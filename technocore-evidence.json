@@ -41,5 +41,10 @@
       "signature": "T5Sg6-p4hdOsfkU1fEYlTh0bxenrr8i0Jfe_nGVbf9RaYzbtL2sIY6EbN59LT0LkLacshEpXWtHKYZ-JML6pCg",
       "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-08-25)"
     }
+  },
+  "x_post": {
+    "url": "https://x.com/HzzzJ87419/status/2092267245988876710",
+    "recorded_seq": 73436,
+    "recorded_ts": "2026-08-25T15:07:52.346591Z"
   }
 }
