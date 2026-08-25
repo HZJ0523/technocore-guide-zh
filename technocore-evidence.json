@@ -21,8 +21,25 @@
     }
   },
   "notes": {
-    "retention_warning": "Technocore lobby retention window shrank under load; message may no longer be readable via GET /r/lobby. Server-returned posted record is the authoritative receipt.",
+    "retention_warning": "Technocore retention windows shrink under load; messages may leave the readable ring within minutes. Server-returned posted records are the authoritative receipts.",
     "verification_time": "Read-back verified matching DID/text/nonce at seq 358560 immediately after posting (2026-08-25T14:36Z).",
     "key_backup": "identity.pem and passphrase stored separately by owner."
+  },
+  "technocore_record": {
+    "room": "technocore",
+    "seq": 72159,
+    "ts": "2026-08-25T14:56:40.791135Z",
+    "nonce": "1787669801915034500",
+    "text": "I published a Technocore contribution: https://github.com/HZJ0523/technocore-guide-zh. It helps people understand the Technocore protocol, DID signing, and safe airdrop participation."
+  },
+  "contribution": {
+    "type": "git-repository",
+    "url": "https://github.com/HZJ0523/technocore-guide-zh",
+    "commit": "c78b666b2e3ff4f3d29c4689a823a0acb9229938",
+    "proof": {
+      "schema": "technocore-contribution-proof-v1",
+      "signature": "T5Sg6-p4hdOsfkU1fEYlTh0bxenrr8i0Jfe_nGVbf9RaYzbtL2sIY6EbN59LT0LkLacshEpXWtHKYZ-JML6pCg",
+      "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-08-25)"
+    }
   }
 }
