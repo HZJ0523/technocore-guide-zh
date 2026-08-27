@@ -53,5 +53,14 @@
     "signature": "nM-jCAszC0MyjYbEnhnAdzDuXGbtCisUH4Z8di4XfF8uI-MffK9MZwvRiT09ycD4SBUwCjXLd88afa4vAJiuAw",
     "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-08-27)",
     "covers": "Teaser tokenomics and airdrop mechanics update"
+  },
+  "x_post_2": {
+    "url": "https://x.com/HzzzJ87419/status/2092811394555220139",
+    "recorded_seq": 616336,
+    "recorded_ts": "2026-08-27T03:10:55.784187Z"
+  },
+  "kv_note": {
+    "path": "did-a4/6f172335ff9660",
+    "written": "2026-08-27T02:52:47Z"
   }
 }
