@@ -69,5 +69,10 @@
     "signature": "JqGPnwujVqnYwaOm2FFSLy9TrGCRHBn91bSuXZWMyDXySOd6OtkM15nV_7IaJOTQWx4TMG7XWmNV4bLSgsYPDA",
     "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-08-27)",
     "covers": "Faucet-on-Technocore DID access announcement"
+  },
+  "x_post_3": {
+    "url": "https://x.com/HzzzJ87419/status/2093145121214943509",
+    "recorded_seq": 1057291,
+    "recorded_ts": "2026-08-28T01:15:54.838878Z"
   }
 }
