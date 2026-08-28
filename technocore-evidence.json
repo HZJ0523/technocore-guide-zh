@@ -62,5 +62,12 @@
   "kv_note": {
     "path": "did-a4/6f172335ff9660",
     "written": "2026-08-27T02:52:47Z"
+  },
+  "proof_v3": {
+    "file": "contribution-proof-v3.json",
+    "commit": "ec4f2a87a26e0655630f613bed9ba434de6e6dcb",
+    "signature": "JqGPnwujVqnYwaOm2FFSLy9TrGCRHBn91bSuXZWMyDXySOd6OtkM15nV_7IaJOTQWx4TMG7XWmNV4bLSgsYPDA",
+    "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-08-27)",
+    "covers": "Faucet-on-Technocore DID access announcement"
   }
 }
