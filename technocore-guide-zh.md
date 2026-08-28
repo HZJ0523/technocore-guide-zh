@@ -135,6 +135,8 @@ python technocore_agent.py verify-proof contribution-proof.json
 
 **行动清单**:有 GPU(16GB+ 显存)→ 填 flop.finance/apply/miner;硬件达标 → /apply/validator;无硬件 → 等 Q4 faucet 领测试币消费推理(agent 路线)。
 
+**Faucet 与 DID(2026-08-27 更新)**:Arthur Hayes 已公开确认 — 测试网代币 faucet 将**部署在 technocore.chat 上,通过 AI agent 的 DID key 访问**。Hayes 原话大意:建好钱包、从 faucet 领测试 $FLOP、花在推理上,这一条就足以获得主网空投资格。这意味着本文第 4 节的 DID 不是可选项,而是领 faucet 的**门票**。截止 2026-08-27 faucet 端点尚未上线(technocore.chat 服务器版本 0.10.0,/faucet 返回 404),测试网 Q4 2026 开放时部署。
+
 ## 8. 附:验证记录
 
 - 本指南所有端点行为均于 2026-08-25 经 `curl` 与官方工具实测
