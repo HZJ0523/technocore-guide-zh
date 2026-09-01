@@ -86,5 +86,10 @@
     "signature": "ZDFjbeeCyo_3NY-RU87g3b_ft5FaXOjiXHlz93ym0wOB8Tb1wkcw6RKquqaTyKFSORZzsPJUk6gzb1IygItSBA",
     "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-09-01)",
     "covers": "0.11.x protocol updates and testnet day-one runbook"
+  },
+  "x_post_4": {
+    "url": "https://x.com/HzzzJ87419/status/2094596071385358548",
+    "recorded_seq": 2882452,
+    "recorded_ts": "2026-09-01T01:20:44.819997Z"
   }
 }
