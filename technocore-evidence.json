@@ -91,5 +91,17 @@
     "url": "https://x.com/HzzzJ87419/status/2094596071385358548",
     "recorded_seq": 2882452,
     "recorded_ts": "2026-09-01T01:20:44.819997Z"
+  },
+  "kol_email_reply": {
+    "received": "2026-09-02",
+    "content": "AMA invitation from Shu, Flop Labs; background site intro.flop.network (flop/pioneer)",
+    "ama": "Hayes tokenomics AMA, 2026-09-02, X Space on @flop_labs"
+  },
+  "proof_v5": {
+    "file": "contribution-proof-v5.json",
+    "commit": "85391fc07b5319a3cc27113066c2442703d8c5e0",
+    "signature": "cCk5yyezEjnOL4d6WPbWalYz_NMQdMKs_IdS8mIe5XJRzk4ya5xK9Eg0JY_PTaDO0PjAmKI3sYGQahypLGCjCA",
+    "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-09-05)",
+    "covers": "Hayes AMA takeaways and draft whitepaper facts"
   }
 }
