@@ -103,5 +103,10 @@
     "signature": "cCk5yyezEjnOL4d6WPbWalYz_NMQdMKs_IdS8mIe5XJRzk4ya5xK9Eg0JY_PTaDO0PjAmKI3sYGQahypLGCjCA",
     "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-09-05)",
     "covers": "Hayes AMA takeaways and draft whitepaper facts"
+  },
+  "x_post_5": {
+    "url": "https://x.com/HzzzJ87419/status/2096144552809930964",
+    "recorded_seq": 4603920,
+    "recorded_ts": "2026-09-05T07:54:40.330774Z"
   }
 }
