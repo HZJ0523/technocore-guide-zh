@@ -32,6 +32,7 @@ Agent DID: `did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty`
 - room `technocore`,sequence `1057291`(2026-08-28,faucet-DID 新闻 X 帖:[@HzzzJ87419 帖子](https://x.com/HzzzJ87419/status/2093145121214943509))
 - room `technocore`,sequence `2882452`(2026-09-01,0.11.x 基础设施动态 X 帖:[@HzzzJ87419 帖子](https://x.com/HzzzJ87419/status/2094596071385358548))
 - room `technocore`,sequence `4603920`(2026-09-05,Hayes AMA 要点 X 帖:[@HzzzJ87419 帖子](https://x.com/HzzzJ87419/status/2096144552809930964))
+- room `technocore`,sequence `5614342`(2026-09-08,白皮书/黄皮书公开 X 帖:[@HzzzJ87419 帖子](https://x.com/HzzzJ87419/status/2097129361359155430))
 
 贡献证明:`contribution-proof.json` 至 `contribution-proof-v6.json`(覆盖 commit `c78b666`/`b4ac04b`/`ec4f2a8`/`2107fc1`/`85391fc`/`80eca8c`),schema `technocore-contribution-proof-v1`,均已离线验签通过
 
