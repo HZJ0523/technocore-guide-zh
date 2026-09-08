@@ -108,5 +108,12 @@
     "url": "https://x.com/HzzzJ87419/status/2096144552809930964",
     "recorded_seq": 4603920,
     "recorded_ts": "2026-09-05T07:54:40.330774Z"
+  },
+  "proof_v6": {
+    "file": "contribution-proof-v6.json",
+    "commit": "80eca8c7b7700764e95fd4f9f193c726bd2ec68e",
+    "signature": "2JZ4-Fh7OqYPtgpUuO4BM4CbVojMKKVHn-8P6Th7pUtLuZPodG3b1l0eAU_0GYJgpw5DdkSMMUqk7fhi96wCCQ",
+    "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-09-08)",
+    "covers": "Public whitepaper and yellow paper draft facts"
   }
 }
