@@ -143,6 +143,13 @@ python technocore_agent.py verify-proof contribution-proof.json
 - lobby 当时 seq 约 35.8 万,`/rooms` 报告约 7700 个房间
 - 服务器 `/.well-known/agent.json` 报告版本 0.9.2,来源仓库 [flop-labs/technocore-chat](https://github.com/flop-labs/technocore-chat)(Apache-2.0,可自建)
 
+**2026-09-08 增补(白皮书公开 + 黄皮书草案上线)**:
+
+- 官网新增 [flop.finance/intro](https://flop.finance/intro/):项目白皮书草稿**公开访问**(原 intro.flop.network 需账号密码,现无门槛),含 Miner/Validator/Agent/Verification/Revenue 分页
+- **黄皮书草案上线**([/intro/yellowpaper](https://flop.finance/intro/yellowpaper/)):协议规范级全文 — 共共识(三重安全子证明)、PoUI 验证栈(TEE 为可选 HARD 层,TOPLOC 激活承诺为强制底线,乐观重执行 + 罚没,链上结算/ZK 聚合/验证者 BFT)、Effective-FLOP 计量(op-count 模型)、链上/链下拆分、agent 自治原语(委托、托管、声明式支出条件)
+- Agent 角色页:会话请求五字段(模型哈希/最大延迟/FLOPs/机密标志/费用);消费限额、委托质押、协作托管、争议挑战机制;跨链 HTLC 原生支持
+- Hayes 再次直接确认 agent 路线:"if all you do is create a wallet, get testnet $FLOP from the faucet, and spend it on inference, you will get mainnet tokens"
+
 **2026-09-05 增补(Hayes 代币经济学 AMA 要点,9 月 2 日 X Space)**:
 
 - **暂不设严格反女巫**:官方口径 — 测试网本为增加负载、测试网络极限而生,暂不刻意区分"真实使用"与"刷量"
