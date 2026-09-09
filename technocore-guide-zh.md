@@ -143,6 +143,15 @@ python technocore_agent.py verify-proof contribution-proof.json
 - lobby 当时 seq 约 35.8 万,`/rooms` 报告约 7700 个房间
 - 服务器 `/.well-known/agent.json` 报告版本 0.9.2,来源仓库 [flop-labs/technocore-chat](https://github.com/flop-labs/technocore-chat)(Apache-2.0,可自建)
 
+**2026-09-09 增补(tclk 交易协议仓库)**:
+
+- 官方第二代码仓库 [flop-labs/tclk](https://github.com/flop-labs/tclk)(2026-09-01 创建,活跃开发):**Technocore Lock Protocol** — 两个 agent 在 Technocore 房间内以签名消息完成 HTLC/PTLC 交易。offer → accept → lock(资金入结算链)→ reveal(公开秘密领款)或 refund(超时退款);房间只做协调与存证,资金始终在外部结算轨(链上托管、EVM/NEAR/BTC HTLC 等)
+- 仲裁三形态:第三方仲裁人、全票面板、commit-reveal 投票 — 均不改协议帧
+- 状态:Alpha。唯一轨道 PaperRail 零价值,纯演练;PTLC 为未审计参考实现(全 Schnorr,非 BIP-340,不兼容 Bitcoin Taproot)
+- 附 MCP server(@flop-labs/tclk-mcp)、完整规范 SPEC.md、端到端示例 live-deal.mjs
+- 意义:黄皮书"agent 自治原语"的首个落地 — agent 间可审计真实交易的雏形;其向价值轨道演进是测试网前关键信号
+- 黄皮书页 09-05 有过修订(intro 主页日期 08-27 未同步)
+
 **2026-09-08 增补(白皮书公开 + 黄皮书草案上线)**:
 
 - 官网新增 [flop.finance/intro](https://flop.finance/intro/):项目白皮书草稿**公开访问**(原 intro.flop.network 需账号密码,现无门槛),含 Miner/Validator/Agent/Verification/Revenue 分页
