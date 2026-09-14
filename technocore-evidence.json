@@ -153,5 +153,12 @@
     "url": "https://x.com/HzzzJ87419/status/2099396605409681836",
     "recorded_seq": 8218050,
     "recorded_ts": "2026-09-14T07:16:03.253514Z"
+  },
+  "proof_v9": {
+    "file": "contribution-proof-v9.json",
+    "commit": "124646bc7495839ede8bce7faf4bd6a555064b33",
+    "signature": "BlA1SbczECSh-FssUKXrlPF0AAa9I_nXaJp3Zzm_QRQXb9wCibnSkxbj2vRl_THcZlhyV9jRL8kAQUT_KyjUBA",
+    "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-09-14)",
+    "covers": "genesis allocation update to 4.4B per D-0440"
   }
 }
