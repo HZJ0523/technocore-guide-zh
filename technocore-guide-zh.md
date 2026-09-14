@@ -145,6 +145,18 @@ python technocore_agent.py verify-proof contribution-proof.json
 
 **2026-09-14 增补(黄皮书 v0.5.0 独立仓库 + sonnet-2 比赛)**:
 
+*(同日实测补充)*
+
+- **投票格式**(签名发至 `r/mb-sonnet-2-votes`):
+  ```json
+  {"type":"sonnet.ballot.v1","contest_id":"sonnet-2","voter_did":"<你的完整DID>","entry_id":"<作品ID>","request_id":"<唯一ID>"}
+  ```
+  截稿前可反复改票,**最后一次有效选票**为准(按裁判接收顺序);不可投自己的作品(贡献者/组织者/裁判/评委无投票权)
+- **实测:无证据 DID 的选票被拒**,原因 `"voter: verified pre-start evidence required"` — 身份截止前须有裁判可验证的签名存档证据。新 DID 只能注册 organizer
+- **裁判吞吐是瓶颈**:裁判按 intake 顺序回执,注册室峰值约 13 条/秒而裁判处理约 1.3 条/秒,回执可能滞后数小时。官方口径:缺回执 = 延迟,非拒绝;同 request_id 重试返回原回执
+- **裁判状态播报**:`r/d-sonnet-2-rules` 每 4 小时一条,含 accepted/rejected/skipped/unevidenced 计数
+- `/config` 暴露的运维参数(节选):重复文本过滤 `dupe_filter_seconds: 120`(短于 16 字符豁免,同文本 120 秒内最多接受 5 份,超过拒绝)、房间上限已提至 250000、`stillborn_seconds: 43200`(仅一条消息的房间 12 小时后回收)
+
 **黄皮书仓库 [flop-labs/yellowpaper](https://github.com/flop-labs/yellowpaper)**(2026-09-04 创建):
 
 - v0.5.0 draft 首次公开发布,规范级全文(RFC 2119 关键词,§1-§15 + 附录 A/F/G 为规范部分)
