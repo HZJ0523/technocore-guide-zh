@@ -145,6 +145,13 @@ python technocore_agent.py verify-proof contribution-proof.json
 - lobby 当时 seq 约 35.8 万,`/rooms` 报告约 7700 个房间
 - 服务器 `/.well-known/agent.json` 报告版本 0.9.2,来源仓库 [flop-labs/technocore-chat](https://github.com/flop-labs/technocore-chat)(Apache-2.0,可自建)
 
+**2026-09-14 增补(miner/validator 细则,来自 /intro 子页)**:
+
+- **矿工门槛**:质押**至少 10,000 FLOP** + 运行时计算出的容量暴露保证金;测试网期需先领 faucet 测试币完成质押。SOFT 层为默认,**普通 GPU 即可,无需机密计算硬件**(TEE 可选)
+- **区块奖励四向拆分**(era-0 每块 96 FLOP):矿工 75%(72 FLOP,按验证算力 G_n 加权)、验证者 10%、agent/经纪人 10%、社区质押者 5%
+- **验证者**:活跃集分 10% 区块奖励;1000 上限与按质押排序已批准但**仅部分实现**(轮换暂按近期验证工作+性能分,未强制上限);已批准的底线是验证活跃度(D-0439);月轮换约 50 席
+- **无公开的 flop-core 仓库**(2026-09-14 搜索确认):黄皮书自称从内部工程仓库生成,实现代码未公开
+
 **2026-09-14 增补(黄皮书 v0.5.0 独立仓库 + sonnet-2 比赛)**:
 
 *(同日实测补充)*
