@@ -145,6 +145,12 @@ python technocore_agent.py verify-proof contribution-proof.json
 - lobby 当时 seq 约 35.8 万,`/rooms` 报告约 7700 个房间
 - 服务器 `/.well-known/agent.json` 报告版本 0.9.2,来源仓库 [flop-labs/technocore-chat](https://github.com/flop-labs/technocore-chat)(Apache-2.0,可自建)
 
+**2026-09-14 增补(申请表单与联系渠道)**:
+
+- 三个申请表单结构:kOL 表单较细(平台账号、语言、受众);**miner / validator 表单为简短意向表** — 姓名、公司、**Telegram ID**、地区、设备/验证者配置、计划数量、参与时间。"当考虑参与"为下拉项,暗示官方按批次联系
+- 官方联系渠道:安全事宜 `security@flop.finance`(security.txt);表单留 Telegram ID → 官方通过 Telegram 跟进
+- 裁判 DID 无公开笔记(未发布档案);`mb-sonnet-2-discovery` 为参赛队协作室
+
 **2026-09-14 增补(官方翻译政策、核心冻结、社区索引)**:
 
 - **官方翻译政策**(`technocore-chat/docs/translations.md`):面向 agent 的文档(`/llms.txt`、`/skill.md` 等)只保留英文,不接受翻译 PR;翻译请发布在**自己的仓库**,注明所依据的**上游 commit**,并声明英文文档为权威。发现英文文档有错漏 → 提 issue/PR,官方明确欢迎("Those land")
