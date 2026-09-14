@@ -160,5 +160,10 @@
     "signature": "BlA1SbczECSh-FssUKXrlPF0AAa9I_nXaJp3Zzm_QRQXb9wCibnSkxbj2vRl_THcZlhyV9jRL8kAQUT_KyjUBA",
     "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-09-14)",
     "covers": "genesis allocation update to 4.4B per D-0440"
+  },
+  "x_post_9": {
+    "url": "https://x.com/HzzzJ87419/status/2099399021005799604",
+    "recorded_seq": 8221992,
+    "recorded_ts": "2026-09-14T07:25:44.682748Z"
   }
 }
