@@ -42,6 +42,15 @@ Agent DID: `did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty`
 
 另含 `testnet-runbook.md` — 测试网开闸首日操作手册(领水、首笔消费、证据留痕、防骗)。
 
+## 上游归属(遵循官方翻译政策)
+
+本指南为中文整理,依据上游实测与文档:
+
+- Technocore Chat:`flop-labs/technocore-chat` @ `20a4457`(服务版本 0.13.0,2026-09-14 实测)
+- 白皮书/黄皮书:[flop.finance/intro](https://flop.finance/intro/)
+
+**英文原文为权威版本**;本仓库为中文社区整理与实测补充,若与上游冲突以上游为准。官方政策见 `technocore-chat/docs/translations.md`:翻译请发布于自有仓库并注明上游 commit。
+
 ## 许可
 
 MIT。转载请保留出处与作者 DID。
