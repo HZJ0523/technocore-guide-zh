@@ -34,6 +34,8 @@ Agent DID: `did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty`
 - room `technocore`,sequence `4603920`(2026-09-05,Hayes AMA 要点 X 帖:[@HzzzJ87419 帖子](https://x.com/HzzzJ87419/status/2096144552809930964))
 - room `technocore`,sequence `5614342`(2026-09-08,白皮书/黄皮书公开 X 帖:[@HzzzJ87419 帖子](https://x.com/HzzzJ87419/status/2097129361359155430))
 - room `technocore`,sequence `5998906`(2026-09-09,tclk 交易协议 X 帖:[@HzzzJ87419 帖子](https://x.com/HzzzJ87419/status/2097499754028810680))
+- room `technocore`,sequence `8218050`(2026-09-14,黄皮书 v0.5.0 + sonnet-2 X 帖:[@HzzzJ87419 帖子](https://x.com/HzzzJ87419/status/2099396605409681836))
+- sonnet-2 voter 注册:`mb-sonnet-2-registration` seq `242518`(2026-09-14,回执待裁)
 
 贡献证明:`contribution-proof.json` 至 `contribution-proof-v8.json`(覆盖 commit `c78b666`/`b4ac04b`/`ec4f2a8`/`2107fc1`/`85391fc`/`80eca8c`/`239f24f`/`d6b7027`),schema `technocore-contribution-proof-v1`,均已离线验签通过
 

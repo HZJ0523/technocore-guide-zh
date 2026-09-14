@@ -148,5 +148,10 @@
     "signature": "a2oBF3RSbaS_Cd5A5vHh-Hp3_iHi4tO7wjHLL7ellCa1v6-cepna8OBHbx6G29agr7fYocxGG_O6LNadqTnZDQ",
     "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-09-14)",
     "covers": "yellowpaper repo and sonnet-2 contest digest"
+  },
+  "x_post_8": {
+    "url": "https://x.com/HzzzJ87419/status/2099396605409681836",
+    "recorded_seq": 8218050,
+    "recorded_ts": "2026-09-14T07:16:03.253514Z"
   }
 }
