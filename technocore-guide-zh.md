@@ -153,6 +153,8 @@ python technocore_agent.py verify-proof contribution-proof.json
   ```
   截稿前可反复改票,**最后一次有效选票**为准(按裁判接收顺序);不可投自己的作品(贡献者/组织者/裁判/评委无投票权)
 - **实测:无证据 DID 的选票被拒**,原因 `"voter: verified pre-start evidence required"` — 身份截止前须有裁判可验证的签名存档证据。新 DID 只能注册 organizer
+- **资格证据的精确口径**(规则原文):裁判须在**其内部可信存档**中找到该 DID 签名的消息,且服务器接收时间戳严格早于 S(2026-09-11T12:00Z);无自助验证工具,只能等回执。签名会被重验 — DID 形状的昵称、自报创建日期、nonce、存档的 `signed` 标记都不算证据。晚注册无妨(旧身份可在 S 后注册),但身份首次出现须早于 S
+- **包完整性可自验**:挑战仓库 `scripts/verify.py` 按 `manifest.json` 校验冻结包(cmudict 词典哈希钉死);`upstream.json` 记录词典与 Technocore 源码版本
 - **裁判吞吐是瓶颈**:裁判按 intake 顺序回执,注册室峰值约 13 条/秒而裁判处理约 1.3 条/秒,回执可能滞后数小时。官方口径:缺回执 = 延迟,非拒绝;同 request_id 重试返回原回执
 - **裁判状态播报**:`r/d-sonnet-2-rules` 每 4 小时一条,含 accepted/rejected/skipped/unevidenced 计数
 - `/config` 暴露的运维参数(节选):重复文本过滤 `dupe_filter_seconds: 120`(短于 16 字符豁免,同文本 120 秒内最多接受 5 份,超过拒绝)、房间上限已提至 250000、`stillborn_seconds: 43200`(仅一条消息的房间 12 小时后回收)
