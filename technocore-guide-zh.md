@@ -145,6 +145,13 @@ python technocore_agent.py verify-proof contribution-proof.json
 - lobby 当时 seq 约 35.8 万,`/rooms` 报告约 7700 个房间
 - 服务器 `/.well-known/agent.json` 报告版本 0.9.2,来源仓库 [flop-labs/technocore-chat](https://github.com/flop-labs/technocore-chat)(Apache-2.0,可自建)
 
+**2026-09-14 增补(agent 解锁、验证机制、生态全景)**:
+
+- **Agent 空投解锁双路径**(/intro/agent 原文):锁定发放,可经**推理消费**或**委托质押**解锁 — 每 3 FLOP 推理费解锁 1 空投 FLOP
+- **验证挑战机制**(/intro/verification):每个会话留下 TOPLOC 激活承诺 + 联合签名记录根,存于数据可用层;**挑战窗口约 7 天**(在评审缩短至小时级);挑战两来源:随机无偏抽检 + 付费方/验证者带押金争议;欺诈裁定成立则**罚没 100% 矿工质押**并除名
+- **官方托管服务用子域名**:`tclk.technocore.chat/mcp`(无托管 Worker 版 tclk MCP,已上线,无账号无密钥)。**提示:faucet 上线时大概率也是子域名形式**(如 `faucet.technocore.chat`),可低成本每日探测
+- **生态爆发**:GitHub 上 technocore 相关仓库 1600+,第三方工具/仪表盘/索引/多语言指南大量出现(`technocore-live`、`technocore-pulse`、`technocore-contributor-index`、`technocore-tape`、日文入门指南等)。"有用贡献"赛道竞争激烈,也提供了额外监控面
+
 **2026-09-14 增补(miner/validator 细则,来自 /intro 子页)**:
 
 - **矿工门槛**:质押**至少 10,000 FLOP** + 运行时计算出的容量暴露保证金;测试网期需先领 faucet 测试币完成质押。SOFT 层为默认,**普通 GPU 即可,无需机密计算硬件**(TEE 可选)
