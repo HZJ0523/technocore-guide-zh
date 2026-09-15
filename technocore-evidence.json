@@ -140,7 +140,12 @@
     "seq": 242518,
     "request_id": "reg-voter-z6mk-20260914",
     "ts": "2026-09-14T07:08:38.642298Z",
-    "receipt": "pending (referee intake cursor behind; missing receipt = delay not rejection)"
+    "resend": {
+      "seq": 767399,
+      "ts": "2026-09-15T01:03:35.174631Z",
+      "note": "same request_id resent per C12 contingency after 24h without receipt"
+    },
+    "receipt": "pending"
   },
   "proof_v8": {
     "file": "contribution-proof-v8.json",
