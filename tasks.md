@@ -47,8 +47,8 @@
 
 | 动作 | 状态 |
 |---|---|
-| 提交 awesome-technocore PR(`d4ncboz/awesome-technocore`,"Community Guides & Tutorials" 按字母序) | 待办 |
-| 填 validator 意向表(`flop.finance/apply/validator`) | 待定(池 4 倍后) |
+| 提交 awesome-technocore PR | **✅ 已开 PR #12**(2026-09-15,+1/-0,open 待维护者合并) |
+| 填 validator 意向表(`flop.finance/apply/validator`) | 待办(文案已备) |
 | 测试网开闸首日跑 `testnet-runbook.md` | 条件触发 |
 
 ## 三、维护协议(每次"新的一天"执行)
