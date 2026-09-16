@@ -102,6 +102,11 @@
 - 关联 C12:重发后仍无回执 + rejected 激增 → 判定可能被拒,届时改查裁判 refusal 消息取证。
 - 计数:19 → 20 项。
 
+### 2026-09-16 — 投出 ballot(触发资格审查)
+- `mb-sonnet-2-votes` seq 314746,entry `maragung-flop`,request_id `ballot-z6mk-20260916-1`。
+- 现场观察:裁判在该室活跃发裁决,窗口内 3 条均为 `status:"rejected"` + `reason:"voter: verified pre-start evidence required"`(他人 DID)— 证实 ballot 强制资格检查(issue #23 先例)。
+- 待观察:我方 ballot 是否收到裁决。若 rejected 且理由为 evidence → 走挑战仓库 issue 申诉(他人先例)。
+
 ### 2026-09-16 — 修订 C12/C13(系统性回执缺失)
 - 新证据:官方挑战仓库 issue #39(18,689 注册仅 4 回执,响应速度 8–11 秒证明非积压)、#40(已注册选民的 ballot 无任何回执;身份集 `sonnet.identities.v1` 查无其 DID)、#42/#43/#46/#47 同类。
 - 行动变更:停止重发;改以投出 ballot 作为资格的**决定性测试**;资格判据锚定 `d-sonnet-2-results` 的 `sonnet.identities.v1` 增量记录。
