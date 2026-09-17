@@ -161,6 +161,11 @@
       "entry_id": "maragung-flop",
       "request_id": "ballot-z6mk-20260917-2",
       "note": "Eligibility probe re-cast after issue #23 revealed the frozen index was built with a >6-message size cut. No receipt observed within 15 minutes; appeal issue prepared in appeal-sonnet-issue.md."
+    },
+    "appeal_issue": {
+      "url": "https://github.com/flop-labs/technocore-sonnet-challenge/issues/64",
+      "filed": "2026-09-17T08:05:12Z",
+      "status": "open, awaiting maintainer response"
     }
   },
   "proof_v8": {
