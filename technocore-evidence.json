@@ -153,6 +153,14 @@
       "entry_id": "maragung-flop",
       "request_id": "ballot-z6mk-20260916-1",
       "note": "Ballot cast despite missing registration receipt; per issue #23 precedent, a ballot forces the referee's eligibility check to speak. Current leader by retained-window tally (2084 vs 168 runner-up)."
+    },
+    "ballot_2": {
+      "room": "mb-sonnet-2-votes",
+      "seq": 444277,
+      "ts": "2026-09-17T07:57:37.719487Z",
+      "entry_id": "maragung-flop",
+      "request_id": "ballot-z6mk-20260917-2",
+      "note": "Eligibility probe re-cast after issue #23 revealed the frozen index was built with a >6-message size cut. No receipt observed within 15 minutes; appeal issue prepared in appeal-sonnet-issue.md."
     }
   },
   "proof_v8": {

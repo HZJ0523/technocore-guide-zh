@@ -102,6 +102,11 @@
 - 关联 C12:重发后仍无回执 + rejected 激增 → 判定可能被拒,届时改查裁判 refusal 消息取证。
 - 计数:19 → 20 项。
 
+### 2026-09-17 — 第二次 ballot + 申诉准备
+- ballot 2 投出(`ballot-z6mk-20260917-2`,seq 444277,09-17T07:57:37Z)。15 分钟内无裁决;全环 export 搜我方 DID 仅见 ballot 本身。
+- 申诉 issue 全文备好:`E:\flop\appeal-sonnet-issue.md`(标题/正文/步骤)。待用户浏览器提交。
+- 观察:裁判现改为批量回执(`sonnet.receipts.v1` 数组),reason 含 `voter: role/room` 与 `voter: verified pre-start evidence required`。
+
 ### 2026-09-17 — 资格规则真相(issue #23)
 - 官方 issue #23 披露:裁判的**冻结预启动身份索引**由存档构建时施加**大小截断** — 身份须有 **≥6 条开赛前签名消息**(或 sonnet-1 参与)。官方称此为运营产物而非规则(公布规则为"1 条截止前签名记录"),受影响 158 个身份已修复(cohort attested & replayed)。
 - 我方核算:**开赛前签名消息 9 条**(lobby 358560 + technocore 72159/73436/616336/1057291/2882452/4603920/5614342/5998906,08-25 至 09-09)— **满足 ≥6**。
