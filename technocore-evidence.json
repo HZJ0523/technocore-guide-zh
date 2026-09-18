@@ -165,7 +165,11 @@
     "appeal_issue": {
       "url": "https://github.com/flop-labs/technocore-sonnet-challenge/issues/64",
       "filed": "2026-09-17T08:05:12Z",
-      "status": "open, awaiting maintainer response"
+      "followup_comment": {
+        "posted": "2026-09-18T01:22:21Z",
+        "content_summary": "Cited issue #72 (98% of receipts are batch envelopes, so 'no receipt' is a lookup-shape artefact); cited #23 (index built with >=6-message cut; our DID has nine pre-cutoff records); asked for (1) batch-envelope disposition of both request_ids, (2) late-evidence attestation if records verify, (3) existing two ballots stand, no new ballot."
+      },
+      "status": "open, awaiting maintainer response; contest closes 2026-09-18T12:00:00Z"
     }
   },
   "proof_v8": {
