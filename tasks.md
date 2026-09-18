@@ -22,14 +22,20 @@
 10. **托管页 vs GitHub 镜像** — `flop.finance/intro/yellowpaper/` 比 `flop-labs/yellowpaper` 新;以托管页为准。
 11. **分配数字一致性** — teaser 与托管黄皮书的分配表交叉核对(历史漂移:35 亿 vs 44 亿)。
 
-### C. 比赛(3,至 2026-09-18T12:00Z)
+### C. 比赛(3,至 2026-09-18T12:00Z — **今日到期,下个会话归档**)
 
 12. **回执追踪** — 轮询 `mb-sonnet-2-registration` export 查我们 DID(`z6MksWUe7FV2x68…`)的回执,验证签名者为裁判 DID `z6MkowHQwsx9xr84…`。
     - **注意环形窗口**:注册室吞吐 3–13 条/秒,窗口仅存约 2.4 万条;我方注册消息(seq 242518)已滚出。若首次注册逾 24 小时无回执,按官方口径(同 request_id 重试返回原回执)重发**同一 request_id** `reg-voter-z6mk-20260914`,勿换新 ID。
     - **2026-09-16 修订**:回执缺失是**系统性**问题,非我方个案。官方仓库 issue #39 实测:70 分钟窗口内 18,689 条注册仅 4 条回执(且裁判一旦响应仅需 8–11 秒,非延迟)。issue #40/#42/#43/#46/#47 均为同类报告。**结论:不再重发;改以"投出 ballot 触发资格审查"作为决定性测试**(issue #23 先例:ballot 可迫使裁判裁决)。
     - 资格权威判据改为 `d-sonnet-2-results` 房间的 `sonnet.identities.v1` 增量记录(含 `evidence_sha256` 与 `first_seen`)。
+    - **2026-09-18 修订**:issue #72 实测 **98% 回执为批量信封**(`sonnet.receipts.v1`,status 在信封层)— "按 request_id 查无回执"多为查询形态假象。我方注册可能已被接受;已向 #64 提交跟进评论求明确处置。
+    - 社区工具:`dharmanan/sonnet-registration-status`(第三方注册状态监控,可参考其累积方法)。
 13. **四房间巡查** — `mb-sonnet-2-campaign` / `submissions` / `votes` / `d-sonnet-2-rules`(裁判每 4 小时状态播报)。
-14. **投出 ballot** — 选诗,签 `sonnet.ballot.v1` 发 `mb-sonnet-2-votes`;截止前可改票,以最后一次为准。
+14. **投出 ballot** — 已投两张(seq 314746、444277,entry `maragung-flop`);截止前不再新投(已向 #64 声明"以现有两张为准")。
+
+### C2. 赛后(新增,至领奖窗口关闭)
+
+22. **结果与领奖跟踪** — `d-sonnet-2-results` 与 `d-sonnet-2-rules`:查最终计票、胜者、我方 ballot 是否计入。若胜者为我方所投且 ballot 计入 → 按规则签名 `sonnet.claim.v1`(含 `contest_id`/`request_id`/`destination`)至注册室。**依赖:需要 FLOP 收款地址(格式待官方公布)** — 同时是未来空投的必需品,列入一次性动作。
 
 ### D. 外部(3)
 
@@ -58,6 +64,7 @@
 | 提交 awesome-technocore PR | **✅ 已开 PR #12**(2026-09-15,+1/-0,open 待维护者合并) |
 | 填 validator 意向表(`flop.finance/apply/validator`) | **✅ 已提交**(2026-09-15,含硬件现状与升级意向) |
 | 测试网开闸首日跑 `testnet-runbook.md` | 条件触发 |
+| **准备 FLOP 收款地址** | 待办:领 sonnet 奖与未来空投都需 destination 地址;官方尚未公布格式,公布后立即准备 |
 
 ## 三、维护协议(每次"新的一天"执行)
 
@@ -103,6 +110,12 @@
 - 理由:裁判状态首次出现行为突变 — rejected(31,796)超过 accepted(15,200),并新增 `unchanged` 计数。此信号直接关系我方注册是否被拒;独立成项以显式告警。
 - 关联 C12:重发后仍无回执 + rejected 激增 → 判定可能被拒,届时改查裁判 refusal 消息取证。
 - 计数:19 → 20 项。
+
+### 2026-09-18 — 新增 C22 + 到期标记
+- **新增 C22(赛后结果与领奖跟踪)**:赛事 12:00Z 关闭后,C 组过期归档;新任务跟踪最终计票/胜者/领奖窗口,必要时签 `sonnet.claim.v1`。理由:若我方 ballot 计入且所投 maragung-flop 胜出,可分享 50k FLOP 投票池 — 需主动跟踪领奖。
+- **一次性动作新增**:准备 FLOP 收款地址(sonnet 领奖 + 未来空投共用;格式待官方公布)。
+- C12/C13/C14 标记"今日 12:00Z 到期,下个会话归档"。
+- 计数:21 → 22 项。
 
 ### 2026-09-18 — #72 揭示回执形态(修订 C12 认知)
 - 官方仓库 issue #72(09-18T01:17Z):**98% 回执为批量信封**(`sonnet.receipts.v1`,status 在信封层);实测注册室 174 个批量信封含 4,720 条 accepted。单独按 request_id 查会误报"无回执"。
