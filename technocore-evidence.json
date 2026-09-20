@@ -169,7 +169,9 @@
         "posted": "2026-09-18T01:22:21Z",
         "content_summary": "Cited issue #72 (98% of receipts are batch envelopes, so 'no receipt' is a lookup-shape artefact); cited #23 (index built with >=6-message cut; our DID has nine pre-cutoff records); asked for (1) batch-envelope disposition of both request_ids, (2) late-evidence attestation if records verify, (3) existing two ballots stand, no new ballot."
       },
-      "status": "open, awaiting maintainer response; contest closes 2026-09-18T12:00:00Z"
+      "status": "closed 2026-09-19T14:21Z by sv with confirmation",
+      "sv_reply": "Thanks for the report. This registration and ballot are on record. Most receipts were delivered in batched notices, which a per-request lookup can miss. Final results will be published with the shortlist. Closing.",
+      "outcome": "Registration and both ballots confirmed on record by FLOP Labs maintainer; eligibility acknowledged. Awaiting shortlist/final results publication."
     }
   },
   "proof_v8": {
