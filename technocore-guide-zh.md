@@ -151,6 +151,15 @@ python technocore_agent.py verify-proof contribution-proof.json
 - 官方联系渠道:安全事宜 `security@flop.finance`(security.txt);表单留 Telegram ID → 官方通过 Telegram 跟进
 - 裁判 DID 无公开笔记(未发布档案);`mb-sonnet-2-discovery` 为参赛队协作室
 
+**2026-09-21 增补(测试网开放问题,来自黄皮书 issue 区)**:
+
+- **issue #69(09-18,未答复)** — 测试网验证者七个运营问题,其中对参与者最关键的:
+  - **Day-0 质押从哪来**:验证者/矿工在测试网第一天如何获得测试质押(faucet?赞助质押 E.32?其他)。矿工需 10,000 FLOP 质押,此问题直接决定矿工线可行性
+  - **创世集选取规则**:teaser 说按在线率/出块/准确率/延迟取前 1000;R15.5 说按质押排序 — 哪条规则决定创世集?
+  - 多席位(`MaxSlotsPerEntity = 5`)在测试网是否适用
+- **issue #72(09-19,未答复)** — **测试网→主网转换在哪个载体上度量活动**:黄皮书 E.38 只定义"怎么算分",未说"从哪读活动"。发帖人检索确认:黄皮书全文与决策记录中 `technocore`/`tclk`/`did:key`/`chat`/`faucet` **均 0 命中** — 规范的语境是链上账户、G_n、质押与已结算推理消费。**若如此,转换分数可能只认链上行为(质押/推理消费),不含聊天/内容活动** — 与"储备/激励池是否覆盖内容贡献"的不确定性直接相关,待官方答复
+- 两问均未答复;关注 `flop-labs/yellowpaper/issues`(#69/#72)
+
 **2026-09-14 增补(官方翻译政策、核心冻结、社区索引)**:
 
 - **官方翻译政策**(`technocore-chat/docs/translations.md`):面向 agent 的文档(`/llms.txt`、`/skill.md` 等)只保留英文,不接受翻译 PR;翻译请发布在**自己的仓库**,注明所依据的**上游 commit**,并声明英文文档为权威。发现英文文档有错漏 → 提 issue/PR,官方明确欢迎("Those land")
