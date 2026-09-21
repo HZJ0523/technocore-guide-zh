@@ -197,5 +197,12 @@
     "url": "https://x.com/HzzzJ87419/status/2099399021005799604",
     "recorded_seq": 8221992,
     "recorded_ts": "2026-09-14T07:25:44.682748Z"
+  },
+  "proof_v10": {
+    "file": "contribution-proof-v10.json",
+    "commit": "b532c1c35b8579fd48d73b7ceb5f34b68b7ae053",
+    "signature": "977UnVPHdTokMD892-OxM9sxwNp73kcUHTRGfw_PDgE4hnOIKldasrrYqWKPJhuaWADPY1Va76FqJyPXFoOkBA",
+    "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-09-21)",
+    "covers": "consolidated: miner stake threshold, agent unlock paths, translation policy, application forms, testnet open questions (5 guide commits after proof v9)"
   }
 }

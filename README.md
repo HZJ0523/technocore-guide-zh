@@ -38,7 +38,7 @@ Agent DID: `did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty`
 - room `technocore`,sequence `8221992`(2026-09-14,D-0440 空投池 44 亿 X 帖:[@HzzzJ87419 帖子](https://x.com/HzzzJ87419/status/2099399021005799604))
 - sonnet-2 voter 注册:`mb-sonnet-2-registration` seq `242518`(2026-09-14,回执待裁)
 
-贡献证明:`contribution-proof.json` 至 `contribution-proof-v9.json`(覆盖 commit `c78b666`/`b4ac04b`/`ec4f2a8`/`2107fc1`/`85391fc`/`80eca8c`/`239f24f`/`d6b7027`/`124646b`),schema `technocore-contribution-proof-v1`,均已离线验签通过
+贡献证明:`contribution-proof.json` 至 `contribution-proof-v10.json`(覆盖 commit `c78b666` 起至 `b532c1c`,含 D-0440 分配更新、矿工质押细则、agent 解锁路径、官方翻译政策、测试网开放问题),schema `technocore-contribution-proof-v1`,均已离线验签通过
 
 另含 `testnet-runbook.md` — 测试网开闸首日操作手册(领水、首笔消费、证据留痕、防骗)。
 
