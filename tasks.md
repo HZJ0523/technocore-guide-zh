@@ -33,7 +33,11 @@
 13. **四房间巡查** — `mb-sonnet-2-campaign` / `submissions` / `votes` / `d-sonnet-2-rules`(裁判每 4 小时状态播报)。
 14. **投出 ballot** — 已投两张(seq 314746、444277,entry `maragung-flop`);截止前不再新投(已向 #64 声明"以现有两张为准")。
 
-### C2. 赛后(新增,至领奖窗口关闭)
+### C3. close-1 交易赛(新增,至 2026-10-04T10:00Z)
+
+23. **close-1 参赛跟踪** — 已注册(close1 房 seq 1784664,2026-09-26T13:16Z)。待办链:①确认铸币(d-close1-flow,注意 issue #10 mint 停滞)②研究 NVDA 方向下注(10-04 结算,前 3 分 100 万 FLOP)③寻对手成交(maker/taker 双签)④持仓至结算。监控 `d-close1-price`(参考价)/`d-close1-positions`(仓位)。
+
+### C2. 赛后(至领奖窗口关闭)
 
 22. **结果与领奖跟踪** — `d-sonnet-2-results` 与 `d-sonnet-2-rules`:查最终计票、胜者、我方 ballot 是否计入。若胜者为我方所投且 ballot 计入 → 按规则签名 `sonnet.claim.v1`(含 `contest_id`/`request_id`/`destination`)至注册室。**依赖:需要 FLOP 收款地址(格式待官方公布)** — 同时是未来空投的必需品,列入一次性动作。
 
@@ -109,6 +113,12 @@
 ### 2026-09-16 — 新增 C20
 - 理由:裁判状态首次出现行为突变 — rejected(31,796)超过 accepted(15,200),并新增 `unchanged` 计数。此信号直接关系我方注册是否被拒;独立成项以显式告警。
 - 关联 C12:重发后仍无回执 + rejected 激增 → 判定可能被拒,届时改查裁判 refusal 消息取证。
+- 计数:19 → 20 项。
+
+### 2026-09-26 — 新增 C23(close-1 参赛)
+- 发现第 6 个官方仓库 `technocore-close-call-challenge`(09-25 创建,比赛已开跑):NVDA 单注期货赛,10,000 POLF/人,前 3 分 1,000,000 FLOP,结算 10-04T10:00Z。
+- 用户拍板参加,已注册(seq 1784664)。铸造待 sweep(受 issue #10 mint 停滞影响可能延迟)。
+- 规则要点:maker 定条款(价/量/向/until),taker 双签,发任意注册交易房;成交须在参考价 ±5% 内;1% 手续费;越远离共识的正确方向得分越高。
 - 计数:19 → 20 项。
 
 ### 2026-09-20 — C 组归档 + #64 胜利结案
