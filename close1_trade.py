@@ -118,7 +118,7 @@ def take(maker_side: str, max_qty: float, room: str = "close1"):
     post(json.dumps(out, ensure_ascii=False, separators=(",", ":")))
 
 
-def snipe(maker_side: str, min_qty: float, seconds: int, room: str = "close1"):
+def snipe(maker_side: str, min_qty: float, seconds: int, room: str = "close1", max_qty: float = 0):
     """Poll for a fresh open maker order of maker_side with qty >= min_qty and take it."""
     import time as _t
     key = load_key()  # passphrase once
@@ -147,6 +147,8 @@ def snipe(maker_side: str, min_qty: float, seconds: int, room: str = "close1"):
                     continue  # need settle runway for referee lag
                 px, qty = float(terms["px"]), float(terms["qty"])
                 if not (float(lo) <= px <= float(hi)) or qty < min_qty:
+                    continue
+                if max_qty and qty > max_qty:
                     continue
                 score = px if maker_side == "sell" else -px
                 if best is None or score > best[0]:
@@ -177,8 +179,8 @@ def main():
         accept(sys.argv[2], int(sys.argv[3]))
     elif cmd == "take" and len(sys.argv) in (4, 5):
         take(sys.argv[2], float(sys.argv[3]), sys.argv[4] if len(sys.argv) == 5 else "close1")
-    elif cmd == "snipe" and len(sys.argv) in (5, 6):
-        snipe(sys.argv[2], float(sys.argv[3]), int(sys.argv[4]), sys.argv[5] if len(sys.argv) == 6 else "close1")
+    elif cmd == "snipe" and len(sys.argv) in (5, 6, 7):
+        snipe(sys.argv[2], float(sys.argv[3]), int(sys.argv[4]), sys.argv[5] if len(sys.argv) >= 6 else "close1", float(sys.argv[6]) if len(sys.argv) == 7 else 0)
     else:
         print(__doc__)
         return 1
