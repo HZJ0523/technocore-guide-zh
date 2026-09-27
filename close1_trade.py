@@ -4,6 +4,7 @@
 Usage:
   python close1_trade.py make buy 224.90 43 2580          # side px qty until_sweep
   python close1_trade.py accept <room> <seq>              # countersign a taker:"any" order
+  python close1_trade.py take sell 1                      # auto-accept best open sell <= qty (we buy)
 Requires technocore-did-starter on sys.path; prompts for identity passphrase.
 """
 from __future__ import annotations
@@ -76,6 +77,43 @@ def accept(room: str, seq: int):
     post(json.dumps(out, ensure_ascii=False, separators=(",", ":")))
 
 
+def take(maker_side: str, max_qty: float, room: str = "close1"):
+    """Accept the best open maker order of maker_side (we take the other side)."""
+    view = tc.read_room(room, limit=200)
+    price_view = tc.read_room("d-close1-price", limit=1)
+    lo, hi = json.loads(price_view["messages"][-1]["text"])["limits"]
+    best = None
+    for m in reversed(view["messages"]):
+        try:
+            j = json.loads(m["text"])
+        except (json.JSONDecodeError, KeyError):
+            continue
+        if j.get("t") != "trade" or j.get("season") != SEASON or "taker_sig" in j:
+            continue
+        terms = j.get("terms", {})
+        if terms.get("taker") != "any" or "maker_sig" not in j:
+            continue
+        if terms.get("side") != maker_side:
+            continue
+        px, qty = float(terms["px"]), float(terms["qty"])
+        if not (float(lo) <= px <= float(hi)) or qty > max_qty:
+            continue
+        # best for us: buy->lowest sell px; sell->highest buy px
+        score = px if maker_side == "sell" else -px
+        if best is None or score > best[0]:
+            best = (score, m["seq"], terms, j["maker_sig"])
+    if best is None:
+        sys.exit(f"no open {maker_side} order <= {max_qty} in band [{lo},{hi}] within window")
+    _, seq, terms, maker_sig = best
+    canon = terms_canon(terms)
+    key = load_key()
+    taker_sig = tc.sign_bytes(key, f"{SEASON}|accept|{canon}|{DID}".encode())
+    out = {"t": "trade", "season": SEASON, "terms": terms,
+           "taker": DID, "maker_sig": maker_sig, "taker_sig": taker_sig}
+    print(f"taking seq {seq}: {canon}")
+    post(json.dumps(out, ensure_ascii=False, separators=(",", ":")))
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -85,6 +123,8 @@ def main():
         make(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
     elif cmd == "accept" and len(sys.argv) == 4:
         accept(sys.argv[2], int(sys.argv[3]))
+    elif cmd == "take" and len(sys.argv) == 4:
+        take(sys.argv[2], float(sys.argv[3]), sys.argv[4] or "close1")
     else:
         print(__doc__)
         return 1
