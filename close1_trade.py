@@ -81,7 +81,8 @@ def take(maker_side: str, max_qty: float, room: str = "close1"):
     """Accept the best open maker order of maker_side (we take the other side)."""
     view = tc.read_room(room, limit=200)
     price_view = tc.read_room("d-close1-price", limit=1)
-    lo, hi = json.loads(price_view["messages"][-1]["text"])["limits"]
+    pj = json.loads(price_view["messages"][-1]["text"])
+    lo, hi, now_n = pj["limits"][0], pj["limits"][1], pj["n"]
     best = None
     for m in reversed(view["messages"]):
         try:
@@ -95,6 +96,8 @@ def take(maker_side: str, max_qty: float, room: str = "close1"):
             continue
         if terms.get("side") != maker_side:
             continue
+        if int(terms.get("until", 0)) <= now_n:
+            continue  # expired
         px, qty = float(terms["px"]), float(terms["qty"])
         if not (float(lo) <= px <= float(hi)) or qty > max_qty:
             continue
@@ -103,7 +106,7 @@ def take(maker_side: str, max_qty: float, room: str = "close1"):
         if best is None or score > best[0]:
             best = (score, m["seq"], terms, j["maker_sig"])
     if best is None:
-        sys.exit(f"no open {maker_side} order <= {max_qty} in band [{lo},{hi}] within window")
+        sys.exit(f"no live open {maker_side} order <= {max_qty} in band [{lo},{hi}] (sweep {now_n}) within window")
     _, seq, terms, maker_sig = best
     canon = terms_canon(terms)
     key = load_key()
