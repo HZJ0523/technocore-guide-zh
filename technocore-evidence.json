@@ -184,7 +184,8 @@
       "direction": "long NVDA (user call 2026-09-27)",
       "open_bids": [
         {"id": "5c7e160c7688", "room": "close1", "detail": "buy 43 @ 224.90 until sweep 2580"},
-        {"id": "88759d673dd7", "room": "c1-xmd-45", "detail": "buy 43 @ 224.90 until sweep 2580"}
+        {"id": "88759d673dd7", "room": "c1-xmd-45", "detail": "buy 43 @ 224.90 until sweep 2580"},
+        {"id": "1bcda129", "room": "close1", "detail": "SNIPE accept: buy 20 @ 224.14 (seq 4621289), until 601 — settlement pending at day end; sweep lag risk (referee stalled at n=600)"}
       ],
       "deadline": "2026-10-04T10:00Z, lock 09:00Z"
     }
