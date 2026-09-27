@@ -37,7 +37,7 @@ def post(text: str):
     print(json.dumps(resp, ensure_ascii=True, indent=1)[:1500])
 
 
-def make(side: str, px: str, qty: str, until: int):
+def make(side: str, px: str, qty: str, until: int, room: str = "close1"):
     terms = {
         "id": uuid.uuid4().hex[:12],
         "maker": DID,
@@ -52,7 +52,8 @@ def make(side: str, px: str, qty: str, until: int):
     maker_sig = tc.sign_bytes(key, f"{SEASON}|terms|{canon}".encode())
     msg = {"t": "trade", "season": SEASON, "terms": terms, "taker": "any", "maker_sig": maker_sig}
     print("terms:", canon)
-    post(json.dumps(msg, ensure_ascii=False, separators=(",", ":")))
+    tc.post_signed_message(load_key(), room, json.dumps(msg, ensure_ascii=False, separators=(",", ":")))
+    print("posted to", room)
 
 
 def accept(room: str, seq: int):
@@ -122,8 +123,8 @@ def main():
         print(__doc__)
         return 1
     cmd = sys.argv[1]
-    if cmd == "make" and len(sys.argv) == 6:
-        make(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
+    if cmd == "make" and len(sys.argv) in (6, 7):
+        make(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6] if len(sys.argv) == 7 else "close1")
     elif cmd == "accept" and len(sys.argv) == 4:
         accept(sys.argv[2], int(sys.argv[3]))
     elif cmd == "take" and len(sys.argv) in (4, 5):
