@@ -118,6 +118,54 @@ def take(maker_side: str, max_qty: float, room: str = "close1"):
     post(json.dumps(out, ensure_ascii=False, separators=(",", ":")))
 
 
+def snipe(maker_side: str, min_qty: float, seconds: int, room: str = "close1"):
+    """Poll for a fresh open maker order of maker_side with qty >= min_qty and take it."""
+    import time as _t
+    key = load_key()  # passphrase once
+    deadline = _t.time() + seconds
+    print(f"sniping {maker_side} qty>={min_qty} in {room} for {seconds}s ...")
+    while _t.time() < deadline:
+        try:
+            view = tc.read_room(room, limit=200)
+            price_view = tc.read_room("d-close1-price", limit=1)
+            pj = json.loads(price_view["messages"][-1]["text"])
+            lo, hi, now_n = pj["limits"][0], pj["limits"][1], pj["n"]
+            best = None
+            for m in reversed(view["messages"]):
+                try:
+                    j = json.loads(m["text"])
+                except (json.JSONDecodeError, KeyError):
+                    continue
+                if j.get("t") != "trade" or j.get("season") != SEASON or "taker_sig" in j:
+                    continue
+                terms = j.get("terms", {})
+                if terms.get("taker") != "any" or "maker_sig" not in j:
+                    continue
+                if terms.get("side") != maker_side:
+                    continue
+                if int(terms.get("until", 0)) <= now_n:
+                    continue
+                px, qty = float(terms["px"]), float(terms["qty"])
+                if not (float(lo) <= px <= float(hi)) or qty < min_qty:
+                    continue
+                score = px if maker_side == "sell" else -px
+                if best is None or score > best[0]:
+                    best = (score, m["seq"], terms, j["maker_sig"])
+            if best:
+                _, seq, terms, maker_sig = best
+                canon = terms_canon(terms)
+                taker_sig = tc.sign_bytes(key, f"{SEASON}|accept|{canon}|{DID}".encode())
+                out = {"t": "trade", "season": SEASON, "terms": terms,
+                       "taker": DID, "maker_sig": maker_sig, "taker_sig": taker_sig}
+                print(f"SNIPE HIT seq {seq}: {canon}")
+                tc.post_signed_message(key, room, json.dumps(out, ensure_ascii=False, separators=(",", ":")))
+                return
+            print(f"  sweep {now_n}: nothing yet", flush=True)
+        except Exception as e:  # keep looping on transient errors
+            print("  err:", str(e)[:120], flush=True)
+        _t.sleep(20)
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -129,6 +177,8 @@ def main():
         accept(sys.argv[2], int(sys.argv[3]))
     elif cmd == "take" and len(sys.argv) in (4, 5):
         take(sys.argv[2], float(sys.argv[3]), sys.argv[4] if len(sys.argv) == 5 else "close1")
+    elif cmd == "snipe" and len(sys.argv) in (5, 6):
+        snipe(sys.argv[2], float(sys.argv[3]), int(sys.argv[4]), sys.argv[5] if len(sys.argv) == 6 else "close1")
     else:
         print(__doc__)
         return 1
