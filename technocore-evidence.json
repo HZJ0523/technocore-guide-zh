@@ -172,6 +172,21 @@
       "status": "closed 2026-09-19T14:21Z by sv with confirmation",
       "sv_reply": "Thanks for the report. This registration and ballot are on record. Most receipts were delivered in batched notices, which a per-request lookup can miss. Final results will be published with the shortlist. Closing.",
       "outcome": "Registration and both ballots confirmed on record by FLOP Labs maintainer; eligibility acknowledged. Awaiting shortlist/final results publication."
+    },
+    "close_1": {
+      "season": "close-1",
+      "registered": "close1 seq 1784664 (2026-09-26)",
+      "probe_settled": {
+        "id": "xrond1790511644xesuy9",
+        "detail": "buy 0.10 @ 224.94, settled sweep 581 — mint confirmed, signing format correct",
+        "ts": "2026-09-27"
+      },
+      "direction": "long NVDA (user call 2026-09-27)",
+      "open_bids": [
+        {"id": "5c7e160c7688", "room": "close1", "detail": "buy 43 @ 224.90 until sweep 2580"},
+        {"id": "88759d673dd7", "room": "c1-xmd-45", "detail": "buy 43 @ 224.90 until sweep 2580"}
+      ],
+      "deadline": "2026-10-04T10:00Z, lock 09:00Z"
     }
   },
   "proof_v8": {
