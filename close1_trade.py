@@ -123,8 +123,8 @@ def main():
         make(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
     elif cmd == "accept" and len(sys.argv) == 4:
         accept(sys.argv[2], int(sys.argv[3]))
-    elif cmd == "take" and len(sys.argv) == 4:
-        take(sys.argv[2], float(sys.argv[3]), sys.argv[4] or "close1")
+    elif cmd == "take" and len(sys.argv) in (4, 5):
+        take(sys.argv[2], float(sys.argv[3]), sys.argv[4] if len(sys.argv) == 5 else "close1")
     else:
         print(__doc__)
         return 1
