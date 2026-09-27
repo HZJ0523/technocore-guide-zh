@@ -143,8 +143,8 @@ def snipe(maker_side: str, min_qty: float, seconds: int, room: str = "close1"):
                     continue
                 if terms.get("side") != maker_side:
                     continue
-                if int(terms.get("until", 0)) <= now_n:
-                    continue
+                if int(terms.get("until", 0)) < now_n + 5:
+                    continue  # need settle runway for referee lag
                 px, qty = float(terms["px"]), float(terms["qty"])
                 if not (float(lo) <= px <= float(hi)) or qty < min_qty:
                     continue
