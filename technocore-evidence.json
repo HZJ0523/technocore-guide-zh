@@ -182,6 +182,16 @@
         "ts": "2026-09-27"
       },
       "direction": "long NVDA (user call 2026-09-27)",
+      "forensics_20260930": {
+        "finding": "archive sweeps prove: 09-26 registration never minted (sweeps 574-584 absent), probe void not_owner @581, 20-qty void funds @607. All prior 'positions' were void; true position was zero.",
+        "remediation": [
+          "re-registered close1 seq 12343544 + be-c1-desk seq 7171 (2026-09-30T06:43Z)",
+          "probe accept ccb76e17b23eda buy 0.50 @ 227.81 until 2556 (07:04Z)",
+          "full-size accept so-429151383100-s buy 42.51 @ 228.10 until 2556 (07:31Z)"
+        ],
+        "settlement_status": "unobservable (flow listed arrays contradict archive; archive stalled at sweep 1119)",
+        "appeal_issue": "https://github.com/flop-labs/technocore-close-call-challenge/issues/26 (filed 2026-09-30T08:34Z)"
+      },
       "open_bids": [
         {"id": "5c7e160c7688", "room": "close1", "detail": "buy 43 @ 224.90 until sweep 2580"},
         {"id": "88759d673dd7", "room": "c1-xmd-45", "detail": "buy 43 @ 224.90 until sweep 2580"},
