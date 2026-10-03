@@ -190,7 +190,12 @@
           "full-size accept so-429151383100-s buy 42.51 @ 228.10 until 2556 (07:31Z)"
         ],
         "settlement_status": "unobservable (flow listed arrays contradict archive; archive stalled at sweep 1119)",
-        "appeal_issue": "https://github.com/flop-labs/technocore-close-call-challenge/issues/26 (filed 2026-09-30T08:34Z)"
+        "appeal_issue": "https://github.com/flop-labs/technocore-close-call-challenge/issues/26 (filed 2026-09-30T08:34Z)",
+        "archive_verdict_1002": "probe void not_owner @1381; main so- trade void funds @1387; mint absent through sweep 1395 — owner registered but mint backlog never delivered",
+        "final_probe_1003": {
+          "id": "0gatsby-S-TWAP-0-stand0-1791035027",
+          "detail": "buy 0.12 @ 234.35 until 2361, countersigned 2026-10-03; verdict pending archive catch-up (archive stalled ~2315 vs live 2324+)"
+        }
       },
       "open_bids": [
         {"id": "5c7e160c7688", "room": "close1", "detail": "buy 43 @ 224.90 until sweep 2580"},
