@@ -195,6 +195,13 @@
         "final_probe_1003": {
           "id": "0gatsby-S-TWAP-0-stand0-1791035027",
           "detail": "buy 0.12 @ 234.35 until 2361, countersigned 2026-10-03; verdict pending archive catch-up (archive stalled ~2315 vs live 2324+)"
+        },
+        "final_outcome_1004": {
+          "settlement_price": "234.69 (final post 2026-10-04T10:00:15Z)",
+          "probe": "void funds (sweeps 2325-2326)",
+          "full_bid": "taken by a taker but void funds @2328",
+          "mint": "never delivered through contest end",
+          "result": "score 0, no prize. Root cause: referee mint pipeline failure under 3.7M-key load (issue cluster #26/#31-35). Our messages were valid — the bid drew a taker. Appeal #26 remains open as record."
         }
       },
       "open_bids": [
