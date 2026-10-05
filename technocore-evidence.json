@@ -198,10 +198,13 @@
         },
         "final_outcome_1004": {
           "settlement_price": "234.69 (final post 2026-10-04T10:00:15Z)",
-          "probe": "void funds (sweeps 2325-2326)",
-          "full_bid": "taken by a taker but void funds @2328",
-          "mint": "never delivered through contest end",
-          "result": "score 0, no prize. Root cause: referee mint pipeline failure under 3.7M-key load (issue cluster #26/#31-35). Our messages were valid — the bid drew a taker. Appeal #26 remains open as record."
+          "official_ruling_1005": {
+            "source": "sv closing comment on issue #26 (2026-10-05T02:06Z)",
+            "mint": "delivered at sweep 304 from the 26 Sep registration (seq 1784664)",
+            "trades": "our ids voided via id-collision (another taker's copy of the same farm order settled first) or counterparty funds; the visible voids were not all ours",
+            "final": "position 21.00, fees 47.076, score +173.814"
+          },
+          "result": "positive score, not top-3 (leader >1066), no prize. Second official account confirmation by FLOP Labs maintainer."
         }
       },
       "open_bids": [
