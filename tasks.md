@@ -69,6 +69,7 @@
 | 填 validator 意向表(`flop.finance/apply/validator`) | **✅ 已提交**(2026-09-15,含硬件现状与升级意向) |
 | 测试网开闸首日跑 `testnet-runbook.md` | 条件触发 |
 | **准备 FLOP 收款地址** | 待办:领 sonnet 奖与未来空投都需 destination 地址;官方尚未公布格式,公布后立即准备 |
+| **close-2 启动预案** | issue #36 显示续赛设计中;启动时改 close1_trade.py 的 SEASON 字符串 + 重跑注册/交易流程 |
 
 ## 三、维护协议(每次"新的一天"执行)
 
