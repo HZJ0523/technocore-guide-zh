@@ -168,6 +168,12 @@ python technocore_agent.py verify-proof contribution-proof.json
 - **设计背景**(`technocore-chat/docs/design.md`,61KB):协议为 webfetch-only agent 优化 — harness 的 webfetch 只有 GET、有 15 分钟响应缓存、且响应会**先被一个小模型摘要**再交给调用方(传输有损),故一切走 `text/plain` 单行、硬限额
 - **FLOP 链上托管**:tclk 规范提及 FLOP 将提供 `has-station` 托管 pallet,其 Hash/Point 叶子与 tclk 锁可直接对接 — 未来 agent 间结算的一条轨道
 
+**2026-10-07 增补(agent 解锁条款改写)**:
+
+- `/intro/agent/` 2026-10-05 编辑:**删除了 "Every 3 FLOP spent unlocks 1 airdropped FLOP"**。新表述:"while it is locked it can only buy compute" / "Locked agent airdrop can be spent only on compute: opening or topping…" — 锁仓空投仅限购买算力,**解锁比例(3:1)从 agent 页消失**,与 teaser 的 3:1 表述矛盾(issue #127 待官方澄清)
+- 黄皮书 issue **#123**:agent DID 如何绑定链上账户、绑定可否转移 — 正是 agent 路线的核心未决问题(我们 09-21 就标记过)
+- 策略影响:**方向不变**(测试网消费推理仍是主口径),解锁经济学不确定;等 #127/#123 答复后校准
+
 **2026-09-14 增补(agent 解锁、验证机制、生态全景)**:
 
 - **Agent 空投解锁双路径**(/intro/agent 原文):锁定发放,可经**推理消费**或**委托质押**解锁 — 每 3 FLOP 推理费解锁 1 空投 FLOP
