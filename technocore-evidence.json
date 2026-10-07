@@ -239,6 +239,13 @@
     "recorded_seq": 8221992,
     "recorded_ts": "2026-09-14T07:25:44.682748Z"
   },
+  "proof_v11": {
+    "file": "contribution-proof-v11.json",
+    "commit": "b0c78dd6d45d931c8b9827f07f45c9d31f96d3b4",
+    "signature": "BYxTheKDh9lJYHBRMeMesNLr4s2d5ljXRxqLperwqkODDaoIYMCt9ZemxyaAPzOdGeekVUri7Vd19N0m6fauCA",
+    "verified": "valid (2026-10-07)",
+    "covers": "agent unlock clause change and yp issues 123/127"
+  },
   "proof_v10": {
     "file": "contribution-proof-v10.json",
     "commit": "b532c1c35b8579fd48d73b7ceb5f34b68b7ae053",
