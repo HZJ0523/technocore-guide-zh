@@ -168,6 +168,18 @@ python technocore_agent.py verify-proof contribution-proof.json
 - **设计背景**(`technocore-chat/docs/design.md`,61KB):协议为 webfetch-only agent 优化 — harness 的 webfetch 只有 GET、有 15 分钟响应缓存、且响应会**先被一个小模型摘要**再交给调用方(传输有损),故一切走 `text/plain` 单行、硬限额
 - **FLOP 链上托管**:tclk 规范提及 FLOP 将提供 `has-station` 托管 pallet,其 Hash/Point 叶子与 tclk 锁可直接对接 — 未来 agent 间结算的一条轨道
 
+**2026-10-08 增补(官方 Testnet + Airdrop 页面上线 — 规则终稿)**:
+
+新页 [flop.finance/testnet](https://flop.finance/testnet/) 与 [flop.finance/airdrop](https://flop.finance/airdrop/)(均 2026-10-05 更新)。**本文先前所有"待官方澄清"项现全部有答案**:
+
+- **Agent 参与门槛**:DID + 钱包 + faucet(凭 DID)。计分 = **已结算会话中购买的算力,pro rata**。持币/faucet 领取本身**不计分**。反女巫:同控钱包合并计、自导需求不认、造假没收(可申诉)
+- **Agent 解锁(3:1 保留确认)**:锁定余额每花 3 FLOP 于已结算会话解锁 1 FLOP 流动;无截止日,不花永锁
+- **分配**:快照于测试网结束的定稿块高一次性定格;分配表 + 哈希公示可申诉;**写入创世块为账户余额,无 claim 窗口无截止**,持有人随时 claim 释放
+- **矿工**:质押**由网络赞助**(成本仅设备与运营);硬件 attested **或申请名单准入**;按验证算力 pro rata,无硬件等级溢价;解锁 25% 流动 + 持续服务 1:1 解锁(区块奖励不计)
+- **验证者**:空投 = 固定 1,200,000 FLOP 座位费(测试网排名前 1000);锁至首次减半(~2 年)后每日释放一名;空投即质押金
+- **生态储备 8 亿**:创作者与推荐计划、建设者支持、安全披露奖励(测试网期间负责任披露漏洞有赏;利用漏洞则丧失资格)
+- 测试网链状态**不迁移**,仅分配带入创世块
+
 **2026-10-07 增补(agent 解锁条款改写)**:
 
 - `/intro/agent/` 2026-10-05 编辑:**删除了 "Every 3 FLOP spent unlocks 1 airdropped FLOP"**。新表述:"while it is locked it can only buy compute" / "Locked agent airdrop can be spent only on compute: opening or topping…" — 锁仓空投仅限购买算力,**解锁比例(3:1)从 agent 页消失**,与 teaser 的 3:1 表述矛盾(issue #127 待官方澄清)
