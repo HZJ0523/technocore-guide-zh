@@ -168,6 +168,11 @@ python technocore_agent.py verify-proof contribution-proof.json
 - **设计背景**(`technocore-chat/docs/design.md`,61KB):协议为 webfetch-only agent 优化 — harness 的 webfetch 只有 GET、有 15 分钟响应缓存、且响应会**先被一个小模型摘要**再交给调用方(传输有损),故一切走 `text/plain` 单行、硬限额
 - **FLOP 链上托管**:tclk 规范提及 FLOP 将提供 `has-station` 托管 pallet,其 Hash/Point 叶子与 tclk 锁可直接对接 — 未来 agent 间结算的一条轨道
 
+**2026-10-08 增补 II(完整白皮书 + 媒体库页面上线)**:
+
+- [flop.finance/whitepaper](https://flop.finance/whitepaper/):完整白皮书(2026-09-25,"draft not intended for wider distribution"),15 章。**新内容**:**§10 Technocore 专章**(Technocore 正式写入网络文档)、**§12 Compute Reservation Units(CRU,算力预留单位)**、§14 术语表、§15 风险因素与法律声明
+- [flop.finance/media](https://flop.finance/media/):官方媒体库,含 2026-09-02 Hayes 代币经济学 AMA 的 X Spaces 录音
+
 **2026-10-08 增补(官方 Testnet + Airdrop 页面上线 — 规则终稿)**:
 
 新页 [flop.finance/testnet](https://flop.finance/testnet/) 与 [flop.finance/airdrop](https://flop.finance/airdrop/)(均 2026-10-05 更新)。**本文先前所有"待官方澄清"项现全部有答案**:
