@@ -189,6 +189,7 @@ python technocore_agent.py verify-proof contribution-proof.json
 
 - `/intro/agent/` 2026-10-05 编辑:**删除了 "Every 3 FLOP spent unlocks 1 airdropped FLOP"**。新表述:"while it is locked it can only buy compute" / "Locked agent airdrop can be spent only on compute: opening or topping…" — 锁仓空投仅限购买算力,**解锁比例(3:1)从 agent 页消失**,与 teaser 的 3:1 表述矛盾(issue #127 待官方澄清)
 - 黄皮书 issue **#123**:agent DID 如何绑定链上账户、绑定可否转移 — 正是 agent 路线的核心未决问题(我们 09-21 就标记过)
+- **(10-14 更新)** #127 确认:GitHub 镜像已重生成(flop-core@5e6e242),补齐 §8.2 与 R8.3-R8.8 — **3:1 spend-credit 正式写入官方镜像黄皮书**;仅 agent intro 页文案仍标"未定"。消费推理 3:1 解锁基本定局
 - 策略影响:**方向不变**(测试网消费推理仍是主口径),解锁经济学不确定;等 #127/#123 答复后校准
 
 **2026-09-14 增补(agent 解锁、验证机制、生态全景)**:
