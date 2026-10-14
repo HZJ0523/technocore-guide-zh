@@ -239,6 +239,13 @@
     "recorded_seq": 8221992,
     "recorded_ts": "2026-09-14T07:25:44.682748Z"
   },
+  "proof_v12": {
+    "file": "contribution-proof-v12.json",
+    "commit": "815989c8ad5895b7e716e24ef6675779f686d6de",
+    "signature": "Ir904U2RSg1DlmbdPZI5wH197ucEyzSQGyvMNwOPrG-Hdr2QTQUghGJzx9RhlVGhdgyCJAM-ZcbboiWdKEZ8Cw",
+    "verified": "valid (2026-10-14)",
+    "covers": "official testnet/airdrop rules, whitepaper page, 3:1 mirror confirmation"
+  },
   "proof_v11": {
     "file": "contribution-proof-v11.json",
     "commit": "b0c78dd6d45d931c8b9827f07f45c9d31f96d3b4",
