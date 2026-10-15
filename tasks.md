@@ -61,6 +61,8 @@
 
 21. **sonnet-challenge issue 跟踪器** — `flop-labs/technocore-sonnet-challenge/issues` 新 issue 与回复。**赛事期间每日**;09-18 后周频。理由:该跟踪器是裁判行为/规则澄清/修复的最高信号源 — 09-17 的突破(issue #23 揭示身份索引 ≥6 条大小截断)即出自此;我方申诉 #64 的回复也在其中。
 
+24. **docs.flop.network 检查(2026-10-15 新增)** — `https://docs.flop.network/llms.txt` 页数/内容 diff + `/docs/network-testnet` 状态页。理由:官方运维文档站(26 页,operator 手册,devnet 现行);testnet status 页 "planned → 各项 identity 发布" 是开闸最直接的信号源,先于公告。附 `ask.flop.finance`(问答 + MCP)。
+
 ## 二、一次性动作(非每日)
 
 | 动作 | 状态 |
@@ -111,6 +113,11 @@
 
 ### 2026-09-15 — C12 预案执行
 - 24 小时无回执,同 request_id `reg-voter-z6mk-20260914` 重发成功(新 seq 767399,generation 1 — 房间已换代)。继续追踪回执。
+
+### 2026-10-15 — 新增 C24(清单 → 20 项)
+- 发现 `docs.flop.network` 官方文档站:operator hub(miner/validator/gpu-provider 手册,devnet 现行)、26 页知识库(llms.txt)、testnet status 页(planned)、`ask.flop.finance` 问答站 + MCP。
+- 新检查项:llms.txt diff + network-testnet 状态。信号优先级高于 sitemap — 开闸前该页会先变。
+- 计数:19 → 20 项。
 
 ### 2026-09-16 — 新增 C20
 - 理由:裁判状态首次出现行为突变 — rejected(31,796)超过 accepted(15,200),并新增 `unchanged` 计数。此信号直接关系我方注册是否被拒;独立成项以显式告警。
