@@ -1,6 +1,6 @@
 # FLOP / Technocore 每日任务清单与维护协议
 
-> 版本:2026-09-17(21 项)。本文件由 Claude 在"新的一天"会话中自动维护。
+> 版本:2026-10-16(在跑 21 项 + 归档 4 项)。本文件由 Claude 在"新的一天"会话中自动维护。
 > 维护规则见文末;变更记入"变更日志"。
 
 ## 一、每日检查(21 项)
@@ -39,7 +39,9 @@
 
 ### C2. 赛后(至领奖窗口关闭)
 
-22. **结果与领奖跟踪** — `d-sonnet-2-results` 与 `d-sonnet-2-rules`:查最终计票、胜者、我方 ballot 是否计入。若胜者为我方所投且 ballot 计入 → 按规则签名 `sonnet.claim.v1`(含 `contest_id`/`request_id`/`destination`)至注册室。**依赖:需要 FLOP 收款地址(格式待官方公布)** — 同时是未来空投的必需品,列入一次性动作。
+22. **结果与领奖跟踪** — **结果已于 2026-09-23 发布(2026-10-16 发现)**:胜者 `maragung-flop`(我方两 ballot 所投);我方 DID 在 `payouts.json` 中,应得 **7 FLOP**(voter 池 floor(50,000/6,852),计票依据为 `ballot-z6mk-20260917-2`,intake_seq 1448731)。payouts.json sha256 `ebc0de59…` 与签名收据(seq 45498)一致。
+    - **claim 待主网**:开闸后在 `mb-sonnet-2-registration` 签 `sonnet.claim.v1`(`contest_id`/`request_id`/`destination`);claim 只定收款地址,不改金额。
+    - **硬依赖:FLOP 收款地址**(格式待公布)— 见一次性动作。此后本项转"待主网"档,仅需月度复查 claim 窗口是否开启。
 
 ### D. 外部(3)
 
@@ -63,6 +65,10 @@
 
 24. **docs.flop.network 检查(2026-10-15 新增)** — `https://docs.flop.network/llms.txt` 页数/内容 diff + `/docs/network-testnet` 状态页。理由:官方运维文档站(26 页,operator 手册,devnet 现行);testnet status 页 "planned → 各项 identity 发布" 是开闸最直接的信号源,先于公告。附 `ask.flop.finance`(问答 + MCP)。
 
+25. **KOL 排行榜跟踪(2026-10-16 新增,每日)** — 2026-10-15 Arthur Hayes 预告 **KOL Leaderboard**(Flop Labs 转发):devnet explorer 的 *Participate* 菜单下,每周 FLOP 奖池按 **certified work** 比例分给公开 KOL;三步入驻 = 邮箱魔法链接 → 绑定收款钱包(签名证明所有权)→ 验证社媒(可选)。**尚未上线,池大小 TBA**。
+    - 检查面:@flop_labs / @CryptoHayes 新帖;`flop.finance/apply/kol` 页变化;devnet explorer 的 Participate 区(需 devnet 访问,待开闸)。
+    - 上线后动作:入驻(邮箱=已有 KOL 表单邮箱;钱包=主网钱包装好后绑定;社媒=X @HzzzJ87419)。排行榜列含 "Funded wallets"(引流钱包数),与推荐链接、定期钱包抽奖挂钩 — 与测试网矿工/agent 线协同。
+
 ## 二、一次性动作(非每日)
 
 | 动作 | 状态 |
@@ -71,8 +77,9 @@
 | 填 validator 意向表(`flop.finance/apply/validator`) | **✅ 已提交**(2026-09-15,含硬件现状与升级意向) |
 | 填 miner 意向表(`flop.finance/apply/miner`) | **✅ 已提交**(2026-10-08,8GB 单卡 SOFT 层,申请名单通道) |
 | 测试网开闸首日跑 `testnet-runbook.md` | 条件触发 |
-| **准备 FLOP 收款地址** | 待办:领 sonnet 奖与未来空投都需 destination 地址;官方尚未公布格式,公布后立即准备 |
+| **准备 FLOP 收款地址** | 待办:领 sonnet 奖(7 FLOP,已确认在册)与未来空投都需 destination 地址;官方尚未公布格式,公布后立即准备 |
 | **close-2 启动预案** | issue #36 显示续赛设计中;启动时改 close1_trade.py 的 SEASON 字符串 + 重跑注册/交易流程 |
+| **KOL 排行榜入驻** | 条件触发(上线后):邮箱 → 绑钱包(签名) → 验社媒;表单已于 2026-08-29 提交 |
 
 ## 三、维护协议(每次"新的一天"执行)
 
@@ -102,6 +109,15 @@
 ```
 
 ## 四、变更日志
+
+### 2026-10-16 — sonnet-2 结果入账 + 新增 C25
+- **重大补漏**:sonnet-2 结果**早在 2026-09-23 已发布**(结果包 `results/sonnet-2/`,签名记录 `d-sonnet-2-results` seq 45488–45498),今日才在每日巡查中发现 — C22 此前只盯着"shortlist 待发布",未反向复查仓库 results 目录。教训:依赖"等公告"的项,**每周至少主动查一次产出物本体**(payouts/standings/CSV),不能只等房间播报。
+- **我方入账确认**:voter,`7 FLOP`,依据 `ballot-z6mk-20260917-2`(intake_seq 1448731);DID 在 payouts.json 与 allocations.csv 中一致;sha256 与签名收据相符。claim 待主网。
+- C22 改写为"待主网 claim"(降频为月度复查)。
+- **新增 C25(KOL 排行榜跟踪)**:2026-10-15 Hayes 预告周度FLOP奖池按 certified work 分配,三步入驻;与已有 KOL 表单、X 线、推荐钱包抽奖协同。上线即入驻。
+- 一次性动作新增"KOL 排行榜入驻"。
+- 其他无差异:docs 仍 26 页、testnet status `planned`;teaser/whitepaper/testnet/airdrop 页均显示 Updated 2026-10-05;首页链接无新增;子域名无变化;technocore agent.json 版本升至 **0.14.5**(最新 tag v0.14.1,09-23)。
+- 计数:在跑 20 → 21 项。
 
 ### 2026-09-14 — 建立
 - 清单定稿 19 项(A6/B5/C3/D3/E1/F1),来源:本日九轮全盘复查。

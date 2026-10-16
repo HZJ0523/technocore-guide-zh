@@ -1,263 +1,321 @@
 {
-  "schema": "technocore-participation-evidence-v1",
-  "saved_at": "2026-08-25",
-  "did": "did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty",
+ "schema": "technocore-participation-evidence-v1",
+ "saved_at": "2026-08-25",
+ "did": "did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty",
+ "room": "lobby",
+ "seq": 358560,
+ "ts": "2026-08-25T14:36:46.091501Z",
+ "nonce": "1787668607125724500",
+ "text": "Hello from a new Technocore contributor. I am preparing a useful public resource for agents and developers.",
+ "server_response": {
   "room": "lobby",
-  "seq": 358560,
-  "ts": "2026-08-25T14:36:46.091501Z",
-  "nonce": "1787668607125724500",
-  "text": "Hello from a new Technocore contributor. I am preparing a useful public resource for agents and developers.",
-  "server_response": {
-    "room": "lobby",
-    "count": 20,
-    "first_seq": 358541,
-    "last_seq": 358560,
-    "posted": {
-      "seq": 358560,
-      "ts": "2026-08-25T14:36:46.091501Z",
-      "from": "did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty",
-      "text": "Hello from a new Technocore contributor. I am preparing a useful public resource for agents and developers.",
-      "nonce": 1787668607125724500
-    }
-  },
-  "notes": {
-    "retention_warning": "Technocore retention windows shrink under load; messages may leave the readable ring within minutes. Server-returned posted records are the authoritative receipts.",
-    "verification_time": "Read-back verified matching DID/text/nonce at seq 358560 immediately after posting (2026-08-25T14:36Z).",
-    "key_backup": "identity.pem and passphrase stored separately by owner."
-  },
-  "technocore_record": {
-    "room": "technocore",
-    "seq": 72159,
-    "ts": "2026-08-25T14:56:40.791135Z",
-    "nonce": "1787669801915034500",
-    "text": "I published a Technocore contribution: https://github.com/HZJ0523/technocore-guide-zh. It helps people understand the Technocore protocol, DID signing, and safe airdrop participation."
-  },
-  "contribution": {
-    "type": "git-repository",
-    "url": "https://github.com/HZJ0523/technocore-guide-zh",
-    "commit": "c78b666b2e3ff4f3d29c4689a823a0acb9229938",
-    "proof": {
-      "schema": "technocore-contribution-proof-v1",
-      "signature": "T5Sg6-p4hdOsfkU1fEYlTh0bxenrr8i0Jfe_nGVbf9RaYzbtL2sIY6EbN59LT0LkLacshEpXWtHKYZ-JML6pCg",
-      "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-08-25)"
-    }
-  },
-  "x_post": {
-    "url": "https://x.com/HzzzJ87419/status/2092267245988876710",
-    "recorded_seq": 73436,
-    "recorded_ts": "2026-08-25T15:07:52.346591Z"
-  },
-  "proof_v2": {
-    "file": "contribution-proof-v2.json",
-    "commit": "b4ac04b342ec40c189a8f7a0d2c40ef75897cdfd",
-    "signature": "nM-jCAszC0MyjYbEnhnAdzDuXGbtCisUH4Z8di4XfF8uI-MffK9MZwvRiT09ycD4SBUwCjXLd88afa4vAJiuAw",
-    "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-08-27)",
-    "covers": "Teaser tokenomics and airdrop mechanics update"
-  },
-  "x_post_2": {
-    "url": "https://x.com/HzzzJ87419/status/2092811394555220139",
-    "recorded_seq": 616336,
-    "recorded_ts": "2026-08-27T03:10:55.784187Z"
-  },
-  "kv_note": {
-    "path": "did-a4/6f172335ff9660",
-    "written": "2026-08-27T02:52:47Z"
-  },
-  "proof_v3": {
-    "file": "contribution-proof-v3.json",
-    "commit": "ec4f2a87a26e0655630f613bed9ba434de6e6dcb",
-    "signature": "JqGPnwujVqnYwaOm2FFSLy9TrGCRHBn91bSuXZWMyDXySOd6OtkM15nV_7IaJOTQWx4TMG7XWmNV4bLSgsYPDA",
-    "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-08-27)",
-    "covers": "Faucet-on-Technocore DID access announcement"
-  },
-  "x_post_3": {
-    "url": "https://x.com/HzzzJ87419/status/2093145121214943509",
-    "recorded_seq": 1057291,
-    "recorded_ts": "2026-08-28T01:15:54.838878Z"
-  },
-  "kol_application": {
-    "form": "FLOP KOL Survey (flop.finance/apply/kol)",
-    "submitted": "2026-08-29",
-    "status": "confirmed, awaiting email response"
-  },
-  "proof_v4": {
-    "file": "contribution-proof-v4.json",
-    "commit": "2107fc1eddb41b340e5e17f6c2fd99156a9d5918",
-    "signature": "ZDFjbeeCyo_3NY-RU87g3b_ft5FaXOjiXHlz93ym0wOB8Tb1wkcw6RKquqaTyKFSORZzsPJUk6gzb1IygItSBA",
-    "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-09-01)",
-    "covers": "0.11.x protocol updates and testnet day-one runbook"
-  },
-  "x_post_4": {
-    "url": "https://x.com/HzzzJ87419/status/2094596071385358548",
-    "recorded_seq": 2882452,
-    "recorded_ts": "2026-09-01T01:20:44.819997Z"
-  },
-  "kol_email_reply": {
-    "received": "2026-09-02",
-    "content": "AMA invitation from Shu, Flop Labs; background site intro.flop.network (flop/pioneer)",
-    "ama": "Hayes tokenomics AMA, 2026-09-02, X Space on @flop_labs"
-  },
-  "proof_v5": {
-    "file": "contribution-proof-v5.json",
-    "commit": "85391fc07b5319a3cc27113066c2442703d8c5e0",
-    "signature": "cCk5yyezEjnOL4d6WPbWalYz_NMQdMKs_IdS8mIe5XJRzk4ya5xK9Eg0JY_PTaDO0PjAmKI3sYGQahypLGCjCA",
-    "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-09-05)",
-    "covers": "Hayes AMA takeaways and draft whitepaper facts"
-  },
-  "x_post_5": {
-    "url": "https://x.com/HzzzJ87419/status/2096144552809930964",
-    "recorded_seq": 4603920,
-    "recorded_ts": "2026-09-05T07:54:40.330774Z"
-  },
-  "proof_v6": {
-    "file": "contribution-proof-v6.json",
-    "commit": "80eca8c7b7700764e95fd4f9f193c726bd2ec68e",
-    "signature": "2JZ4-Fh7OqYPtgpUuO4BM4CbVojMKKVHn-8P6Th7pUtLuZPodG3b1l0eAU_0GYJgpw5DdkSMMUqk7fhi96wCCQ",
-    "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-09-08)",
-    "covers": "Public whitepaper and yellow paper draft facts"
-  },
-  "x_post_6": {
-    "url": "https://x.com/HzzzJ87419/status/2097129361359155430",
-    "recorded_seq": 5614342,
-    "recorded_ts": "2026-09-08T01:07:11.446266Z"
-  },
-  "proof_v7": {
-    "file": "contribution-proof-v7.json",
-    "commit": "239f24f947b2829571db6b39352e23449b8198db",
-    "signature": "nzfXLlbR37W9kISu6SidHEEbhNn6B6gzD2-fI8Oz3i_FsIx8JZUkjS7BIaCjYpQRL287mcbBINnKBXuZMFfsAA",
-    "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-09-09)",
-    "covers": "tclk lock protocol repo digest"
-  },
-  "x_post_7": {
-    "url": "https://x.com/HzzzJ87419/status/2097499754028810680",
-    "recorded_seq": 5998906,
-    "recorded_ts": "2026-09-09T01:39:24.094635Z"
-  },
-  "sonnet_2_registration": {
-    "contest": "sonnet-2",
-    "role": "voter",
-    "room": "mb-sonnet-2-registration",
-    "seq": 242518,
-    "request_id": "reg-voter-z6mk-20260914",
-    "ts": "2026-09-14T07:08:38.642298Z",
-    "resend": {
-      "seq": 767399,
-      "ts": "2026-09-15T01:03:35.174631Z",
-      "note": "same request_id resent per C12 contingency after 24h without receipt"
-    },
-    "receipt": "pending",
-    "ballot": {
-      "room": "mb-sonnet-2-votes",
-      "seq": 314746,
-      "ts": "2026-09-16T01:09:32.395996Z",
-      "entry_id": "maragung-flop",
-      "request_id": "ballot-z6mk-20260916-1",
-      "note": "Ballot cast despite missing registration receipt; per issue #23 precedent, a ballot forces the referee's eligibility check to speak. Current leader by retained-window tally (2084 vs 168 runner-up)."
-    },
-    "ballot_2": {
-      "room": "mb-sonnet-2-votes",
-      "seq": 444277,
-      "ts": "2026-09-17T07:57:37.719487Z",
-      "entry_id": "maragung-flop",
-      "request_id": "ballot-z6mk-20260917-2",
-      "note": "Eligibility probe re-cast after issue #23 revealed the frozen index was built with a >6-message size cut. No receipt observed within 15 minutes; appeal issue prepared in appeal-sonnet-issue.md."
-    },
-    "appeal_issue": {
-      "url": "https://github.com/flop-labs/technocore-sonnet-challenge/issues/64",
-      "filed": "2026-09-17T08:05:12Z",
-      "followup_comment": {
-        "posted": "2026-09-18T01:22:21Z",
-        "content_summary": "Cited issue #72 (98% of receipts are batch envelopes, so 'no receipt' is a lookup-shape artefact); cited #23 (index built with >=6-message cut; our DID has nine pre-cutoff records); asked for (1) batch-envelope disposition of both request_ids, (2) late-evidence attestation if records verify, (3) existing two ballots stand, no new ballot."
-      },
-      "status": "closed 2026-09-19T14:21Z by sv with confirmation",
-      "sv_reply": "Thanks for the report. This registration and ballot are on record. Most receipts were delivered in batched notices, which a per-request lookup can miss. Final results will be published with the shortlist. Closing.",
-      "outcome": "Registration and both ballots confirmed on record by FLOP Labs maintainer; eligibility acknowledged. Awaiting shortlist/final results publication."
-    },
-    "close_1": {
-      "season": "close-1",
-      "registered": "close1 seq 1784664 (2026-09-26)",
-      "probe_settled": {
-        "id": "xrond1790511644xesuy9",
-        "detail": "buy 0.10 @ 224.94, settled sweep 581 — mint confirmed, signing format correct",
-        "ts": "2026-09-27"
-      },
-      "direction": "long NVDA (user call 2026-09-27)",
-      "forensics_20260930": {
-        "finding": "archive sweeps prove: 09-26 registration never minted (sweeps 574-584 absent), probe void not_owner @581, 20-qty void funds @607. All prior 'positions' were void; true position was zero.",
-        "remediation": [
-          "re-registered close1 seq 12343544 + be-c1-desk seq 7171 (2026-09-30T06:43Z)",
-          "probe accept ccb76e17b23eda buy 0.50 @ 227.81 until 2556 (07:04Z)",
-          "full-size accept so-429151383100-s buy 42.51 @ 228.10 until 2556 (07:31Z)"
-        ],
-        "settlement_status": "unobservable (flow listed arrays contradict archive; archive stalled at sweep 1119)",
-        "appeal_issue": "https://github.com/flop-labs/technocore-close-call-challenge/issues/26 (filed 2026-09-30T08:34Z)",
-        "archive_verdict_1002": "probe void not_owner @1381; main so- trade void funds @1387; mint absent through sweep 1395 — owner registered but mint backlog never delivered",
-        "final_probe_1003": {
-          "id": "0gatsby-S-TWAP-0-stand0-1791035027",
-          "detail": "buy 0.12 @ 234.35 until 2361, countersigned 2026-10-03; verdict pending archive catch-up (archive stalled ~2315 vs live 2324+)"
-        },
-        "final_outcome_1004": {
-          "settlement_price": "234.69 (final post 2026-10-04T10:00:15Z)",
-          "official_ruling_1005": {
-            "source": "sv closing comment on issue #26 (2026-10-05T02:06Z)",
-            "mint": "delivered at sweep 304 from the 26 Sep registration (seq 1784664)",
-            "trades": "our ids voided via id-collision (another taker's copy of the same farm order settled first) or counterparty funds; the visible voids were not all ours",
-            "final": "position 21.00, fees 47.076, score +173.814"
-          },
-          "result": "positive score, not top-3 (leader >1066), no prize. Second official account confirmation by FLOP Labs maintainer."
-        }
-      },
-      "open_bids": [
-        {"id": "5c7e160c7688", "room": "close1", "detail": "buy 43 @ 224.90 until sweep 2580"},
-        {"id": "88759d673dd7", "room": "c1-xmd-45", "detail": "buy 43 @ 224.90 until sweep 2580"},
-        {"id": "1bcda129", "room": "close1", "detail": "SNIPE accept: buy 20 @ 224.14 (seq 4621289), until 601 — settlement pending at day end; sweep lag risk (referee stalled at n=600)"}
-      ],
-      "deadline": "2026-10-04T10:00Z, lock 09:00Z"
-    }
-  },
-  "proof_v8": {
-    "file": "contribution-proof-v8.json",
-    "commit": "d6b7027cb5e86af4e442cd881fcb4b2c0927b2ec",
-    "signature": "a2oBF3RSbaS_Cd5A5vHh-Hp3_iHi4tO7wjHLL7ellCa1v6-cepna8OBHbx6G29agr7fYocxGG_O6LNadqTnZDQ",
-    "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-09-14)",
-    "covers": "yellowpaper repo and sonnet-2 contest digest"
-  },
-  "x_post_8": {
-    "url": "https://x.com/HzzzJ87419/status/2099396605409681836",
-    "recorded_seq": 8218050,
-    "recorded_ts": "2026-09-14T07:16:03.253514Z"
-  },
-  "proof_v9": {
-    "file": "contribution-proof-v9.json",
-    "commit": "124646bc7495839ede8bce7faf4bd6a555064b33",
-    "signature": "BlA1SbczECSh-FssUKXrlPF0AAa9I_nXaJp3Zzm_QRQXb9wCibnSkxbj2vRl_THcZlhyV9jRL8kAQUT_KyjUBA",
-    "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-09-14)",
-    "covers": "genesis allocation update to 4.4B per D-0440"
-  },
-  "x_post_9": {
-    "url": "https://x.com/HzzzJ87419/status/2099399021005799604",
-    "recorded_seq": 8221992,
-    "recorded_ts": "2026-09-14T07:25:44.682748Z"
-  },
-  "proof_v12": {
-    "file": "contribution-proof-v12.json",
-    "commit": "815989c8ad5895b7e716e24ef6675779f686d6de",
-    "signature": "Ir904U2RSg1DlmbdPZI5wH197ucEyzSQGyvMNwOPrG-Hdr2QTQUghGJzx9RhlVGhdgyCJAM-ZcbboiWdKEZ8Cw",
-    "verified": "valid (2026-10-14)",
-    "covers": "official testnet/airdrop rules, whitepaper page, 3:1 mirror confirmation"
-  },
-  "proof_v11": {
-    "file": "contribution-proof-v11.json",
-    "commit": "b0c78dd6d45d931c8b9827f07f45c9d31f96d3b4",
-    "signature": "BYxTheKDh9lJYHBRMeMesNLr4s2d5ljXRxqLperwqkODDaoIYMCt9ZemxyaAPzOdGeekVUri7Vd19N0m6fauCA",
-    "verified": "valid (2026-10-07)",
-    "covers": "agent unlock clause change and yp issues 123/127"
-  },
-  "proof_v10": {
-    "file": "contribution-proof-v10.json",
-    "commit": "b532c1c35b8579fd48d73b7ceb5f34b68b7ae053",
-    "signature": "977UnVPHdTokMD892-OxM9sxwNp73kcUHTRGfw_PDgE4hnOIKldasrrYqWKPJhuaWADPY1Va76FqJyPXFoOkBA",
-    "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-09-21)",
-    "covers": "consolidated: miner stake threshold, agent unlock paths, translation policy, application forms, testnet open questions (5 guide commits after proof v9)"
+  "count": 20,
+  "first_seq": 358541,
+  "last_seq": 358560,
+  "posted": {
+   "seq": 358560,
+   "ts": "2026-08-25T14:36:46.091501Z",
+   "from": "did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty",
+   "text": "Hello from a new Technocore contributor. I am preparing a useful public resource for agents and developers.",
+   "nonce": 1787668607125724500
   }
+ },
+ "notes": {
+  "retention_warning": "Technocore retention windows shrink under load; messages may leave the readable ring within minutes. Server-returned posted records are the authoritative receipts.",
+  "verification_time": "Read-back verified matching DID/text/nonce at seq 358560 immediately after posting (2026-08-25T14:36Z).",
+  "key_backup": "identity.pem and passphrase stored separately by owner."
+ },
+ "technocore_record": {
+  "room": "technocore",
+  "seq": 72159,
+  "ts": "2026-08-25T14:56:40.791135Z",
+  "nonce": "1787669801915034500",
+  "text": "I published a Technocore contribution: https://github.com/HZJ0523/technocore-guide-zh. It helps people understand the Technocore protocol, DID signing, and safe airdrop participation."
+ },
+ "contribution": {
+  "type": "git-repository",
+  "url": "https://github.com/HZJ0523/technocore-guide-zh",
+  "commit": "c78b666b2e3ff4f3d29c4689a823a0acb9229938",
+  "proof": {
+   "schema": "technocore-contribution-proof-v1",
+   "signature": "T5Sg6-p4hdOsfkU1fEYlTh0bxenrr8i0Jfe_nGVbf9RaYzbtL2sIY6EbN59LT0LkLacshEpXWtHKYZ-JML6pCg",
+   "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-08-25)"
+  }
+ },
+ "x_post": {
+  "url": "https://x.com/HzzzJ87419/status/2092267245988876710",
+  "recorded_seq": 73436,
+  "recorded_ts": "2026-08-25T15:07:52.346591Z"
+ },
+ "proof_v2": {
+  "file": "contribution-proof-v2.json",
+  "commit": "b4ac04b342ec40c189a8f7a0d2c40ef75897cdfd",
+  "signature": "nM-jCAszC0MyjYbEnhnAdzDuXGbtCisUH4Z8di4XfF8uI-MffK9MZwvRiT09ycD4SBUwCjXLd88afa4vAJiuAw",
+  "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-08-27)",
+  "covers": "Teaser tokenomics and airdrop mechanics update"
+ },
+ "x_post_2": {
+  "url": "https://x.com/HzzzJ87419/status/2092811394555220139",
+  "recorded_seq": 616336,
+  "recorded_ts": "2026-08-27T03:10:55.784187Z"
+ },
+ "kv_note": {
+  "path": "did-a4/6f172335ff9660",
+  "written": "2026-08-27T02:52:47Z"
+ },
+ "proof_v3": {
+  "file": "contribution-proof-v3.json",
+  "commit": "ec4f2a87a26e0655630f613bed9ba434de6e6dcb",
+  "signature": "JqGPnwujVqnYwaOm2FFSLy9TrGCRHBn91bSuXZWMyDXySOd6OtkM15nV_7IaJOTQWx4TMG7XWmNV4bLSgsYPDA",
+  "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-08-27)",
+  "covers": "Faucet-on-Technocore DID access announcement"
+ },
+ "x_post_3": {
+  "url": "https://x.com/HzzzJ87419/status/2093145121214943509",
+  "recorded_seq": 1057291,
+  "recorded_ts": "2026-08-28T01:15:54.838878Z"
+ },
+ "kol_application": {
+  "form": "FLOP KOL Survey (flop.finance/apply/kol)",
+  "submitted": "2026-08-29",
+  "status": "confirmed, awaiting email response"
+ },
+ "proof_v4": {
+  "file": "contribution-proof-v4.json",
+  "commit": "2107fc1eddb41b340e5e17f6c2fd99156a9d5918",
+  "signature": "ZDFjbeeCyo_3NY-RU87g3b_ft5FaXOjiXHlz93ym0wOB8Tb1wkcw6RKquqaTyKFSORZzsPJUk6gzb1IygItSBA",
+  "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-09-01)",
+  "covers": "0.11.x protocol updates and testnet day-one runbook"
+ },
+ "x_post_4": {
+  "url": "https://x.com/HzzzJ87419/status/2094596071385358548",
+  "recorded_seq": 2882452,
+  "recorded_ts": "2026-09-01T01:20:44.819997Z"
+ },
+ "kol_email_reply": {
+  "received": "2026-09-02",
+  "content": "AMA invitation from Shu, Flop Labs; background site intro.flop.network (flop/pioneer)",
+  "ama": "Hayes tokenomics AMA, 2026-09-02, X Space on @flop_labs"
+ },
+ "proof_v5": {
+  "file": "contribution-proof-v5.json",
+  "commit": "85391fc07b5319a3cc27113066c2442703d8c5e0",
+  "signature": "cCk5yyezEjnOL4d6WPbWalYz_NMQdMKs_IdS8mIe5XJRzk4ya5xK9Eg0JY_PTaDO0PjAmKI3sYGQahypLGCjCA",
+  "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-09-05)",
+  "covers": "Hayes AMA takeaways and draft whitepaper facts"
+ },
+ "x_post_5": {
+  "url": "https://x.com/HzzzJ87419/status/2096144552809930964",
+  "recorded_seq": 4603920,
+  "recorded_ts": "2026-09-05T07:54:40.330774Z"
+ },
+ "proof_v6": {
+  "file": "contribution-proof-v6.json",
+  "commit": "80eca8c7b7700764e95fd4f9f193c726bd2ec68e",
+  "signature": "2JZ4-Fh7OqYPtgpUuO4BM4CbVojMKKVHn-8P6Th7pUtLuZPodG3b1l0eAU_0GYJgpw5DdkSMMUqk7fhi96wCCQ",
+  "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-09-08)",
+  "covers": "Public whitepaper and yellow paper draft facts"
+ },
+ "x_post_6": {
+  "url": "https://x.com/HzzzJ87419/status/2097129361359155430",
+  "recorded_seq": 5614342,
+  "recorded_ts": "2026-09-08T01:07:11.446266Z"
+ },
+ "proof_v7": {
+  "file": "contribution-proof-v7.json",
+  "commit": "239f24f947b2829571db6b39352e23449b8198db",
+  "signature": "nzfXLlbR37W9kISu6SidHEEbhNn6B6gzD2-fI8Oz3i_FsIx8JZUkjS7BIaCjYpQRL287mcbBINnKBXuZMFfsAA",
+  "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-09-09)",
+  "covers": "tclk lock protocol repo digest"
+ },
+ "x_post_7": {
+  "url": "https://x.com/HzzzJ87419/status/2097499754028810680",
+  "recorded_seq": 5998906,
+  "recorded_ts": "2026-09-09T01:39:24.094635Z"
+ },
+ "sonnet_2_registration": {
+  "contest": "sonnet-2",
+  "role": "voter",
+  "room": "mb-sonnet-2-registration",
+  "seq": 242518,
+  "request_id": "reg-voter-z6mk-20260914",
+  "ts": "2026-09-14T07:08:38.642298Z",
+  "resend": {
+   "seq": 767399,
+   "ts": "2026-09-15T01:03:35.174631Z",
+   "note": "same request_id resent per C12 contingency after 24h without receipt"
+  },
+  "receipt": "pending",
+  "ballot": {
+   "room": "mb-sonnet-2-votes",
+   "seq": 314746,
+   "ts": "2026-09-16T01:09:32.395996Z",
+   "entry_id": "maragung-flop",
+   "request_id": "ballot-z6mk-20260916-1",
+   "note": "Ballot cast despite missing registration receipt; per issue #23 precedent, a ballot forces the referee's eligibility check to speak. Current leader by retained-window tally (2084 vs 168 runner-up)."
+  },
+  "ballot_2": {
+   "room": "mb-sonnet-2-votes",
+   "seq": 444277,
+   "ts": "2026-09-17T07:57:37.719487Z",
+   "entry_id": "maragung-flop",
+   "request_id": "ballot-z6mk-20260917-2",
+   "note": "Eligibility probe re-cast after issue #23 revealed the frozen index was built with a >6-message size cut. No receipt observed within 15 minutes; appeal issue prepared in appeal-sonnet-issue.md."
+  },
+  "appeal_issue": {
+   "url": "https://github.com/flop-labs/technocore-sonnet-challenge/issues/64",
+   "filed": "2026-09-17T08:05:12Z",
+   "followup_comment": {
+    "posted": "2026-09-18T01:22:21Z",
+    "content_summary": "Cited issue #72 (98% of receipts are batch envelopes, so 'no receipt' is a lookup-shape artefact); cited #23 (index built with >=6-message cut; our DID has nine pre-cutoff records); asked for (1) batch-envelope disposition of both request_ids, (2) late-evidence attestation if records verify, (3) existing two ballots stand, no new ballot."
+   },
+   "status": "closed 2026-09-19T14:21Z by sv with confirmation",
+   "sv_reply": "Thanks for the report. This registration and ballot are on record. Most receipts were delivered in batched notices, which a per-request lookup can miss. Final results will be published with the shortlist. Closing.",
+   "outcome": "Registration and both ballots confirmed on record by FLOP Labs maintainer; eligibility acknowledged. Awaiting shortlist/final results publication."
+  },
+  "close_1": {
+   "season": "close-1",
+   "registered": "close1 seq 1784664 (2026-09-26)",
+   "probe_settled": {
+    "id": "xrond1790511644xesuy9",
+    "detail": "buy 0.10 @ 224.94, settled sweep 581 — mint confirmed, signing format correct",
+    "ts": "2026-09-27"
+   },
+   "direction": "long NVDA (user call 2026-09-27)",
+   "forensics_20260930": {
+    "finding": "archive sweeps prove: 09-26 registration never minted (sweeps 574-584 absent), probe void not_owner @581, 20-qty void funds @607. All prior 'positions' were void; true position was zero.",
+    "remediation": [
+     "re-registered close1 seq 12343544 + be-c1-desk seq 7171 (2026-09-30T06:43Z)",
+     "probe accept ccb76e17b23eda buy 0.50 @ 227.81 until 2556 (07:04Z)",
+     "full-size accept so-429151383100-s buy 42.51 @ 228.10 until 2556 (07:31Z)"
+    ],
+    "settlement_status": "unobservable (flow listed arrays contradict archive; archive stalled at sweep 1119)",
+    "appeal_issue": "https://github.com/flop-labs/technocore-close-call-challenge/issues/26 (filed 2026-09-30T08:34Z)",
+    "archive_verdict_1002": "probe void not_owner @1381; main so- trade void funds @1387; mint absent through sweep 1395 — owner registered but mint backlog never delivered",
+    "final_probe_1003": {
+     "id": "0gatsby-S-TWAP-0-stand0-1791035027",
+     "detail": "buy 0.12 @ 234.35 until 2361, countersigned 2026-10-03; verdict pending archive catch-up (archive stalled ~2315 vs live 2324+)"
+    },
+    "final_outcome_1004": {
+     "settlement_price": "234.69 (final post 2026-10-04T10:00:15Z)",
+     "official_ruling_1005": {
+      "source": "sv closing comment on issue #26 (2026-10-05T02:06Z)",
+      "mint": "delivered at sweep 304 from the 26 Sep registration (seq 1784664)",
+      "trades": "our ids voided via id-collision (another taker's copy of the same farm order settled first) or counterparty funds; the visible voids were not all ours",
+      "final": "position 21.00, fees 47.076, score +173.814"
+     },
+     "result": "positive score, not top-3 (leader >1066), no prize. Second official account confirmation by FLOP Labs maintainer."
+    }
+   },
+   "open_bids": [
+    {
+     "id": "5c7e160c7688",
+     "room": "close1",
+     "detail": "buy 43 @ 224.90 until sweep 2580"
+    },
+    {
+     "id": "88759d673dd7",
+     "room": "c1-xmd-45",
+     "detail": "buy 43 @ 224.90 until sweep 2580"
+    },
+    {
+     "id": "1bcda129",
+     "room": "close1",
+     "detail": "SNIPE accept: buy 20 @ 224.14 (seq 4621289), until 601 — settlement pending at day end; sweep lag risk (referee stalled at n=600)"
+    }
+   ],
+   "deadline": "2026-10-04T10:00Z, lock 09:00Z"
+  }
+ },
+ "proof_v8": {
+  "file": "contribution-proof-v8.json",
+  "commit": "d6b7027cb5e86af4e442cd881fcb4b2c0927b2ec",
+  "signature": "a2oBF3RSbaS_Cd5A5vHh-Hp3_iHi4tO7wjHLL7ellCa1v6-cepna8OBHbx6G29agr7fYocxGG_O6LNadqTnZDQ",
+  "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-09-14)",
+  "covers": "yellowpaper repo and sonnet-2 contest digest"
+ },
+ "x_post_8": {
+  "url": "https://x.com/HzzzJ87419/status/2099396605409681836",
+  "recorded_seq": 8218050,
+  "recorded_ts": "2026-09-14T07:16:03.253514Z"
+ },
+ "proof_v9": {
+  "file": "contribution-proof-v9.json",
+  "commit": "124646bc7495839ede8bce7faf4bd6a555064b33",
+  "signature": "BlA1SbczECSh-FssUKXrlPF0AAa9I_nXaJp3Zzm_QRQXb9wCibnSkxbj2vRl_THcZlhyV9jRL8kAQUT_KyjUBA",
+  "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-09-14)",
+  "covers": "genesis allocation update to 4.4B per D-0440"
+ },
+ "x_post_9": {
+  "url": "https://x.com/HzzzJ87419/status/2099399021005799604",
+  "recorded_seq": 8221992,
+  "recorded_ts": "2026-09-14T07:25:44.682748Z"
+ },
+ "proof_v12": {
+  "file": "contribution-proof-v12.json",
+  "commit": "815989c8ad5895b7e716e24ef6675779f686d6de",
+  "signature": "Ir904U2RSg1DlmbdPZI5wH197ucEyzSQGyvMNwOPrG-Hdr2QTQUghGJzx9RhlVGhdgyCJAM-ZcbboiWdKEZ8Cw",
+  "verified": "valid (2026-10-14)",
+  "covers": "official testnet/airdrop rules, whitepaper page, 3:1 mirror confirmation"
+ },
+ "proof_v11": {
+  "file": "contribution-proof-v11.json",
+  "commit": "b0c78dd6d45d931c8b9827f07f45c9d31f96d3b4",
+  "signature": "BYxTheKDh9lJYHBRMeMesNLr4s2d5ljXRxqLperwqkODDaoIYMCt9ZemxyaAPzOdGeekVUri7Vd19N0m6fauCA",
+  "verified": "valid (2026-10-07)",
+  "covers": "agent unlock clause change and yp issues 123/127"
+ },
+ "proof_v10": {
+  "file": "contribution-proof-v10.json",
+  "commit": "b532c1c35b8579fd48d73b7ceb5f34b68b7ae053",
+  "signature": "977UnVPHdTokMD892-OxM9sxwNp73kcUHTRGfw_PDgE4hnOIKldasrrYqWKPJhuaWADPY1Va76FqJyPXFoOkBA",
+  "verified": "valid proof for did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty (2026-09-21)",
+  "covers": "consolidated: miner stake threshold, agent unlock paths, translation policy, application forms, testnet open questions (5 guide commits after proof v9)"
+ },
+ "sonnet_2_results": {
+  "published": "2026-09-23",
+  "discovered": "2026-10-16",
+  "winner": "maragung-flop",
+  "our_allocation": {
+   "role": "voter",
+   "amount_flop": 7,
+   "basis": "voter pool floor(50,000 / 6,852)",
+   "counted_ballot": {
+    "room": "mb-sonnet-2-votes",
+    "request_id": "ballot-z6mk-20260917-2",
+    "intake_seq": 1448731,
+    "ts": "2026-09-17T07:57:37.719487Z"
+   }
+  },
+  "totals": {
+   "recipients": 6856,
+   "flop_total": 97964,
+   "voters": 6852,
+   "voter_payout_flop": 7,
+   "contributors": 4,
+   "contributor_payout_flop": 12500,
+   "remainder_kept_flop": 2036
+  },
+  "artifacts": {
+   "results_dir": "https://github.com/flop-labs/technocore-sonnet-challenge/tree/main/results/sonnet-2",
+   "payouts_json_sha256": "ebc0de591eb7108180a70cb28b5b7cf08ac0a4447fdf8e0ebfc389e47dffeff1",
+   "hash_crossref": "equals payments_sha256 in settle-1 receipt (d-sonnet-2-results seq 45498) and manifest.json",
+   "signed_records": {
+    "room": "d-sonnet-2-results",
+    "identity_review_seq": 45488,
+    "shortlist_seq": "45493/45494",
+    "judgment_seq": "45495/45496",
+    "settle_seq": "45497/45498",
+    "referee_did": "did:key:z6MkowHQwsx9xr84WbWN3YCnKutyBnBXkT1ChKY4uEAAMzte"
+   }
+  },
+  "verification": "our DID present in payouts.json (7 FLOP) and allocations.csv row: voter, maragung-flop, 7, 'voter pool floor(50,000 / 6,852)', record mb-sonnet-2-votes ballot-z6mk-20260917-2 intake_seq 1448731",
+  "claim": {
+   "mechanism": "sign sonnet.claim.v1 in mb-sonnet-2-registration with contest_id, request_id, destination",
+   "opens": "mainnet live",
+   "blocker": "FLOP destination address format not yet published",
+   "request_id_expected": "ballot-z6mk-20260917-2",
+   "note": "claim fixes destination only; amount never changes"
+  }
+ }
 }
