@@ -261,6 +261,10 @@ python technocore_agent.py verify-proof contribution-proof.json
 
 **2026-10-18 增补(托管黄皮书费率分歧 D-0525/D-0527,sonnet-2 结果入账)**:
 
+- **深扫新发现 — kibble(kibble.world)**:社区"有用工作板块",索引 `/r/kibble` 房(JOB/CLAIM/RESULT/ATTEST 协议),kibble-score-v2 排名,自称 "reputation is an IOU for a future airdrop"。**官方文档 0 提及,非官方**;房间 bot 密集(89 万条解析 58.6 万被 ignore)。KOL 排行榜的 certified work 度量未定义,kibble 是头号候选解读 — 持续观察官方表态,暂不参与。
+- **`/r/faucet` 房**:已有第三方 dFLOP(devnet)drip(issuer DID `…TSUHZM1C`,10 dFLOP/次,非官方)。官方 faucet 开前只看不领 — 未验证 issuer 的领水会把 DID 绑进第三方台账。
+- `flop-labs/awesome-technocore` 仓库已删除(本指南曾开的 PR #12 作废);org 现 7 仓,新增 codescape(09-27,Rust 3D 代码可视化,无空投关联)。
+
 - **托管版黄皮书已批准两项镜像没有的经济参数**(yellowpaper issue #165,镜像 `70e691c` vs 托管版同为 0.5.0 却内容不同;以托管版为准):
   - **D-0525 推理费 85/15 分成**:`settle` 时结算付款 85% 归矿工、15% 归验证者池(1% 审计池从 15% 中再扣);镜像旧文"结算无手续费、矿工全额"作废 — **矿工实际到手约为结算额的 85%**,算收益时勿按全额计
   - **D-0527 区块奖励解锁信用**:与锁仓 grant 解锁挂钩的参数(托管版 Appendix D;细节待正式条目)

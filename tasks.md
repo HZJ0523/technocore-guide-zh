@@ -1,6 +1,6 @@
 # FLOP / Technocore 每日任务清单与维护协议
 
-> 版本:2026-10-16(在跑 21 项 + 归档 4 项)。本文件由 Claude 在"新的一天"会话中自动维护。
+> 版本:2026-10-18(在跑 23 项 + 归档 4 项)。本文件由 Claude 在"新的一天"会话中自动维护。
 > 维护规则见文末;变更记入"变更日志"。
 
 ## 一、每日检查(21 项)
@@ -69,11 +69,19 @@
     - 检查面:@flop_labs / @CryptoHayes 新帖;`flop.finance/apply/kol` 页变化;devnet explorer 的 Participate 区(需 devnet 访问,待开闸)。
     - 上线后动作:入驻(邮箱=已有 KOL 表单邮箱;钱包=主网钱包装好后绑定;社媒=X @HzzzJ87419)。排行榜列含 "Funded wallets"(引流钱包数),与推荐链接、定期钱包抽奖挂钩 — 与测试网矿工/agent 线协同。
 
+26. **kibble 生态跟踪(2026-10-18 深扫新增,周频)** — `kibble.world`(社区,自述 "A public job board for useful work, until $FLOP can pay"):索引 technocore `/r/kibble` 房间(kibble-v1 协议:JOB/CLAIM/RESULT/ATTEST),按 kibble-score-v2 出 passports 排名,自称 "reputation is an IOU for a future airdrop"。规模:22.4 万 JOB、5,754 agents(实测 10-18)。
+    - 每周查:`/api/status`(score_schema 变化 / reset 标志)+ 官方是否首次提及 kibble 或定义 "certified work"(docs.flop.network 与 flop.finance 当前 **0 次提及**;KOL 排行榜的 certified work 度量未定义,kibble 是头号候选解读)。
+    - **暂不参与**:官方零背书;房间 bot 环境重(89 万条解析中 58.6 万被 ignore);与官方空投规则(测试网验证算力)无已证关联。若官方定义挂钩 kibble 或提及 → 提请用户决策是否以现有 DID 做真实贡献(勿 keygen 新 DID — 身份连续性是资产)。
+    - 官方关联信号仅一条:tc-chat issue #955(kibble 索引游标问题)有维护者跟帖(至 10-16)— 关注但不等于背书。
+
+27. **faucet 房间监测(2026-10-18 深扫新增,每日)** — technocore `/r/faucet` 房活跃(实时):当前是**第三方** dFLOP(devnet) drip,issuer DID `…TSUHZM1C`(非官方,10 dFLOP/次);kibble 运营者也在该房发广告(HELLO v1 witness)。
+    - 每日读房尾:等**官方** issuer 或官方领水公告(措辞/flood 模式突变、flop_labs 域名出现)。官方 faucet 上线前**只看不领** — 未验证的 issuer 领水=把 DID 绑进第三方台账,且官方规则领水须凭 DID,乱领有污染风险。
+
 ## 二、一次性动作(非每日)
 
 | 动作 | 状态 |
 |---|---|
-| 提交 awesome-technocore PR | **✅ 已开 PR #12**(2026-09-15,+1/-0,open 待维护者合并) |
+| 提交 awesome-technocore PR | **❌ 作废(2026-10-18 发现)**:`flop-labs/awesome-technocore` 仓库已删除/转移(404,org 下 7 仓无此名),PR #12 随之消失。无动作;指南仓库仍在 |
 | 填 validator 意向表(`flop.finance/apply/validator`) | **✅ 已提交**(2026-09-15,含硬件现状与升级意向) |
 | 填 miner 意向表(`flop.finance/apply/miner`) | **✅ 已提交**(2026-10-08,8GB 单卡 SOFT 层,申请名单通道) |
 | 测试网开闸首日跑 `testnet-runbook.md` | 条件触发 |
@@ -109,6 +117,13 @@
 ```
 
 ## 四、变更日志
+
+### 2026-10-18 — 深扫:kibble/faucet 房两个新面 + PR12 作废
+- **新增 C26(kibble 生态,周频)**:发现 `kibble.world`(社区有用工作板块,kibble-score-v2 排名,自称未来空投 IOU;官方文档 0 提及)。规模大(22.4 万 JOB / 5,754 agents)。策略:监控不参与,等官方 certified work 定义。
+- **新增 C27(faucet 房监测,每日)**:`/r/faucet` 房已有**第三方** dFLOP drip(issuer …TSUHZM1C,非官方)+ kibble 广告 bot。官方 faucet 开前只看不领,防 DID 污染。
+- **PR #12 作废**:`flop-labs/awesome-technocore` 仓库已 404(org 现 7 仓:yellowpaper、technocore-chat、tclk、close-call-challenge、**codescape(09-27 新,Rust 3D 代码可视化工具,无空投关联)**、sonnet-challenge、.github)。一次性动作表更新。
+- 其他深扫结果:openapi.json 无新路径(有 kv set-signed 与 /healthz,均为已知);隐藏语言区探测 8 个全 404;flop.network 302 → flop.finance;ask.flop.finance 200 正常;docs.flop.network/explorer 等子域无解析;D-0525 见 10-18 例行报告。
+- 计数:在跑 21 → 23 项。
 
 ### 2026-10-16 — sonnet-2 结果入账 + 新增 C25
 - **重大补漏**:sonnet-2 结果**早在 2026-09-23 已发布**(结果包 `results/sonnet-2/`,签名记录 `d-sonnet-2-results` seq 45488–45498),今日才在每日巡查中发现 — C22 此前只盯着"shortlist 待发布",未反向复查仓库 results 目录。教训:依赖"等公告"的项,**每周至少主动查一次产出物本体**(payouts/standings/CSV),不能只等房间播报。
