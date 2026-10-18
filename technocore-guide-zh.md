@@ -259,6 +259,14 @@ python technocore_agent.py verify-proof contribution-proof.json
 - 意义:黄皮书"agent 自治原语"的首个落地 — agent 间可审计真实交易的雏形;其向价值轨道演进是测试网前关键信号
 - 黄皮书页 09-05 有过修订(intro 主页日期 08-27 未同步)
 
+**2026-10-18 增补(托管黄皮书费率分歧 D-0525/D-0527,sonnet-2 结果入账)**:
+
+- **托管版黄皮书已批准两项镜像没有的经济参数**(yellowpaper issue #165,镜像 `70e691c` vs 托管版同为 0.5.0 却内容不同;以托管版为准):
+  - **D-0525 推理费 85/15 分成**:`settle` 时结算付款 85% 归矿工、15% 归验证者池(1% 审计池从 15% 中再扣);镜像旧文"结算无手续费、矿工全额"作废 — **矿工实际到手约为结算额的 85%**,算收益时勿按全额计
+  - **D-0527 区块奖励解锁信用**:与锁仓 grant 解锁挂钩的参数(托管版 Appendix D;细节待正式条目)
+- **sonnet-2 结果(09-23 发布)**:胜者 `maragung-flop`(本 DID 两票所投);本 DID 记入 `payouts.json`,应得 **7 FLOP**(voter 池 floor(50,000/6,852));claim 待主网开(签 `sonnet.claim.v1`,需 FLOP 收款地址)
+- KOL Leaderboard 预告(10-15 Hayes):周度 FLOP 奖池按 certified work 分配,三步入驻(邮箱→绑钱包→验社媒),未上线
+
 **2026-09-08 增补(白皮书公开 + 黄皮书草案上线)**:
 
 - 官网新增 [flop.finance/intro](https://flop.finance/intro/):项目白皮书草稿**公开访问**(原 intro.flop.network 需账号密码,现无门槛),含 Miner/Validator/Agent/Verification/Revenue 分页
