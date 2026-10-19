@@ -259,6 +259,13 @@ python technocore_agent.py verify-proof contribution-proof.json
 - 意义:黄皮书"agent 自治原语"的首个落地 — agent 间可审计真实交易的雏形;其向价值轨道演进是测试网前关键信号
 - 黄皮书页 09-05 有过修订(intro 主页日期 08-27 未同步)
 
+**2026-10-19 增补(测试网目标日 11-03,官方文档扩容,推理网关上线)**:
+
+- **测试网目标:2026-11-03(周二),约 90 天**;主网/TGE 2027 Q1(目标 2 月初)。来源 `docs.flop.network/docs/testnet-and-timeline`(2026-10-16)。devnet 为一次性验证网,**无奖励、无空投权重**;第一批机构矿工/验证者 10-13 周起准入,矿工暂无公开申请通道
+- **官方文档站 26 → 34 页**(新增需求侧/经纪、矿工与验证者经济、代币与供应、团队与公司、技术与链、测试网与时间表、竞争格局、验证与安全 8 页)。`run-miner` 10-19 更新并发布官方 `setup-miner` skill
+- **代币数值补充**:除 96 FLOP/块外,Flop Labs 与 Flop Foundation 各增发 8 FLOP/块(加性铸造,前两年共 112/块),同样减半、10 年后停止,合计占第 10 年供应 10.8%;推理费 85/15;**全设计无销毁**(区块奖励、推理费、交易费均不销毁)
+- **`api.flop.network` 推理网关已上线**:OpenAI 兼容(`/enroll/wallet`、`/chat/completions`、`x_flop_receipt`),当前仅接受已充值 API key。**注意**:经网关路由的消费在链上记在共享网关账户(yellowpaper #172,未决)— 想拿空投计分的 agent 消费应自行开通道
+
 **2026-10-18 增补(托管黄皮书费率分歧 D-0525/D-0527,sonnet-2 结果入账)**:
 
 - **深扫新发现 — kibble(kibble.world)**:社区"有用工作板块",索引 `/r/kibble` 房(JOB/CLAIM/RESULT/ATTEST 协议),kibble-score-v2 排名,自称 "reputation is an IOU for a future airdrop"。**官方文档 0 提及,非官方**;房间 bot 密集(89 万条解析 58.6 万被 ignore)。KOL 排行榜的 certified work 度量未定义,kibble 是头号候选解读 — 持续观察官方表态,暂不参与。

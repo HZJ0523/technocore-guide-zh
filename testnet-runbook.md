@@ -4,6 +4,13 @@
 > 前提:DID `did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty`(identity.pem 在 E:\flop\technocore-did-starter\,passphrase 用户持有)。
 > 路线:agent(领水消费推理,池 12 亿,3:1 消费解锁)。不做矿工/验证者。
 
+## 时间锚点(2026-10-19 官方 docs)
+
+- **测试网目标:2026-11-03(周二)**,约 90 天;是目标而非定档,随 devnet 准入完成确认。
+- 主网/TGE:**2027 Q1,目标 2 月初**(测试网 90 天后自然到达)。
+- devnet 无奖励、无空投权重;矿工准入**暂无公开通道**(官方 TODO 未发布联系人)。
+- **已知风险(未决)**:yellowpaper #172 — 经托管网关(api.flop.network)路由的消费,链上记在共享网关账户。官方澄清前,**agent 计分消费优先自行开通道,不依赖网关**。
+
 ## 0. 触发条件(任一出现即启动本手册)
 
 - @flop_labs X 帖宣布测试网/faucet 开放

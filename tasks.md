@@ -1,6 +1,6 @@
 # FLOP / Technocore 每日任务清单与维护协议
 
-> 版本:2026-10-18(在跑 23 项 + 归档 4 项)。本文件由 Claude 在"新的一天"会话中自动维护。
+> 版本:2026-10-19(在跑 24 项 + 归档 4 项)。本文件由 Claude 在"新的一天"会话中自动维护。
 > 维护规则见文末;变更记入"变更日志"。
 
 ## 一、每日检查(21 项)
@@ -63,7 +63,9 @@
 
 21. **sonnet-challenge issue 跟踪器** — `flop-labs/technocore-sonnet-challenge/issues` 新 issue 与回复。**赛事期间每日**;09-18 后周频。理由:该跟踪器是裁判行为/规则澄清/修复的最高信号源 — 09-17 的突破(issue #23 揭示身份索引 ≥6 条大小截断)即出自此;我方申诉 #64 的回复也在其中。
 
-24. **docs.flop.network 检查(2026-10-15 新增)** — `https://docs.flop.network/llms.txt` 页数/内容 diff + `/docs/network-testnet` 状态页。理由:官方运维文档站(26 页,operator 手册,devnet 现行);testnet status 页 "planned → 各项 identity 发布" 是开闸最直接的信号源,先于公告。附 `ask.flop.finance`(问答 + MCP)。
+24. **docs.flop.network 检查(2026-10-15 新增)** — `https://docs.flop.network/llms.txt` 页数/内容 diff + `/docs/network-testnet` 状态页。理由:官方运维文档站(2026-10-19 已从 26 → **34 页**,新增 competitive-landscape / demand-and-broker / miner-and-validator-economics / team-and-company / technology-and-chain / testnet-and-timeline / tokenomics-and-supply / verification-and-security);testnet status 页 "planned → 各项 identity 发布" 是开闸最直接的信号源,先于公告。附 `ask.flop.finance`(问答 + MCP)。
+
+28. **api.flop.network 推理网关(2026-10-19 新增,每日)** — 公开 OpenAI 兼容推理数据面(OpenAPI 3.1:"FLOP Public Inference Data Plane",`/enroll/wallet`、`/chat/completions`、`x_flop_receipt`)。检查:`/openapi.json` 版本与路径 diff;`/` 状态;是否开放公开注册。理由:**这是 agent 线真正的花钱入口**;yellowpaper #172 已提出**网关路由的消费可能记在网关账户而非终端 agent 账户**(R8.4 计分主体未定,官方 0 回复)— 在官方澄清前,agent 测试网消费是否走网关需谨慎,优先自开通道。
 
 25. **KOL 排行榜跟踪(2026-10-16 新增,每日)** — 2026-10-15 Arthur Hayes 预告 **KOL Leaderboard**(Flop Labs 转发):devnet explorer 的 *Participate* 菜单下,每周 FLOP 奖池按 **certified work** 比例分给公开 KOL;三步入驻 = 邮箱魔法链接 → 绑定收款钱包(签名证明所有权)→ 验证社媒(可选)。**尚未上线,池大小 TBA**。
     - 检查面:@flop_labs / @CryptoHayes 新帖;`flop.finance/apply/kol` 页变化;devnet explorer 的 Participate 区(需 devnet 访问,待开闸)。
@@ -117,6 +119,13 @@
 ```
 
 ## 四、变更日志
+
+### 2026-10-19 — 时间表落地 + docs 扩页 + 网关(api.flop.network)
+- **测试网目标日确定:2026-11-03(周二)**,约 90 天;主网/TGE 2027 Q1(目标 2 月初)。来源 `docs.flop.network/docs/testnet-and-timeline`(2026-10-16)。devnet 第一批机构矿工/验证者自 10-13 周起准入,10 月下半月扩大;**devnet 无奖励无空投权重**,唯一价值是让机器在测试网首日就绪。**矿工准入无公开申请通道**(run-miner 明确 "There is no public intake path yet",TODO 联系人未发布)— user 只需保持表单在册。
+- **docs 站扩容 26 → 34 页**(新增 8 页,均为 2026-10-16)。`run-miner` 于 2026-10-19 更新,并发布官方 **setup-miner skill**(`docs.flop.network/skills/setup-miner/SKILL.md`)—— 与本地预检栈一致(GPU VM + Docker + TOPLOC 后端 + tailnet HTTPS 8645)。
+- **api.flop.network 实况**(新增 C28):OpenAI 兼容网关,已上线(200),`/enroll/wallet` + `/chat/completions` + `x_flop_receipt`;当前仅接受 funded API key,链上支付验证未启用。
+- **风险项 yellowpaper #172**(今日开,0 回复):网关路由的已结算消费,链上 `agent` 是共享网关账户(实测同一账户占 122 通道中 46 个),**R8.4 的消费计分可能不归终端 agent**。影响 agent 空投路线 → 官方澄清前,不把"网关消费"当作有效计分消费。
+- 计数:在跑 23 → 24 项。
 
 ### 2026-10-18 — 深扫:kibble/faucet 房两个新面 + PR12 作废
 - **新增 C26(kibble 生态,周频)**:发现 `kibble.world`(社区有用工作板块,kibble-score-v2 排名,自称未来空投 IOU;官方文档 0 提及)。规模大(22.4 万 JOB / 5,754 agents)。策略:监控不参与,等官方 certified work 定义。
