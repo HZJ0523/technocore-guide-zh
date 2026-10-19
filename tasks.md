@@ -51,7 +51,7 @@
 
 ### E. 生态(1,周频)
 
-18. **生态扫描** — GitHub 搜 `technocore OR flop` 新仓库:同行贡献(竞争)与新监控工具。
+18. **生态扫描** — GitHub 搜 `technocore OR flop` 新仓库:同行贡献(竞争)与新监控工具。附 `gpus.flop.finance`(官方可租 GPU 市场监控:H100 容量、价格地板、API 毛利、盈亏平衡租价)— 矿工租/买决策时看,平时扫一眼。
 
 ### F. 维护(1,≤每周)
 
@@ -65,7 +65,13 @@
 
 24. **docs.flop.network 检查(2026-10-15 新增)** — `https://docs.flop.network/llms.txt` 页数/内容 diff + `/docs/network-testnet` 状态页。理由:官方运维文档站(2026-10-19 已从 26 → **34 页**,新增 competitive-landscape / demand-and-broker / miner-and-validator-economics / team-and-company / technology-and-chain / testnet-and-timeline / tokenomics-and-supply / verification-and-security);testnet status 页 "planned → 各项 identity 发布" 是开闸最直接的信号源,先于公告。附 `ask.flop.finance`(问答 + MCP)。
 
-28. **api.flop.network 推理网关(2026-10-19 新增,每日)** — 公开 OpenAI 兼容推理数据面(OpenAPI 3.1:"FLOP Public Inference Data Plane",`/enroll/wallet`、`/chat/completions`、`x_flop_receipt`)。检查:`/openapi.json` 版本与路径 diff;`/` 状态;是否开放公开注册。理由:**这是 agent 线真正的花钱入口**;yellowpaper #172 已提出**网关路由的消费可能记在网关账户而非终端 agent 账户**(R8.4 计分主体未定,官方 0 回复)— 在官方澄清前,agent 测试网消费是否走网关需谨慎,优先自开通道。
+28. **官方数据面/网络状态(2026-10-19 新增,每日)** — 四端点合计 <10 秒:
+    - `api.flop.network/openapi.json`(版本;当前 2.0.0,17 路径,含 `/enroll/wallet`、`/chat/completions`、`/keys/me/receipts`;`/v1/models` 公开目录,现仅 `qwen/qwen2.5-0.5b-instruct`,4+ 矿工报价)
+    - `explorer.devnet.flop.network/api/stats` + `/api/health`(块高/TPS/validators/agents/operators/finality state)
+    - `rpc.devnet.flop.network`(JSON-RPC `chain_getBlockHash`)
+    - `faucet.flop.network/health`
+    - 理由:**agent 线真正的花钱入口**;yellowpaper #172 指出网关路由消费可能记在共享网关账户(实测同账户占 122 通道中 46 个),R8.4 计分主体未定(官方 0 回复)→ 澄清前,计分消费优先自行开通道,不走网关。
+    - 附:devnet 实况(2026-10-19)块高 1,584,112、10 validators、**0 active agents / 0 operators** — agent 侧仍是空白,先进入者有先发优势。
 
 25. **KOL 排行榜跟踪(2026-10-16 新增,每日)** — 2026-10-15 Arthur Hayes 预告 **KOL Leaderboard**(Flop Labs 转发):devnet explorer 的 *Participate* 菜单下,每周 FLOP 奖池按 **certified work** 比例分给公开 KOL;三步入驻 = 邮箱魔法链接 → 绑定收款钱包(签名证明所有权)→ 验证社媒(可选)。**尚未上线,池大小 TBA**。
     - 检查面:@flop_labs / @CryptoHayes 新帖;`flop.finance/apply/kol` 页变化;devnet explorer 的 Participate 区(需 devnet 访问,待开闸)。
@@ -76,8 +82,9 @@
     - **暂不参与**:官方零背书;房间 bot 环境重(89 万条解析中 58.6 万被 ignore);与官方空投规则(测试网验证算力)无已证关联。若官方定义挂钩 kibble 或提及 → 提请用户决策是否以现有 DID 做真实贡献(勿 keygen 新 DID — 身份连续性是资产)。
     - 官方关联信号仅一条:tc-chat issue #955(kibble 索引游标问题)有维护者跟帖(至 10-16)— 关注但不等于背书。
 
-27. **faucet 房间监测(2026-10-18 深扫新增,每日)** — technocore `/r/faucet` 房活跃(实时):当前是**第三方** dFLOP(devnet) drip,issuer DID `…TSUHZM1C`(非官方,10 dFLOP/次);kibble 运营者也在该房发广告(HELLO v1 witness)。
-    - 每日读房尾:等**官方** issuer 或官方领水公告(措辞/flood 模式突变、flop_labs 域名出现)。官方 faucet 上线前**只看不领** — 未验证的 issuer 领水=把 DID 绑进第三方台账,且官方规则领水须凭 DID,乱领有污染风险。
+27. **faucet 监测(每日)** — **官方 faucet 已上线:`https://faucet.flop.network`(devnet)**(2026-10-19 深扫发现,CT 证书枚举)。实测:`/chain` 返回 devnet 链参数(genesis `0x99c172c0…`,ss58Format **42**,decimals **18**,symbol FLOP,RPC `wss://rpc.devnet.flop.network`);`/health` signer `5DZsAQ…M8ux`;页面:quick 25 FLOP,人类验证 500–2000 FLOP(BrightID / Self,按 Human Passport 或 Guild score)。
+    - 每日:faucet `/health` + `/chain` 是否新增 **testnet** network;technocore `/r/faucet` 房尾(仍为第三方 dFLOP drip + kibble 广告,**非官方,不领**)。
+    - devnet 领水无空投权重;但可演练全流程(钱包→领水→消费),等 testnet 同日执行。
 
 ## 二、一次性动作(非每日)
 
@@ -87,7 +94,7 @@
 | 填 validator 意向表(`flop.finance/apply/validator`) | **✅ 已提交**(2026-09-15,含硬件现状与升级意向) |
 | 填 miner 意向表(`flop.finance/apply/miner`) | **✅ 已提交**(2026-10-08,8GB 单卡 SOFT 层,申请名单通道) |
 | 测试网开闸首日跑 `testnet-runbook.md` | 条件触发 |
-| **准备 FLOP 收款地址** | 待办:领 sonnet 奖(7 FLOP,已确认在册)与未来空投都需 destination 地址;官方尚未公布格式,公布后立即准备 |
+| **准备 FLOP 收款地址** | **格式已确定(2026-10-19):SS58,prefix 42**(devnet `/chain` 明确 ss58Format 42,decimals 18)。**可立即做**:装 Polkadot.js / Talisman / SubWallet 任一,建 FLOP 账户,记下 SS58 地址(种子/口令只留本机)。用途:sonnet-2 的 7 FLOP claim、测试网 faucet、空投 destination |
 | **close-2 启动预案** | issue #36 显示续赛设计中;启动时改 close1_trade.py 的 SEASON 字符串 + 重跑注册/交易流程 |
 | **KOL 排行榜入驻** | 条件触发(上线后):邮箱 → 绑钱包(签名) → 验社媒;表单已于 2026-08-29 提交 |
 
@@ -119,6 +126,18 @@
 ```
 
 ## 四、变更日志
+
+### 2026-10-19 — 全盘深扫:官方 faucet / explorer / devnet RPC 全部在线
+- **证书透明度枚举发现 8 个未在导航里出现的官方端点**,实测:
+  - `faucet.flop.network` **200** — 官方领水站(devnet):quick 25 FLOP;人类验证 500–2000 FLOP(BrightID/Self + Human Passport/Guild score);`/chain` 给出链参数(genesis `0x99c172c0…`,**SS58 prefix 42**,decimals 18,RPC `wss://rpc.devnet.flop.network`),`/health` 有 signer
+  - `explorer.devnet.flop.network` **200** — devnet 浏览器:Chain / PoUI / **Participate** / Markets / Cross-Chain;`/api/stats` 块高 1,584,112、TPS 1.73、10 validators、41 accounts、**0 agents / 0 operators**;`/api/health` phase live
+  - `rpc.devnet.flop.network` **405 on GET / 200 on JSON-RPC** — devnet RPC 活
+  - `api.flop.network` 200 — 推理网关(17 路径,`/v1/models` 公开,仅 Qwen2.5-0.5B,4+ 矿工实时报价)
+  - `gpus.flop.finance` 200 — 可租 GPU 市场监控(H100 容量/价格地板/API 毛利);`links.tx.flop.finance` 400;`voice.flop.network` 530(Cloudflare 1033);`intro.flop.network` 302 → flop.finance/intro
+- **C27 重写**:官方 faucet 已上线;每日查 testnet network 是否出现。
+- **C28 扩为四端点**:api + explorer stats + rpc + faucet health。
+- **一次性动作 F:FLOP 收款地址格式已定 → 立即可做**(SS58 prefix 42)。
+- 计数:仍为在跑 24 项(C27 改写 + C28 扩容,未新增编号);一次性动作表更新收款地址条目。
 
 ### 2026-10-19 — 时间表落地 + docs 扩页 + 网关(api.flop.network)
 - **测试网目标日确定:2026-11-03(周二)**,约 90 天;主网/TGE 2027 Q1(目标 2 月初)。来源 `docs.flop.network/docs/testnet-and-timeline`(2026-10-16)。devnet 第一批机构矿工/验证者自 10-13 周起准入,10 月下半月扩大;**devnet 无奖励无空投权重**,唯一价值是让机器在测试网首日就绪。**矿工准入无公开申请通道**(run-miner 明确 "There is no public intake path yet",TODO 联系人未发布)— user 只需保持表单在册。

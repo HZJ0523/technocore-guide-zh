@@ -259,6 +259,15 @@ python technocore_agent.py verify-proof contribution-proof.json
 - 意义:黄皮书"agent 自治原语"的首个落地 — agent 间可审计真实交易的雏形;其向价值轨道演进是测试网前关键信号
 - 黄皮书页 09-05 有过修订(intro 主页日期 08-27 未同步)
 
+**2026-10-19 深扫增补(官方 devnet 全套在线:faucet / explorer / RPC / 网关)**:
+
+- **官方领水站已上线:`faucet.flop.network`(devnet)** — quick 25 FLOP;人类验证 500–2000 FLOP(BrightID / Self,按 Human Passport 或 Guild score)。`/chain` 返回:genesis `0x99c172c0…`、**SS58 prefix 42**、decimals 18、symbol FLOP、RPC `wss://rpc.devnet.flop.network`
+- **devnet 浏览器:`explorer.devnet.flop.network`** — Chain / PoUI / Participate / Markets / Cross-Chain;`/api/stats` 实时:块高 158 万+、TPS 1.73、10 validators、41 accounts、**0 active agents / 0 operators**
+- **推理网关 `api.flop.network`** — OpenAPI 2.0.0,17 路径;`/v1/models` 公开目录当前仅 `qwen/qwen2.5-0.5b-instruct`,4+ 矿工实时报价
+- **GPU 市场监控:`gpus.flop.finance`** — 可租 H100 容量、价格地板、API 毛利与盈亏平衡租价
+- **收款地址格式确定:SS58 prefix 42** — 可立即用 Polkadot.js / Talisman / SubWallet 建账户(种子只留本机)
+- devnet 的 token 无空投权重("devnet earns nothing"),仅用于演练:钱包 → 领水 → 消费 → 证据
+
 **2026-10-19 增补(测试网目标日 11-03,官方文档扩容,推理网关上线)**:
 
 - **测试网目标:2026-11-03(周二),约 90 天**;主网/TGE 2027 Q1(目标 2 月初)。来源 `docs.flop.network/docs/testnet-and-timeline`(2026-10-16)。devnet 为一次性验证网,**无奖励、无空投权重**;第一批机构矿工/验证者 10-13 周起准入,矿工暂无公开申请通道
