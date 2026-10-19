@@ -94,7 +94,7 @@
 | 填 validator 意向表(`flop.finance/apply/validator`) | **✅ 已提交**(2026-09-15,含硬件现状与升级意向) |
 | 填 miner 意向表(`flop.finance/apply/miner`) | **✅ 已提交**(2026-10-08,8GB 单卡 SOFT 层,申请名单通道) |
 | 测试网开闸首日跑 `testnet-runbook.md` | 条件触发 |
-| **准备 FLOP 收款地址** | **格式已确定(2026-10-19):SS58,prefix 42**(devnet `/chain` 明确 ss58Format 42,decimals 18)。**可立即做**:装 Polkadot.js / Talisman / SubWallet 任一,建 FLOP 账户,记下 SS58 地址(种子/口令只留本机)。用途:sonnet-2 的 7 FLOP claim、测试网 faucet、空投 destination |
+| **准备 FLOP 收款地址** | **✅ 已完成(2026-10-19)**:`5ED4bNNKCq6miyYyyeURuNWpirECfuDxt465aAtEY1VwQoZY`(SS58 prefix 42,Polkadot.js,种子用户自持)。devnet faucet 已到账 25 FLOP(仅演练,无空投权重)。用途:sonnet-2 的 7 FLOP claim、测试网 faucet、空投 destination |
 | **close-2 启动预案** | issue #36 显示续赛设计中;启动时改 close1_trade.py 的 SEASON 字符串 + 重跑注册/交易流程 |
 | **KOL 排行榜入驻** | 条件触发(上线后):邮箱 → 绑钱包(签名) → 验社媒;表单已于 2026-08-29 提交 |
 

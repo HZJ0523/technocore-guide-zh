@@ -317,5 +317,18 @@
    "request_id_expected": "ballot-z6mk-20260917-2",
    "note": "claim fixes destination only; amount never changes"
   }
+ },
+ "flop_wallet": {
+  "address_ss58": "5ED4bNNKCq6miyYyyeURuNWpirECfuDxt465aAtEY1VwQoZY",
+  "format": "SS58 prefix 42",
+  "created": "2026-10-19",
+  "wallet": "Polkadot.js extension (user-held seed; never shared)",
+  "observed": "2026-10-19 devnet explorer /api/accounts: balance 25000000000000000000 raw = 25 FLOP, nonce 0, txCount 0",
+  "purpose": [
+   "sonnet-2 voter payout 7 FLOP claim destination",
+   "testnet faucet claim",
+   "airdrop destination"
+  ],
+  "note": "devnet faucet token has no airdrop weight; this address is the destination for real allocations"
  }
 }
