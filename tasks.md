@@ -1,6 +1,6 @@
 # FLOP / Technocore 每日任务清单与维护协议
 
-> 版本:2026-10-19(在跑 24 项 + 归档 4 项)。本文件由 Claude 在"新的一天"会话中自动维护。
+> 版本:2026-10-20(在跑 25 项 + 归档 4 项)。本文件由 Claude 在"新的一天"会话中自动维护。
 > 维护规则见文末;变更记入"变更日志"。
 
 ## 一、每日检查(21 项)
@@ -72,6 +72,7 @@
     - `faucet.flop.network/health`
     - 理由:**agent 线真正的花钱入口**;yellowpaper #172 指出网关路由消费可能记在共享网关账户(实测同账户占 122 通道中 46 个),R8.4 计分主体未定(官方 0 回复)→ 澄清前,计分消费优先自行开通道,不走网关。
     - 附:devnet 实况(2026-10-19)块高 1,584,112、10 validators、**0 active agents / 0 operators** — agent 侧仍是空白,先进入者有先发优势。
+    - 周频附查:`explorer.devnet.flop.network/api/miners`(活跃矿工、selfStake、G_n、calibration)与 `/api/models`(模型注册/价格)— 判断矿工生态成熟度。
 
 25. **KOL 排行榜跟踪(2026-10-16 新增,每日)** — 2026-10-15 Arthur Hayes 预告 **KOL Leaderboard**(Flop Labs 转发):devnet explorer 的 *Participate* 菜单下,每周 FLOP 奖池按 **certified work** 比例分给公开 KOL;三步入驻 = 邮箱魔法链接 → 绑定收款钱包(签名证明所有权)→ 验证社媒(可选)。**尚未上线,池大小 TBA**。
     - 检查面:@flop_labs / @CryptoHayes 新帖;`flop.finance/apply/kol` 页变化;devnet explorer 的 Participate 区(需 devnet 访问,待开闸)。
@@ -85,6 +86,11 @@
 27. **faucet 监测(每日)** — **官方 faucet 已上线:`https://faucet.flop.network`(devnet)**(2026-10-19 深扫发现,CT 证书枚举)。实测:`/chain` 返回 devnet 链参数(genesis `0x99c172c0…`,ss58Format **42**,decimals **18**,symbol FLOP,RPC `wss://rpc.devnet.flop.network`);`/health` signer `5DZsAQ…M8ux`;页面:quick 25 FLOP,人类验证 500–2000 FLOP(BrightID / Self,按 Human Passport 或 Guild score)。
     - 每日:faucet `/health` + `/chain` 是否新增 **testnet** network;technocore `/r/faucet` 房尾(仍为第三方 dFLOP drip + kibble 广告,**非官方,不领**)。
     - devnet 领水无空投权重;但可演练全流程(钱包→领水→消费),等 testnet 同日执行。
+
+29. **验证者席位路径(2026-10-20 深扫新增,周频)** — 官方 `run-validator` + `validator-faq` + 新发布的 `skills/setup-validator`(200)。
+    - 事实:验证者**纯 CPU,无需 GPU/TEE**;硬件规划 **8 核 / 32GB RAM / 4TB NVMe(含 DA 托管)/ 1Gbps**;奖励 = 区块奖励 10% + 推理费 15%;座位保证金 **1,200,000 FLOP 自 stake 仅限本人**(空投发放即 bond,首次减半后每日释放 1 席);轮换约每月淘汰最差 50、补位前 50。
+    - 准入:**管理员控制,非公开注册**(与矿工同);1,000 席为 ratified 目标,运行时上限仍 200。
+    - 每周查:run-validator 更新、setup-validator skill 更新、admission 通道是否开放;若开放 → 评估用户 16 核服务器是否满足(需确认 RAM/磁盘/上行带宽)。
 
 ## 二、一次性动作(非每日)
 
@@ -126,6 +132,13 @@
 ```
 
 ## 四、变更日志
+
+### 2026-10-20 — 全盘深扫:验证者路径 + explorer 公共 API + ask MCP
+- **新增 C29(验证者席位,周频)**:`run-validator` / `validator-faq` / **新发布 `skills/setup-validator`**。验证者纯 CPU;硬件规划 8 核/32GB/4TB NVMe/1Gbps;座位 1,200,000 FLOP 自 stake(空投即 bond);准入仍管理员控制。
+- **C28 周频附查**:explorer 公共 API `/api/miners`、`/api/models`(实测:活跃矿工有真实 stake 与奖励;模型仅 Qwen2.5-0.5B,`minVramGb: 1`)。
+- **ask.flop.finance MCP 可用**(3 工具:search/get/manifest)— 官方语料问答面;搜 "gateway credit" 无直接答案(yellowpaper #172 仍无官方口径)。
+- 其他:证书枚举无新子域;docs 站无 sitemap;challenges.technocore.chat 根为 Not Found;tclk 根 404(仅 MCP);`/rooms` 官方房无新增。
+- 计数:24 → 25 项。
 
 ### 2026-10-19 — 全盘深扫:官方 faucet / explorer / devnet RPC 全部在线
 - **证书透明度枚举发现 8 个未在导航里出现的官方端点**,实测:
