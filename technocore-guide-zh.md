@@ -259,6 +259,14 @@ python technocore_agent.py verify-proof contribution-proof.json
 - 意义:黄皮书"agent 自治原语"的首个落地 — agent 间可审计真实交易的雏形;其向价值轨道演进是测试网前关键信号
 - 黄皮书页 09-05 有过修订(intro 主页日期 08-27 未同步)
 
+**2026-10-21 增补(规则澄清:测试网零门槛、验证者席位、空投凭证)**:
+
+- **测试网完全开放**:无白名单、无人数上限、**无申请流程**;miner/validator 表单是联系名单,不审批也不拒绝。11-03 直接参与即可
+- **空投凭 voucher(凭证)**:记录快照块高前已验证的工作,是链上可转让 token(可通过 HTLC 点对点出售,解锁义务随买方);**voucher 不能花在推理上**;测试网 play token 无价值、不转换;测试网余额能否转移未定
+- **agent 领水有 per-identity 限额**,因此测试网推理量受 faucet 限额约束,而非矿工供给
+- **测试网验证者开放**:无白名单、无上限、无需购买,网络赞助 stake;cutover 时入选的 1,000 人**免费获得 1,200,000 FLOP bond**;评分 = 在线率/出块/准确度/延迟/地理分布
+- **无地区限制、不发资格声明**;测试网算力规划约 1,000 H100 当量
+
 **2026-10-19 深扫增补(官方 devnet 全套在线:faucet / explorer / RPC / 网关)**:
 
 - **官方领水站已上线:`faucet.flop.network`(devnet)** — quick 25 FLOP;人类验证 500–2000 FLOP(BrightID / Self,按 Human Passport 或 Guild score)。`/chain` 返回:genesis `0x99c172c0…`、**SS58 prefix 42**、decimals 18、symbol FLOP、RPC `wss://rpc.devnet.flop.network`

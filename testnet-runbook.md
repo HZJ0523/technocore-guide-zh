@@ -4,6 +4,13 @@
 > 前提:DID `did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty`(identity.pem 在 E:\flop\technocore-did-starter\,passphrase 用户持有)。
 > 路线:agent(领水消费推理,池 12 亿,3:1 消费解锁)。不做矿工/验证者。
 
+## 规则锚点(2026-10-21 官方 docs 更新)
+
+- **测试网无门槛**:无白名单、无人数上限、**无需申请**;miner/validator 表单只是联系名单,不审批不拒绝。11-03 直接参与。
+- **空投凭 voucher**:记录快照块高前的已验证工作;voucher 可转让(HTLC),**不可花在推理上**;测试网 play token 无价值、不转换。
+- **agent 领水有 per-identity 限额** → 推理量受 faucet 限额约束。
+- 验证者测试网开放、网络赞助 stake;cutover 时 top-1,000 免费得 1,200,000 FLOP bond(本机硬件不达标,不参选)。
+
 ## 时间锚点(2026-10-19 官方 docs)
 
 - **测试网目标:2026-11-03(周二)**,约 90 天;是目标而非定档,随 devnet 准入完成确认。

@@ -87,10 +87,11 @@
     - 每日:faucet `/health` + `/chain` 是否新增 **testnet** network;technocore `/r/faucet` 房尾(仍为第三方 dFLOP drip + kibble 广告,**非官方,不领**)。
     - devnet 领水无空投权重;但可演练全流程(钱包→领水→消费),等 testnet 同日执行。
 
-29. **验证者席位路径(2026-10-20 深扫新增,周频)** — 官方 `run-validator` + `validator-faq` + 新发布的 `skills/setup-validator`(200)。
-    - 事实:验证者**纯 CPU,无需 GPU/TEE**;硬件规划 **8 核 / 32GB RAM / 4TB NVMe(含 DA 托管)/ 1Gbps**;奖励 = 区块奖励 10% + 推理费 15%;座位保证金 **1,200,000 FLOP 自 stake 仅限本人**(空投发放即 bond,首次减半后每日释放 1 席);轮换约每月淘汰最差 50、补位前 50。
-    - 准入:**管理员控制,非公开注册**(与矿工同);1,000 席为 ratified 目标,运行时上限仍 200。
-    - 每周查:run-validator 更新、setup-validator skill 更新、admission 通道是否开放;若开放 → 评估用户 16 核服务器是否满足(需确认 RAM/磁盘/上行带宽)。
+29. **验证者席位路径(2026-10-20 新增,周频;10-21 修订)** — 官方 `run-validator` + `validator-faq` + `skills/setup-validator`。
+    - **测试网验证者开放报名:无白名单、无上限、无需购买;测试网 stake 由网络赞助**(docs testnet-and-timeline 10-20 更新)。**须切换到实网(devnet 仍是管理员控制)**。
+    - 选中者(cutover 时 top-1,000)每人**免费获得 1,200,000 FLOP 的 bond**;评分维度:uptime、出块、准确度、延迟、地理分布(三个月全程,权重未公布)。
+    - 硬件规划 8 核/32GB/4TB NVMe/1Gbps;本机磁盘与网络不达标 → **不参选**,仅跟踪规则变化。
+    - 每周查:run-validator / testnet-and-timeline 更新。
 
 ## 二、一次性动作(非每日)
 
@@ -132,6 +133,15 @@
 ```
 
 ## 四、变更日志
+
+### 2026-10-21 — 规则澄清:测试网无门槛、验证者席位免费、空投凭 voucher
+- **测试网完全开放**:无白名单、无人数上限、**无申请流程**;miner/validator 表单只是联系名单,不审批不拒绝("nobody is approved or rejected").→ 用户无需等准入,11-03 直接参与。
+- **测试网验证者同样开放**:无白名单、无上限、无需购买,网络赞助 stake;cutover 时 top-1,000 每人**免费得 1,200,000 FLOP bond**。评分 = uptime/出块/准确度/延迟/地理分布,权重未公布。(本机硬件不达标,仍不参选。)
+- **空投凭 voucher**:voucher 记录截至快照块高的已验证工作,是链上可转让 token(HTLC 可 P2P 出售,解锁义务随买方);**不可用于推理消费**;测试网 play token 无价值、不转换;转移测试网余额是否允许未定。
+- **agent 领水有 per-identity 限额** → agent 可做的推理量受 faucet 限,不受矿工供给限。
+- **无地区限制、不发资格声明**;测试网算力规划 ~1,000 H100-eq。
+- yellowpaper #172 收到两条社区回复(指向 R8.7/R8.8:网关代开通道的消费**无法解锁终端用户 grant**)——官方仍未表态,结论不变:自己开通道。
+- 计数:在跑 25 项不变(C29 修订)。
 
 ### 2026-10-20 — 全盘深扫:验证者路径 + explorer 公共 API + ask MCP
 - **新增 C29(验证者席位,周频)**:`run-validator` / `validator-faq` / **新发布 `skills/setup-validator`**。验证者纯 CPU;硬件规划 8 核/32GB/4TB NVMe/1Gbps;座位 1,200,000 FLOP 自 stake(空投即 bond);准入仍管理员控制。
