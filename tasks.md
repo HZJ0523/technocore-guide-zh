@@ -63,7 +63,7 @@
 
 21. **sonnet-challenge issue 跟踪器** — `flop-labs/technocore-sonnet-challenge/issues` 新 issue 与回复。**赛事期间每日**;09-18 后周频。理由:该跟踪器是裁判行为/规则澄清/修复的最高信号源 — 09-17 的突破(issue #23 揭示身份索引 ≥6 条大小截断)即出自此;我方申诉 #64 的回复也在其中。
 
-24. **docs.flop.network 检查(2026-10-15 新增)** — `https://docs.flop.network/llms.txt` 页数/内容 diff + `/docs/network-testnet` 状态页。理由:官方运维文档站(2026-10-19 已从 26 → **34 页**,新增 competitive-landscape / demand-and-broker / miner-and-validator-economics / team-and-company / technology-and-chain / testnet-and-timeline / tokenomics-and-supply / verification-and-security);testnet status 页 "planned → 各项 identity 发布" 是开闸最直接的信号源,先于公告。附 `ask.flop.finance`(问答 + MCP)。
+24. **docs.flop.network 检查(2026-10-15 新增)** — `https://docs.flop.network/llms.txt` 页数/内容 diff + `/docs/network-testnet` 状态页 + **12 个 FAQ 页 `Last updated` 日期 diff**(2026-10-21 新增:10-20 一批页面内容更新但 llms.txt 页数不变,只查页数会漏 — 实测 12 页同时改版)。理由:官方运维文档站(2026-10-19 已从 26 → **34 页**);testnet status 页是开闸最直接信号源。附 `ask.flop.finance`(问答 + MCP,3 工具:search/get/manifest)。
 
 28. **官方数据面/网络状态(2026-10-19 新增,每日)** — 四端点合计 <10 秒:
     - `api.flop.network/openapi.json`(版本;当前 2.0.0,17 路径,含 `/enroll/wallet`、`/chat/completions`、`/keys/me/receipts`;`/v1/models` 公开目录,现仅 `qwen/qwen2.5-0.5b-instruct`,4+ 矿工报价)
@@ -133,6 +133,12 @@
 ```
 
 ## 四、变更日志
+
+### 2026-10-21 — 深扫补:12 FAQ 页批量改版 → C24 加日期 diff
+- **docs 站 10-20 一次性改版 12 个 FAQ 页**(competitive-landscape / core-terms / demand-and-broker / miner-and-validator-economics / staking-and-slashing / team-and-company / technology-and-chain / testnet-and-timeline / tokenomics-and-supply / verification-and-security / verification-stack / what-is-flop),而 llms.txt 页数 34 不变 → **只查页数会漏更新**。
+- **C24 增强**:每日 diff 这 12 页的 `Last updated` 日期。
+- 要点补充:miner economics(H100 首月约 $15k/月区块奖励,~8–10× 租金;测试网按"同算力在主网本可赚多少"计空投;25% TGE + 1:1 解锁,约 4 个月全解锁);团队(Maelstrom 唯一股权,无外部融资,2 年+ runway;Hayes 全职 CEO);验证(四层,不需 TEE 也可用消费卡)。
+- 计数:25 项不变(C24 增强)。
 
 ### 2026-10-21 — 规则澄清:测试网无门槛、验证者席位免费、空投凭 voucher
 - **测试网完全开放**:无白名单、无人数上限、**无申请流程**;miner/validator 表单只是联系名单,不审批不拒绝("nobody is approved or rejected").→ 用户无需等准入,11-03 直接参与。
