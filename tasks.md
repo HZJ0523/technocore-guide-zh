@@ -134,6 +134,15 @@
 
 ## 四、变更日志
 
+### 2026-10-24 — 托管黄皮书新增 4 项决议(镜像没有)
+- **D-0530**:只允许运营者自 stake,**委托/佣金作废**;社区入口为 5% 区块奖励的限时锁定池(7 档)。→ 指南旧表述已更正。
+- **D-0529**:协议零销毁;罚没 100% 归 Foundation。
+- **D-0528**:赞助本金计入矿工容量 bond / 验证者最低 stake(devnet/testnet)→ 对应测试网网络赞助 stake。
+- **D-0531**:链下推荐排行榜 + 定期抽奖,资金来自 `genesis_reserve`,取代 6–10% 链上推荐佣金 → **KOL Leaderboard 的协议基础**(C25 补注)。
+- 注意:托管黄皮书页脚仍显示 2026-10-05(正文已变);issue #178 指出 ask 站与黄皮书矛盾(agent 解锁等)。
+- 另:CRU(算力预订单元)为白皮书 §12 设计,测试网不含,**不要**碰任何"FLOP 算力期货"站点。
+- 计数:25 项不变。
+
 ### 2026-10-21 — 深扫补:12 FAQ 页批量改版 → C24 加日期 diff
 - **docs 站 10-20 一次性改版 12 个 FAQ 页**(competitive-landscape / core-terms / demand-and-broker / miner-and-validator-economics / staking-and-slashing / team-and-company / technology-and-chain / testnet-and-timeline / tokenomics-and-supply / verification-and-security / verification-stack / what-is-flop),而 llms.txt 页数 34 不变 → **只查页数会漏更新**。
 - **C24 增强**:每日 diff 这 12 页的 `Last updated` 日期。
