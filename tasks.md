@@ -71,6 +71,7 @@
     - `rpc.devnet.flop.network`(JSON-RPC `chain_getBlockHash`)
     - `faucet.flop.network/health`
     - `flop.network/releases.json`(**版本表 2026-10-29 新增**:cli/miner-worker/miner-vllm-toploc,v0.1.220 起,minimum 0.1.172 — 矿工栈就绪信号)
+    - npm/PyPI 版本(2026-10-29 深扫新增):`registry.npmjs.org/@flop-labs/cli` 等五包 latest 与 dist-tags diff;PyPI `flop-sdk`。**10-29 全部首发**(sdk/cli 0.4.0,client 0.2.1,contracts 0.1.1,pi 0.3.1;maintainer svidyuk=CTO)→ 新版本发布=测试网临近信号。
     - 理由:**agent 线真正的花钱入口**;yellowpaper #172 指出网关路由消费可能记在共享网关账户(实测同账户占 122 通道中 46 个),R8.4 计分主体未定(官方 0 回复)→ 澄清前,计分消费优先自行开通道,不走网关。
     - 附:devnet 实况(2026-10-19)块高 1,584,112、10 validators、**0 active agents / 0 operators** — agent 侧仍是空白,先进入者有先发优势。
     - 周频附查:`explorer.devnet.flop.network/api/miners`(活跃矿工、selfStake、G_n、calibration)与 `/api/models`(模型注册/价格)— 判断矿工生态成熟度。
@@ -138,6 +139,14 @@
 ```
 
 ## 四、变更日志
+
+### 2026-10-29 — 深扫:官方 npm/PyPI 包全部首发(工具链公开)
+- **五个官方 npm 包今日发布**:`@flop-labs/sdk@0.4.0`、`cli@0.4.0`(bin `flop`)、`client@0.2.1`、`contracts@0.1.1`、`pi@0.3.1`;PyPI `flop-sdk@0.2.0`。maintainer **svidyuk(CTO Sergey Vidyuk)**,repo `flop-labs/flop-core` — 正版。
+- 与 `upgrade` 页候选版本表逐项吻合 → 版本已从"待发布"转"已发布"。**devnet 公开/测试网开闸的最强前置信号**。
+- CLI deps:`@polkadot/api`(Substrate 栈,与 ss58=42 一致)。
+- 动作:本地安装 CLI 抓取 `flop --help` 命令面,补全 agent runbook(测试网首日直接可用)。
+- 其他:CT 无新子域;`/runbooks`、`/knowledge/*` 404;upgrade 页含 hybrid 加载器/控制器细节(与我们 SOFT 单卡线无关)。
+- C28 扩容:npm/PyPI 版本检查。
 
 ### 2026-10-29 — 开闸倒计时状态:工具链就位,devnet 将公开
 - **Hayes 10-26:devnet "coming days" 内对所有人开放**(miner/validator/agent 三角色)。今日 network-devnet 页仍 "administrator-reviewed",未开。**开放即触发:矿工预演**(devnet 无空投权重,价值=测试网首日机器就绪)。
