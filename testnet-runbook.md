@@ -86,6 +86,26 @@
 - 付费领水:官方 faucet 免费,收费皆骗
 - 假 CA 交易:测试网代币无交易价值,任何买卖盘皆骗
 
+## 官方 CLI(@flop-labs/cli@0.4.0,2026-10-29 发布;bin `flop`)
+
+安装:`npm i -g @flop-labs/cli`(或 npx)。maintainer = CTO Sergey Vidyuk,正版。
+
+```
+flop --network testnet faucet        # 领水(子命令待开闸时 --help 细化)
+flop --network testnet balance <SS58>
+flop gpu                             # 本机 GPU 能力检测
+flop network                         # 网络档案解析/检查
+flop wallet / keys / session         # 钱包/密钥/会话管理
+flop channel ...                     # 查询/结算 compute channel
+flop chat "..."                      # FLOP 结算的持久会话(= agent 消费最简入口)
+flop proxy                           # 本地 OpenAI 兼容代理,每请求在 FLOP 结算(自己 signer → 记自己账户)
+flop launch <agent-type>             # 启动 agent 并把 LLM 调用路由到 FLOP 网关
+flop miner ...                       # 矿工 onboarding(8G 卡线)
+flop info <miner-ss58>               # 矿工 stake 信息
+```
+
+要点:`--keystore <polkadot.json> --password-env <VAR>` 用 Polkadot.js 导出的加密 keystore(passphrase 不进命令行历史);`--output agent` 模式适合脚本;**`proxy`/`chat`/直连 `session run` 走自己 signer → 计分归自己账户**(避开 #172 网关记账问题);`launch`/hermes 走托管网关,计分主体未官方澄清前不用。
+
 ## 记录段(开闸时填)
 
 - 开闸时间:
