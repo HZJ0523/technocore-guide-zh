@@ -1,6 +1,6 @@
 # FLOP / Technocore 每日任务清单与维护协议
 
-> 版本:2026-10-24(在跑 26 项 + 归档 4 项)。本文件由 Claude 在"新的一天"会话中自动维护。
+> 版本:2026-10-29(在跑 26 项 + 归档 4 项;C24/C28/C30 扩容)。本文件由 Claude 在"新的一天"会话中自动维护。
 > 维护规则见文末;变更记入"变更日志"。
 
 ## 一、每日检查(21 项)
@@ -70,6 +70,7 @@
     - `explorer.devnet.flop.network/api/stats` + `/api/health`(块高/TPS/validators/agents/operators/finality state)
     - `rpc.devnet.flop.network`(JSON-RPC `chain_getBlockHash`)
     - `faucet.flop.network/health`
+    - `flop.network/releases.json`(**版本表 2026-10-29 新增**:cli/miner-worker/miner-vllm-toploc,v0.1.220 起,minimum 0.1.172 — 矿工栈就绪信号)
     - 理由:**agent 线真正的花钱入口**;yellowpaper #172 指出网关路由消费可能记在共享网关账户(实测同账户占 122 通道中 46 个),R8.4 计分主体未定(官方 0 回复)→ 澄清前,计分消费优先自行开通道,不走网关。
     - 附:devnet 实况(2026-10-19)块高 1,584,112、10 validators、**0 active agents / 0 operators** — agent 侧仍是空白,先进入者有先发优势。
     - 周频附查:`explorer.devnet.flop.network/api/miners`(活跃矿工、selfStake、G_n、calibration)与 `/api/models`(模型注册/价格)— 判断矿工生态成熟度。
@@ -94,7 +95,7 @@
     - 每周查:run-validator / testnet-and-timeline 更新。
 
 30. **托管黄皮书决议 ID 监控(2026-10-24 新增,每日)** — `flop.finance/intro/yellowpaper/` 正文里的 `D-04xx/D-05xx` 决议编号。**页脚日期不可信**(10-05 之后正文已加 D-0528/0529/0530/0531)。做法:抓页面,提取最大 `D-0xxx`,与上次比对;新增即读该段并判断是否影响 agent/矿工/空投规则。
-    - 基线(2026-10-24):最大 **D-0531**(链下推荐排行榜 + 抽奖,genesis_reserve 出资)。
+    - 基线(2026-10-29):最大 **D-0533**(10-24 基线 D-0531;0532/0533 详情未渲染)。
     - 附:`docs.flop.network/reference`(skills 的 SHA-256 与 CLI/env 名)每周扫一眼。
 
 ## 二、一次性动作(非每日)
@@ -137,6 +138,15 @@
 ```
 
 ## 四、变更日志
+
+### 2026-10-29 — 开闸倒计时状态:工具链就位,devnet 将公开
+- **Hayes 10-26:devnet "coming days" 内对所有人开放**(miner/validator/agent 三角色)。今日 network-devnet 页仍 "administrator-reviewed",未开。**开放即触发:矿工预演**(devnet 无空投权重,价值=测试网首日机器就绪)。
+- **官方镜像版本表上线:`flop.network/releases.json`** — cli / miner-worker / miner-vllm-toploc 均 v0.1.220(GHCR 带 SHA256,minimum 0.1.172)。**加入 C28 每日检查**。
+- **docs 34 → 37 页**:新 `upgrade`(10-26,升级手册 + 候选包版本:sdk@0.4.0/cli@0.4.0/contracts@0.1.1 等)、`send-to-specific-miner`(10-20,**agent 直连会话 CLI 完整命令**,含 `--new-wallet` 自动领水)、`official-links`(10-23,官方账号全集;**无官方 Discord/Telegram/Reddit/Medium**;唯一邮箱 security@flop.finance)。
+- **airdrop-and-testnet-conversion 更新 10-26**:agent 3:1 解锁已写明(与黄皮书 R8.7 一致,#178 矛盾解决)。
+- **C30 基线:D-0531 → D-0533**(新增两条决议编号,正文未渲染详情)。
+- 观察:explorer `/api/*` 今日 502(索引后端故障,RPC 正常);新骗局:Robinhood Chain 假 "Flop Labs" 代币。
+- 计数:26 → 27 项(releases.json 并入 C28 不新增编号;实为 C24/C28/C30 扩容)。
 
 ### 2026-10-24 — 托管黄皮书新增 4 项决议(镜像没有) + 新增 C30
 - **新增 C30(托管黄皮书决议 ID 每日监控)**:页脚日期不可信(仍 10-05,正文已含 D-0528…D-0531);改为提取最大 D-0xxx 编号做 diff。基线 D-0531。
