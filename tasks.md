@@ -63,7 +63,7 @@
 
 21. **sonnet-challenge issue 跟踪器** — `flop-labs/technocore-sonnet-challenge/issues` 新 issue 与回复。**赛事期间每日**;09-18 后周频。理由:该跟踪器是裁判行为/规则澄清/修复的最高信号源 — 09-17 的突破(issue #23 揭示身份索引 ≥6 条大小截断)即出自此;我方申诉 #64 的回复也在其中。
 
-24. **docs.flop.network 检查(2026-10-15 新增)** — `https://docs.flop.network/llms.txt` 页数/内容 diff + `/docs/network-testnet` 状态页 + **12 个 FAQ 页 `Last updated` 日期 diff**(2026-10-21 新增:10-20 一批页面内容更新但 llms.txt 页数不变,只查页数会漏 — 实测 12 页同时改版)。理由:官方运维文档站(2026-10-19 已从 26 → **34 页**);testnet status 页是开闸最直接信号源。附 `ask.flop.finance`(问答 + MCP,3 工具:search/get/manifest)。
+24. **docs.flop.network 检查(2026-10-15 新增;10-30 修订)** — ①`llms.txt` 页数 diff;②`/docs/network-testnet` 状态页;③**全部页面(37)的 `Last updated` 日期 diff**(2026-10-30 修订:原 12 页清单不全,漏了 agent-integration / protocol-parameters / run-validator 的 10-26 改版;做法改为全量日期扫描)。理由:页数不变时内容仍会改;status 页是开闸最直接信号源。附 `ask.flop.finance` MCP(manifest 可当更新索引)。
 
 28. **官方数据面/网络状态(2026-10-19 新增,每日)** — 四端点合计 <10 秒:
     - `api.flop.network/openapi.json`(版本;当前 2.0.0,17 路径,含 `/enroll/wallet`、`/chat/completions`、`/keys/me/receipts`;`/v1/models` 公开目录,现仅 `qwen/qwen2.5-0.5b-instruct`,4+ 矿工报价)
@@ -139,6 +139,13 @@
 ```
 
 ## 四、变更日志
+
+### 2026-10-30 — 深扫:C24 日期清单不全;protocol-parameters 10-26 改版载明活参数
+- 漏检修正:agent-integration / protocol-parameters / run-validator 三页 **10-26 改版**,原 C24 只盯 12 个 FAQ 页未覆盖。C24 改为全量 37 页日期扫描(ask MCP manifest 可作更新索引)。
+- **protocol-parameters 现有活参数**(10-26):矿工容量保证金**实测含义 7,560 FLOP/校准 GFLOP·s⁻¹**(604,800 块撤销窗 ×1.25 surge 后);基础自 stake 10,000 FLOP;审计率 2.5%;挑战窗 ~7 天;响应时限 2 小时(沉默=判欺诈);争议押金 100 FLOP;开发者补贴 16/块(8+8,五纪元后停)。
+- agent-integration 10-26:内联写明 3:1 解锁 + 社区质押池(D-0530 口径统一)。
+- explorer /api 五种路径全 502(索引后端故障第三天);ask corpus 37 概念与 docs 同步。
+- 计数:26 项不变。
 
 ### 2026-10-29 — 深扫:官方 npm/PyPI 包全部首发(工具链公开)
 - **五个官方 npm 包今日发布**:`@flop-labs/sdk@0.4.0`、`cli@0.4.0`(bin `flop`)、`client@0.2.1`、`contracts@0.1.1`、`pi@0.3.1`;PyPI `flop-sdk@0.2.0`。maintainer **svidyuk(CTO Sergey Vidyuk)**,repo `flop-labs/flop-core` — 正版。
