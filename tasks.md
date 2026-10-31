@@ -1,6 +1,6 @@
 # FLOP / Technocore 每日任务清单与维护协议
 
-> 版本:2026-10-29(在跑 26 项 + 归档 4 项;C24/C28/C30 扩容)。本文件由 Claude 在"新的一天"会话中自动维护。
+> 版本:2026-10-31(在跑 26 项 + 归档 4 项)。本文件由 Claude 在"新的一天"会话中自动维护。
 > 维护规则见文末;变更记入"变更日志"。
 
 ## 一、每日检查(21 项)
@@ -96,7 +96,7 @@
     - 每周查:run-validator / testnet-and-timeline 更新。
 
 30. **托管黄皮书决议 ID 监控(2026-10-24 新增,每日)** — `flop.finance/intro/yellowpaper/` 正文里的 `D-04xx/D-05xx` 决议编号。**页脚日期不可信**(10-05 之后正文已加 D-0528/0529/0530/0531)。做法:抓页面,提取最大 `D-0xxx`,与上次比对;新增即读该段并判断是否影响 agent/矿工/空投规则。
-    - 基线(2026-10-29):最大 **D-0533**(10-24 基线 D-0531;0532/0533 详情未渲染)。
+    - 基线(2026-10-31):最大 **D-0537**(D-0534..0537 为 FCU 算力期货规范,测试网不含)。
     - 附:`docs.flop.network/reference`(skills 的 SHA-256 与 CLI/env 名)每周扫一眼。
 
 ## 二、一次性动作(非每日)
@@ -139,6 +139,15 @@
 ```
 
 ## 四、变更日志
+
+### 2026-10-31 — 开闸前加速:矿工镜像跳版 + sdk-references 页 + FCU 决议
+- **releases.json 矿工镜像跳版**(10-30/31):miner-vllm-toploc → 0.1.239、miner-worker → 0.1.238(cli 仍 0.1.220)。测试网前最后集成迹象。
+- **docs 37 → 38 页**:新增 `sdk-references`(10-30,六包清单 + 选型;**官方明示未发布 Rust/Go/agent-SDK — 同名公开包皆为假**)。
+- 大批页面 10-30 改版;**11-03 目标日不变**,确认节奏 "as devnet onboarding completes"。
+- **YP D-0534..D-0537**:FCU(算力期货/预订)规范细化 — booking horizon、payment rules、consolidated FCU。测试网不含,仅跟踪。
+- explorer /api 恢复(502 三天后);块高 2.50M,tps 0,avgBlockTime 1000ms。
+- C30 基线:D-0533 → **D-0537**。
+- 计数:26 项不变。
 
 ### 2026-10-30 — 深扫:C24 日期清单不全;protocol-parameters 10-26 改版载明活参数
 - 漏检修正:agent-integration / protocol-parameters / run-validator 三页 **10-26 改版**,原 C24 只盯 12 个 FAQ 页未覆盖。C24 改为全量 37 页日期扫描(ask MCP manifest 可作更新索引)。
