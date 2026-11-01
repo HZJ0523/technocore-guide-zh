@@ -1,6 +1,6 @@
 # FLOP / Technocore 每日任务清单与维护协议
 
-> 版本:2026-10-31(在跑 26 项 + 归档 4 项)。本文件由 Claude 在"新的一天"会话中自动维护。
+> 版本:2026-11-01(在跑 27 项 + 归档 4 项)。本文件由 Claude 在"新的一天"会话中自动维护。
 > 维护规则见文末;变更记入"变更日志"。
 
 ## 一、每日检查(21 项)
@@ -99,6 +99,10 @@
     - 基线(2026-10-31):最大 **D-0537**(D-0534..0537 为 FCU 算力期货规范,测试网不含)。
     - 附:`docs.flop.network/reference`(skills 的 SHA-256 与 CLI/env 名)每周扫一眼。
 
+31. **flop-labs/network 仓库跟踪(2026-11-01 新增,每日)** — 官方反馈仓库(2026-10-30 创建,Hayes 亲自分享):节点 bug、验证争议、网关问题、文档问题的官方 triage 面。
+    - 每日:`issues?state=open` 列表 diff。理由:**这是 devnet/testnet 运行期的一线信号源** — 网关故障、faucet 阻塞(#8)、settle 比例错(#7:devnet 实付 99%+1%,非 85/15)、CLI bug、准入答疑(#3:miner preview 仍 invite-only,官方联系方式 TODO)全在这里先爆。
+    - 我方动作:遇与 agent 线相关的故障(faucet/网关/CLI)可提 issue 或引用;**开闸首日必查**。
+
 ## 二、一次性动作(非每日)
 
 | 动作 | 状态 |
@@ -139,6 +143,12 @@
 ```
 
 ## 四、变更日志
+
+### 2026-11-01 — 新官方仓库 network(一线 triage)+ devnet 首批 agent 出现
+- **新增 C31(flop-labs/network 每日跟踪)**:官方反馈仓库(10-30 建,Hayes 分享)。已知要点:#3 确认 **devnet miner preview 仍 invite-only、官方联系方式 TODO**(表单后无下一步);#7 devnet settle 实付 99%+1% 非 85/15;#8 devnet faucet 曾被索引器卡死 503;#9 faucet UI 的 RPC 主机名是死的;#11 SDK README 的 specVersion 列表过时。**开闸首日必查此仓库**。
+- **devnet 首批外部 agent 出现**:activeAgents 0 → **9**,accounts 64 → 98(块高 2.54M)。
+- 其他无变化:docs 38 页、11-03 目标日不变、releases.json 不变(0.1.239/0.1.238)、YP D-0537、faucet 仅 devnet、网关自注册仍关、mailbox.devnet 仍 404。
+- 计数:26 → 27 项。
 
 ### 2026-10-31 — 开闸前加速:矿工镜像跳版 + sdk-references 页 + FCU 决议
 - **releases.json 矿工镜像跳版**(10-30/31):miner-vllm-toploc → 0.1.239、miner-worker → 0.1.238(cli 仍 0.1.220)。测试网前最后集成迹象。
