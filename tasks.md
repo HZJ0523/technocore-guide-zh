@@ -1,6 +1,6 @@
 # FLOP / Technocore 每日任务清单与维护协议
 
-> 版本:2026-11-01(在跑 27 项 + 归档 4 项)。本文件由 Claude 在"新的一天"会话中自动维护。
+> 版本:2026-11-02(在跑 26 项 + 归档 4 项)。本文件由 Claude 在"新的一天"会话中自动维护。
 > 维护规则见文末;变更记入"变更日志"。
 
 ## 一、每日检查(21 项)
@@ -20,7 +20,7 @@
 8. **technocore-chat open issues** — 运维限制、新示例、schema 讨论。
 9. **yellowpaper issues** — 团队技术评审面(D-0440 空投池变更即此发现)。
 10. **托管页 vs GitHub 镜像** — `flop.finance/intro/yellowpaper/` 比 `flop-labs/yellowpaper` 新;以托管页为准。
-11. **分配数字一致性** — teaser 与托管黄皮书的分配表交叉核对(历史漂移:35 亿 vs 44 亿)。
+11. **分配数字一致性(2026-11-02 起周频)** — teaser 与托管黄皮书的分配表交叉核对(历史漂移:35 亿 vs 44 亿)。两页自 10-05 未动,降频。
 
 ### C. 比赛(3,至 2026-09-18T12:00Z — **今日到期,下个会话归档**)
 
@@ -57,11 +57,11 @@
 
 19. **KV 笔记刷新** — 写 `did-a4/6f172335ff9660`(7 天不写过期)。
 
-### G. 告警(1)
+### G. 告警(已清空)
 
-20. **裁判行为突变监控** — `d-sonnet-2-rules` 状态计数:rejected/unevidenced 比率异常(sample: 09-16 rejected 31,796 超 accepted 15,200)时显式告警。关联 C12:重发后仍无回执 + rejected 激增 → 判定可能被拒,改查裁判 refusal 消息。
+20. ~~裁判行为突变监控~~ — **2026-11-02 删除**:sonnet-2 裁判 09-18 停摆,`d-sonnet-2-results` 房已滚空(0 条),监控对象不存在。
 
-21. **sonnet-challenge issue 跟踪器** — `flop-labs/technocore-sonnet-challenge/issues` 新 issue 与回复。**赛事期间每日**;09-18 后周频。理由:该跟踪器是裁判行为/规则澄清/修复的最高信号源 — 09-17 的突破(issue #23 揭示身份索引 ≥6 条大小截断)即出自此;我方申诉 #64 的回复也在其中。
+21. ~~sonnet-challenge issue 跟踪器~~ — **2026-11-02 并入 C22(月频)**:结果 09-23 已发布、申诉全部结案、仓库最后 push 09-23。
 
 24. **docs.flop.network 检查(2026-10-15 新增;10-30 修订)** — ①`llms.txt` 页数 diff;②`/docs/network-testnet` 状态页;③**全部页面(37)的 `Last updated` 日期 diff**(2026-10-30 修订:原 12 页清单不全,漏了 agent-integration / protocol-parameters / run-validator 的 10-26 改版;做法改为全量日期扫描)。理由:页数不变时内容仍会改;status 页是开闸最直接信号源。附 `ask.flop.finance` MCP(manifest 可当更新索引)。
 
@@ -143,6 +143,15 @@
 ```
 
 ## 四、变更日志
+
+### 2026-11-02 — 深扫 + 清单修剪(27 → 26)
+- **新增发现:`flop.finance/official/` 页面**(sitemap 首次收录)— 官方链接/账号/邮箱的全集 + "尚无代币"警告,与 docs `official-links` 同源。开闸前的防骗装甲,又一前兆。
+- **修剪**(用户要求审查过时项):
+  - **删 C20**(裁判行为监控):裁判停摆 6 周,`d-sonnet-2-results` 环形已滚空(实测 0 条),对象不存在。
+  - **C21 并入 C22**:sonnet 仓库最后 push 09-23,结果已发布、申诉结案;C22 本就是"待主网"档,合并后月频。
+  - **B11 降周频**:分配表两页 10-05 后未动。
+- 其余保留:开闸窗口期,A/D/C24-31 全部高信息密度。
+- 计数:27 → 26 项。
 
 ### 2026-11-01 — 新官方仓库 network(一线 triage)+ devnet 首批 agent 出现
 - **新增 C31(flop-labs/network 每日跟踪)**:官方反馈仓库(10-30 建,Hayes 分享)。已知要点:#3 确认 **devnet miner preview 仍 invite-only、官方联系方式 TODO**(表单后无下一步);#7 devnet settle 实付 99%+1% 非 85/15;#8 devnet faucet 曾被索引器卡死 503;#9 faucet UI 的 RPC 主机名是死的;#11 SDK README 的 specVersion 列表过时。**开闸首日必查此仓库**。
