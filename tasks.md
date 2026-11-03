@@ -114,7 +114,7 @@
 | **准备 FLOP 收款地址** | **✅ 已完成(2026-10-19)**:`5ED4bNNKCq6miyYyyeURuNWpirECfuDxt465aAtEY1VwQoZY`(SS58 prefix 42,Polkadot.js,种子用户自持)。devnet faucet 已到账 25 FLOP(仅演练,无空投权重)。用途:sonnet-2 的 7 FLOP claim、测试网 faucet、空投 destination |
 | **close-2 启动预案** | issue #36 显示续赛设计中;启动时改 close1_trade.py 的 SEASON 字符串 + 重跑注册/交易流程 |
 | **KOL 排行榜入驻** | **官方口径(11-03 邮件):无需申请/注册**;专属推荐链接 + 周度排行榜细节"soon"发布,出现即入驻(绑钱包+社媒) |
-| **Devnet 矿工邀请** | **待用户发邮件**(草稿 `devnet-miner-invite.md`,回复官方 "Devnet is open" 邮件):申请 1 个矿工账户 operator 批准;公共端点已开(wss://rpc.devnet、mailbox.devnet、faucet /sponsor/miner),限额 10 新矿工/24h,paid sessions 未开放 |
+| **Devnet 矿工邀请** | **✅ 邮件已发(2026-11-03)**至 info@flop.finance(官方 Reply-To);等批准/access bundle,48h 无回音转 X 公开渠道;公共端点已开(wss://rpc.devnet、mailbox.devnet、faucet /sponsor/miner),限额 10 新矿工/24h,paid sessions 未开放 |
 
 ## 三、维护协议(每次"新的一天"执行)
 

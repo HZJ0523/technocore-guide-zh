@@ -330,5 +330,14 @@
    "airdrop destination"
   ],
   "note": "devnet faucet token has no airdrop weight; this address is the destination for real allocations"
+ },
+ "devnet_miner_invite": {
+  "sent": "2026-11-03",
+  "from": "840897354@qq.com",
+  "to": "info@flop.finance (Reply-To of official 'Devnet is open' email, sender no-reply@tx.flop.finance)",
+  "subject": "Miner devnet invitation request — RTX 4060 8GB host ready",
+  "content": "Request operator approval for one SOFT miner account; host RTX 4060 8GB WSL2 Ubuntu 26.04 + Docker 29.8.2 GPU-verified; Qwen2.5-0.5B BF16; pinned images 0.1.238/0.1.239; understands paid sessions closed; goal = registration/calibration/accepted-work evidence before testnet day one; miner interest form 2026-10-08",
+  "awaiting": "reply with approval / access bundle",
+  "fallback": "if no reply in 48h, public comment under @flop_labs devnet announcement on X"
  }
 }
