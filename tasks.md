@@ -145,6 +145,14 @@
 
 ## 四、变更日志
 
+### 2026-11-03 — 深扫(邮件后):sponsor 端点已部署 + MCP 15 工具 + FRCR 页
+- **faucet `POST /sponsor/miner` 已上线**(实测 400 "Missing 'address'" = 服务存在待参数)— 矿工质押请求通道就绪,等官方批准即可调用。
+- **官方 MCP(mcp.flop.network/mcp)15 个工具**:health/balance/generate_secrets/check_htlc/trust_root/get_compute_channel/list_session_offers/list_settlements/list_swaps/indexer_query/get_stats/get_block/get_poui_leaderboard/check_session/verify_tee_quote — 只读为主,信息面比 docs 更细。
+- 网关 20 → 21 路径(新增 `/keys/me/receipts/{request_id}` 单回执查询)。
+- explorer `/markets` 200(Compute Market / FRCR 仪表盘,邮件首披露);API 路径暂无(/api/markets 404)。
+- docs 38 页不变(run-miner 11-02 仍是最新)。
+- 计数:26 项不变。
+
 ### 2026-11-03 — 官方邮件:Devnet 公开 + 测试网无日期 + 矿工邀请通道
 - **官方邮件(Shu,用户转发)落地三大信息**:①Devnet 公开(explorer/faucet/API/MCP/SDK 可用);②**测试网日期取消**("haven't set a testnet date yet",11-03 目标作废,等 devnet 稳定后公布);③**矿工/验证者卡住可回复邮件求助** — 即事实上的邀请申请通道;KOL 无需申请,推荐链接 soon;GPU 租赁 20+ 卡可引荐机构数据中心。
 - **run-miner 11-02 版新增 "Join the devnet"**:10-30 起公共端点(wss://rpc.devnet.flop.network、mailbox.devnet.flop.network、faucet POST /sponsor/miner);**仍需 operator 逐户批准**;限额:10 新矿工/24h、20M FLOP/24h、新矿工 ~1M FLOP sponsor 质押;**paid sessions 未开放**(DA 与网关准入收尾中)。
