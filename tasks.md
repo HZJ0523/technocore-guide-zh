@@ -113,7 +113,8 @@
 | 测试网开闸首日跑 `testnet-runbook.md` | 条件触发 |
 | **准备 FLOP 收款地址** | **✅ 已完成(2026-10-19)**:`5ED4bNNKCq6miyYyyeURuNWpirECfuDxt465aAtEY1VwQoZY`(SS58 prefix 42,Polkadot.js,种子用户自持)。devnet faucet 已到账 25 FLOP(仅演练,无空投权重)。用途:sonnet-2 的 7 FLOP claim、测试网 faucet、空投 destination |
 | **close-2 启动预案** | issue #36 显示续赛设计中;启动时改 close1_trade.py 的 SEASON 字符串 + 重跑注册/交易流程 |
-| **KOL 排行榜入驻** | 条件触发(上线后):邮箱 → 绑钱包(签名) → 验社媒;表单已于 2026-08-29 提交 |
+| **KOL 排行榜入驻** | **官方口径(11-03 邮件):无需申请/注册**;专属推荐链接 + 周度排行榜细节"soon"发布,出现即入驻(绑钱包+社媒) |
+| **Devnet 矿工邀请** | **待用户发邮件**(草稿 `devnet-miner-invite.md`,回复官方 "Devnet is open" 邮件):申请 1 个矿工账户 operator 批准;公共端点已开(wss://rpc.devnet、mailbox.devnet、faucet /sponsor/miner),限额 10 新矿工/24h,paid sessions 未开放 |
 
 ## 三、维护协议(每次"新的一天"执行)
 
@@ -143,6 +144,12 @@
 ```
 
 ## 四、变更日志
+
+### 2026-11-03 — 官方邮件:Devnet 公开 + 测试网无日期 + 矿工邀请通道
+- **官方邮件(Shu,用户转发)落地三大信息**:①Devnet 公开(explorer/faucet/API/MCP/SDK 可用);②**测试网日期取消**("haven't set a testnet date yet",11-03 目标作废,等 devnet 稳定后公布);③**矿工/验证者卡住可回复邮件求助** — 即事实上的邀请申请通道;KOL 无需申请,推荐链接 soon;GPU 租赁 20+ 卡可引荐机构数据中心。
+- **run-miner 11-02 版新增 "Join the devnet"**:10-30 起公共端点(wss://rpc.devnet.flop.network、mailbox.devnet.flop.network、faucet POST /sponsor/miner);**仍需 operator 逐户批准**;限额:10 新矿工/24h、20M FLOP/24h、新矿工 ~1M FLOP sponsor 质押;**paid sessions 未开放**(DA 与网关准入收尾中)。
+- 一次性动作:新增"Devnet 矿工邀请"(**用户发邮件,草稿已备**);KOL 条目更新。
+- 附:mcp.flop.network/mcp 已可用(flop_health/balance 等只读工具);网关自注册(enroll)仍 404 — agent 走 CLI 直连或等网关开放。
 
 ### 2026-11-02 — 深扫 + 清单修剪(27 → 26)
 - **新增发现:`flop.finance/official/` 页面**(sitemap 首次收录)— 官方链接/账号/邮箱的全集 + "尚无代币"警告,与 docs `official-links` 同源。开闸前的防骗装甲,又一前兆。
