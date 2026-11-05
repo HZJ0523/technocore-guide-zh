@@ -354,6 +354,16 @@
   "type": "sr25519 (mining/signing per CLI guidance)",
   "password": "user-held, never shared",
   "tool": "@flop-labs/cli@0.4.0 keys generate (--offline: release check timed out on local network)",
-  "purpose": "dedicated devnet/testnet miner account (separate from payout wallet 5ED4bNNK...QoZY)"
+  "purpose": "dedicated devnet/testnet miner account (separate from payout wallet 5ED4bNNK...QoZY)",
+  "access_issue": {
+   "url": "https://github.com/flop-labs/network/issues/73",
+   "filed": "2026-11-05",
+   "labels": [
+    "area:node",
+    "type:bug",
+    "status:triage"
+   ],
+   "status": "open, awaiting operator reply"
+  }
  }
 }
