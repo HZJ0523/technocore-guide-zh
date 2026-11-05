@@ -338,6 +338,13 @@
   "subject": "Miner devnet invitation request — RTX 4060 8GB host ready",
   "content": "Request operator approval for one SOFT miner account; host RTX 4060 8GB WSL2 Ubuntu 26.04 + Docker 29.8.2 GPU-verified; Qwen2.5-0.5B BF16; pinned images 0.1.238/0.1.239; understands paid sessions closed; goal = registration/calibration/accepted-work evidence before testnet day one; miner interest form 2026-10-08",
   "awaiting": "reply with approval / access bundle",
-  "fallback": "if no reply in 48h, public comment under @flop_labs devnet announcement on X"
+  "fallback": "if no reply in 48h, public comment under @flop_labs devnet announcement on X",
+  "reply": {
+   "received": "2026-11-05",
+   "from": "Flop Labs (info@flop.finance)",
+   "content_summary": "Devnet 100% permissionless, no application/approval; join directly via docs.flop.network guides; setup questions and bugs -> flop-labs/network GitHub issues (engineers reply directly); search existing issues first; never post seed phrases/private keys/API tokens",
+   "implication": "intake = network repo access issues (per #65/#68/#69 precedent); sponsorship still capacity-capped (auto 3 uncalibrated + 10/24h)",
+   "next": "generate dedicated miner SS58 via official CLI, open access issue in flop-labs/network"
+  }
  }
 }
