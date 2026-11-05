@@ -346,5 +346,14 @@
    "implication": "intake = network repo access issues (per #65/#68/#69 precedent); sponsorship still capacity-capped (auto 3 uncalibrated + 10/24h)",
    "next": "generate dedicated miner SS58 via official CLI, open access issue in flop-labs/network"
   }
+ },
+ "devnet_miner_account": {
+  "created": "2026-11-05",
+  "ss58": "5E1vD6BD3EYJJR3R2y81LfCUTCX8nyDst9hGbcektBpEd9wc",
+  "keystore": "C:\\Users\\HZJ\\.flop\\miner-01.json",
+  "type": "sr25519 (mining/signing per CLI guidance)",
+  "password": "user-held, never shared",
+  "tool": "@flop-labs/cli@0.4.0 keys generate (--offline: release check timed out on local network)",
+  "purpose": "dedicated devnet/testnet miner account (separate from payout wallet 5ED4bNNK...QoZY)"
  }
 }
