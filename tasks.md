@@ -70,7 +70,8 @@
     - `explorer.devnet.flop.network/api/stats` + `/api/health`(块高/TPS/validators/agents/operators/finality state)
     - `rpc.devnet.flop.network`(JSON-RPC `chain_getBlockHash`)
     - `faucet.flop.network/health`
-    - `flop.network/releases.json`(**版本表 2026-10-29 新增**:cli/miner-worker/miner-vllm-toploc,v0.1.220 起,minimum 0.1.172 — 矿工栈就绪信号)
+    - `flop.network/releases.json`(**版本表 2026-10-29 新增**:cli/miner-worker/miner-vllm-toploc,v0.1.220 起,minimum 0.1.172 — 矿工栈就绪信号;矿工线装包必用最新 pin)
+    - `faucet.flop.network/limits`(**2026-11-07 新增**:一端点读全队列状态 — miner sponsor `automatic_full`/open、未校准占用 n/40、每日新赞助 used/100、validator sponsor 状态、faucet 余额与日限。**sponsor 从 full 转 open = #73 可执行信号**)
     - npm/PyPI 版本(2026-10-29 深扫新增):`registry.npmjs.org/@flop-labs/cli` 等五包 latest 与 dist-tags diff;PyPI `flop-sdk`。**10-29 全部首发**(sdk/cli 0.4.0,client 0.2.1,contracts 0.1.1,pi 0.3.1;maintainer svidyuk=CTO)→ 新版本发布=测试网临近信号。
     - 理由:**agent 线真正的花钱入口**;yellowpaper #172 指出网关路由消费可能记在共享网关账户(实测同账户占 122 通道中 46 个),R8.4 计分主体未定(官方 0 回复)→ 澄清前,计分消费优先自行开通道,不走网关。
     - 附:devnet 实况(2026-10-19)块高 1,584,112、10 validators、**0 active agents / 0 operators** — agent 侧仍是空白,先进入者有先发优势。
@@ -151,6 +152,13 @@
 - 网关 20 → 21 路径(新增 `/keys/me/receipts/{request_id}` 单回执查询)。
 - explorer `/markets` 200(Compute Market / FRCR 仪表盘,邮件首披露);API 路径暂无(/api/markets 404)。
 - docs 38 页不变(run-miner 11-02 仍是最新)。
+- 计数:26 项不变。
+
+### 2026-11-07 — 深扫:faucet /limits 全队列端点 + sponsor 实况
+- **新端点 `faucet.flop.network/limits`**:miner sponsor **automatic_full**(未校准 40/40 满;配额已提至 100 新赞助/日,今日用 28;stake 预算 200M/日用 36M)→ #73 获批也暂挤不进,等清位;**validator sponsor open**(0/100 用,150M 预算)— 验证者线随时可赞助(本机硬件不达标,仅记录)。agent 领水粒度 2 FLOP/日。
+- miner-worker 镜像 0.1.238 → **0.1.286**;新 pack `miner-pack-devnet-ts-20261106`。
+- YP **D-0539**(DA 纠删码 R=6/k=3 + serve-or-slash 规范)。
+- run-validator 11-06 更新。C28 增 /limits 检查。
 - 计数:26 项不变。
 
 ### 2026-11-03 — 官方邮件:Devnet 公开 + 测试网无日期 + 矿工邀请通道
