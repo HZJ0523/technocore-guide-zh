@@ -1,6 +1,6 @@
 # FLOP / Technocore 每日任务清单与维护协议
 
-> 版本:2026-11-02(在跑 26 项 + 归档 4 项)。本文件由 Claude 在"新的一天"会话中自动维护。
+> 版本:2026-11-08(在跑 27 项 + 归档 4 项)。本文件由 Claude 在"新的一天"会话中自动维护。
 > 维护规则见文末;变更记入"变更日志"。
 
 ## 一、每日检查(21 项)
@@ -104,6 +104,13 @@
     - 每日:`issues?state=open` 列表 diff。理由:**这是 devnet/testnet 运行期的一线信号源** — 网关故障、faucet 阻塞(#8)、settle 比例错(#7:devnet 实付 99%+1%,非 85/15)、CLI bug、准入答疑(#3:miner preview 仍 invite-only,官方联系方式 TODO)全在这里先爆。
     - 我方动作:遇与 agent 线相关的故障(faucet/网关/CLI)可提 issue 或引用;**开闸首日必查**。
 
+31b. **矿工栈运维日检(2026-11-08 新增,每日,矿工上线后)** — 本机 WSL:
+    - `docker ps`:worker + backend 状态(restarts 应为 0)
+    - 隧道端点探活:`curl -o /dev/null -w %{http_code} https://<当前域名>/session/info` 应 401
+    - releases.json 版本 diff(worker/toploc 升版 → 按 upgrade 手册更新,注意保留状态)
+    - explorer `/api/miners` 查我方地址入册与校准状态(索引滞后属正常)
+    - paid sessions 开放信号:官方公告 + `/api/sessions` 出现记录
+
 ## 二、一次性动作(非每日)
 
 | 动作 | 状态 |
@@ -153,6 +160,13 @@
 - explorer `/markets` 200(Compute Market / FRCR 仪表盘,邮件首披露);API 路径暂无(/api/markets 404)。
 - docs 38 页不变(run-miner 11-02 仍是最新)。
 - 计数:26 项不变。
+
+### 2026-11-08 — 矿工上线日(本机 devnet miner 全绿)+ 新增 C31b
+- **矿工栈完整上线**:sponsor settled → 校准 G_n=130 GFLOP/s → backend(8G 显存调参:util 0.4 + MAX_MODEL_LEN 4096 + expandable_segments)→ 隧道端点 401 活 → 端点广告发布 mailbox。
+- **新增 C31b(矿工运维日检,每日)**:容器/端点/版本/注册表/paid-sessions 信号五查。
+- 一次性动作:接入条目闭环 ✅;新增"开机自启脚本"待办。
+- 环境大事记:Docker 数据迁 D 盘(C 盘救回);cloudflared 走官方 apt 源;quick tunnel 域名随重启轮换(待脚本固化)。
+- 计数:26 → 27 项。
 
 ### 2026-11-07 — 深扫:faucet /limits 全队列端点 + sponsor 实况
 - **新端点 `faucet.flop.network/limits`**:miner sponsor **automatic_full**(未校准 40/40 满;配额已提至 100 新赞助/日,今日用 28;stake 预算 200M/日用 36M)→ #73 获批也暂挤不进,等清位;**validator sponsor open**(0/100 用,150M 预算)— 验证者线随时可赞助(本机硬件不达标,仅记录)。agent 领水粒度 2 FLOP/日。
