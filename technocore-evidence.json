@@ -365,5 +365,38 @@
    ],
    "status": "open, awaiting operator reply"
   }
+ },
+ "devnet_miner_deployment": {
+  "date": "2026-11-08",
+  "miner_account": "5FU6JExTpvUqraVgNni33RRF664PA6h67M3V8zsLWX38EQdS (pack-native sr25519; supersedes Windows-CLI account 5E1vD6BD…, noted in #73)",
+  "sponsor": {
+   "tx": "0x2b2b5fe0c35084b8eaf215f626cd0165d0c9cf23a0dc8bfd87eadf7a19fd0b9f",
+   "state": "settled",
+   "quota_day": "96/100 used 2026-11-08",
+   "free_balance_flop": 250,
+   "stake": "~1M sponsored locked"
+  },
+  "calibration": {
+   "state": "initial cap accepted",
+   "gn_gflops": 130,
+   "verified_jobs": 64,
+   "window_from_seq": 3211608
+  },
+  "stack": {
+   "pack": "miner-pack-devnet-ts-20261106 (sha256 35f222f7… verified)",
+   "images": "miner-worker stable(0.1.286)/miner-vllm-toploc stable(0.1.239)/cli stable",
+   "model": "Qwen2.5-0.5B-Instruct BF16, model_hash 0x1a52c1ab…, decode policy 0xeca6a3f9… (chain-allowlisted)"
+  },
+  "host_tuning": {
+   "issue": "8GB VRAM: TOPLOC capture buffer OOM at default 0.9 util",
+   "fix": "GPU_MEMORY_UTILIZATION=0.4 + MAX_MODEL_LEN=4096 + MAX_NEW_TOKENS=2048 + PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True (added to compose environment)",
+   "backend": "healthy, restarts=0"
+  },
+  "tunnel": "cloudflared quick tunnel (trycloudflare.com); hostname rotates per restart — SESSION_PUBLIC_HOST in /opt/flop-miner/miner.env",
+  "infra_notes": [
+   "Docker Desktop data moved to D:\\Docker\\DockerDesktopWSL (C: was full)",
+   "cloudflared installed via pkg.cloudflare.com apt (GitHub release 504 from CN network)",
+   "session endpoint: https://font-isle-handbags-chef.trycloudflare.com/session/info expect 401"
+  ]
  }
 }
