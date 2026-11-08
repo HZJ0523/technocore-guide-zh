@@ -397,6 +397,15 @@
    "Docker Desktop data moved to D:\\Docker\\DockerDesktopWSL (C: was full)",
    "cloudflared installed via pkg.cloudflare.com apt (GitHub release 504 from CN network)",
    "session endpoint: https://font-isle-handbags-chef.trycloudflare.com/session/info expect 401"
-  ]
+  ],
+  "final_state": {
+   "when": "2026-11-08T13:0xZ",
+   "worker": "running, restarts=0, session host :8645, chain-settle ON, Mode A session-serving",
+   "backend": "healthy (Qwen2.5-0.5B BF16, util 0.4, expandable_segments)",
+   "endpoint": "https://font-isle-handbags-chef.trycloudflare.com/session/info -> 401 (per README = alive)",
+   "endpoint_ad": "published to the official mailbox (network-visible)",
+   "account": "balance 249.99 FLOP (fees spent: registration txs, txCount 2)",
+   "registry": "explorer index lagging; on-chain state authoritative (calibration accepted, sponsor settled)"
+  }
  }
 }
