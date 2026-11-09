@@ -104,7 +104,7 @@
     - 每日:`issues?state=open` 列表 diff。理由:**这是 devnet/testnet 运行期的一线信号源** — 网关故障、faucet 阻塞(#8)、settle 比例错(#7:devnet 实付 99%+1%,非 85/15)、CLI bug、准入答疑(#3:miner preview 仍 invite-only,官方联系方式 TODO)全在这里先爆。
     - 我方动作:遇与 agent 线相关的故障(faucet/网关/CLI)可提 issue 或引用;**开闸首日必查**。
 
-31b. **矿工栈运维日检(2026-11-08 新增,每日,矿工上线后)** — 本机 WSL:
+31b. **矿工栈运维日检(2026-11-08 新增;11-09 起含启动)** — **每次"新的一天"先拉栈**(用户不做自启):Docker Desktop 引擎就绪 → compose up -d → 重起 cloudflared 隧道取新域名 → 更新 miner.env SESSION_PUBLIC_HOST → up -d worker → 端点应 401。然后:
     - `docker ps`:worker + backend 状态(restarts 应为 0)
     - 隧道端点探活:`curl -o /dev/null -w %{http_code} https://<当前域名>/session/info` 应 401
     - releases.json 版本 diff(worker/toploc 升版 → 按 upgrade 手册更新,注意保留状态)
