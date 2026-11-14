@@ -162,6 +162,12 @@
 - docs 38 页不变(run-miner 11-02 仍是最新)。
 - 计数:26 项不变。
 
+### 2026-11-14 — 测试网目标日公布:2026-11-24
+- **官方口径(新页 agent-onboarding,11-14)**:public testnet targeted **2026-11-24**,subject to readiness;devnet 活动不赚空投;**空投只认测试网合格已结算推理消费**。
+- faucet linked 层:500 基础 / 单笔至多 2000 / 滚动 7 天 2000 / 24h 冷却;Self/BrightID 同层无乘数。
+- **离线损失实锤**:04:04 UTC 有 channel 指向我们时机器离线(错失)。→ 测试网期须 7×24 挂机;与用户确认开机策略(当前用户拍板不自启,需重新评估)。
+- docs 38→39(+agent-onboarding);devnet agents 16,217;#238 仍开;price_sources 21 无我们。
+
 ### 2026-11-08 — 矿工上线日(本机 devnet miner 全绿)+ 新增 C31b
 - **矿工栈完整上线**:sponsor settled → 校准 G_n=130 GFLOP/s → backend(8G 显存调参:util 0.4 + MAX_MODEL_LEN 4096 + expandable_segments)→ 隧道端点 401 活 → 端点广告发布 mailbox。
 - **新增 C31b(矿工运维日检,每日)**:容器/端点/版本/注册表/paid-sessions 信号五查。
