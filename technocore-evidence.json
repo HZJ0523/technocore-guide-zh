@@ -406,6 +406,19 @@
    "endpoint_ad": "published to the official mailbox (network-visible)",
    "account": "balance 249.99 FLOP (fees spent: registration txs, txCount 2)",
    "registry": "explorer index lagging; on-chain state authoritative (calibration accepted, sponsor settled)"
+  },
+  "status_20261115": {
+   "via": "CLI v0.1.354 (GHCR-only, supports runtime 1014020; releases.json still 0.1.321)",
+   "registered": true,
+   "stake_delegated_flop": "1000000.1 active",
+   "calibration": {
+    "cap_gflops": 130,
+    "version": 2,
+    "verified_jobs": 8,
+    "accepted_at_block": 3731513
+   },
+   "gateway": "still absent from price_sources (20 listed) — public-path gateway admission is the remaining official gate (run-miner README: 'gateway traffic for public-path miners follow')",
+   "channels": "192 total, none since 11-12 08:05; one open channel 11-14 04:04 missed while offline"
   }
  }
 }
