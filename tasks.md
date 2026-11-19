@@ -107,6 +107,7 @@
 31b. **矿工栈运维日检(2026-11-08 新增;11-09 起含启动)** — **每次"新的一天"先拉栈**(用户不做自启):Docker Desktop 引擎就绪 → compose up -d → 重起 cloudflared 隧道取新域名 → 更新 miner.env SESSION_PUBLIC_HOST → up -d worker → 端点应 401。然后:
     - `docker ps`:worker + backend 状态(restarts 应为 0)
     - 隧道端点探活:`curl -o /dev/null -w %{http_code} https://<当前域名>/session/info` 应 401
+    - **announce 存活检查(2026-11-19 新增,#358 缓解)**:近 1 小时 `Endpoint ad ... published` 行数应 >0(正常 ~5 分钟一条;RPC 停滞后 announce 循环会**静默死掉**,矿工健康但隐形 — network #358,0.1.388 仍未修)。**为 0 → restart worker**(重启即复活并重发广告)。已在日检执行一次。
     - **网关可选性检查(2026-11-13 新增)**:`api.flop.network/v1/models` 的 `x-flop.price_sources` 是否含我方地址 — **不在列表 = 买家看不到我们,零订单**。这是最灵敏的"能不能接单"指标。
     - **releases.json 版本 diff → 有新版即自动升级**(2026-11-12 用户授权):备份身份文件 → `compose pull` → `up -d`(保留 miner.env/signer/session-keys/模型)→ 验证 worker "Session host listening" + 端点 401 + 校准仍在。升级后如校准/注册异常 → 按 network 仓库同类 issue 处理并记录
     - explorer `/api/miners` 查我方地址入册与校准状态(索引滞后属正常)
