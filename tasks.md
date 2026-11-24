@@ -3,14 +3,15 @@
 > 版本:2026-11-24(**测试网实战期**;在跑 19 项 = T3 + S8 + W4 + M4)。本文件由 Claude 在"新的一天"会话中自动维护。
 > 维护规则见文末;变更记入"变更日志"。旧编号 → 新编号对照见 2026-11-24 变更日志。
 
-## 一、检查项(按阶段:测试网 2026-11-24 07:00 UTC 开闸,约 90 天)
+## 一、检查项(按阶段:测试网 2026-11-24 起分阶段开放;当前 `live, unscored` — 见 runbook「测试网开放实况」)
 
 ### T. 测试网实战(每日 — 空投只认这里)
 
 1. **T1 Agent 线:领水 + 推理消费 + 证据(最优先)** — 每天凭 Technocore DID(`z6MksWUe7FV2x68…`,08-25 起有记录)**领测试网 FLOP**(形态以官方 setup 页为准:Technocore 聊天室签名或一次 API 调用)→ **花在推理上** → 回执(tx/channel/receipt)写入 `technocore-evidence.json`。
     - 规则:无审批无等待名单;**空投按 agent 在测试网的行为计量,攒着不花 = 零**。
     - passphrase / keystore 密码相关的命令**由用户亲手跑**;我只给命令、收地址与回执。
-    - 待官方发布后补入:最低活跃门槛("随测试网规则发布")。
+    - **计分尚未开始**:官方 — earning 自"未来一次 runtime 升级的公示 finalized activation block"起算,目前未公布区块或日期;此前活动记零、不补。
+    - 待官方发布后补入:最低活跃门槛("随测试网规则发布")、agent 领水通道的具体形态。
 2. **T2 矿工线:栈运维(每日;每次"新的一天"先拉栈)** — Docker Desktop 引擎 → `compose up -d` → 重起 cloudflared 取新域名 → 更新 `miner.env` 的 `SESSION_PUBLIC_HOST` → `up -d worker` → 端点应 401。然后查:
     - 容器状态(restarts=0);**announce 存活**:近 1 小时 `Endpoint ad … published` >0,**为 0 → restart worker**(#358:RPC 停滞后 announce 循环静默死亡,矿工健康但隐形)
     - **实际服务量**:`explorer…/api/compute-channels?miner=<地址>` 与网关 price_sources(测试网等价端点)是否含我方。**"Uptime on its own is not counted. Inference served is what counts."**
@@ -20,7 +21,7 @@
 
 ### S. 信号(每日)
 
-4. **S1 测试网端点存活**(原 D15/C27)— CLI 内置档案:`wss://testnet.flop.network`、`https://gateway.testnet.flop.network`、`https://faucet.testnet.flop.network`(`/chain`、`/limits`)+ explorer + CT `*.testnet.flop.network`。开闸前 = 开闸信号;开闸后 = 基础设施健康。
+4. **S1 测试网开放进度**(原 D15/C27)— 三个信号任一出现即上报:①**签名 Testnet 矿工包**(`docs.flop.network/operators?network=testnet`、`flop.network/releases.json`、`github.com/flop-labs/network/releases`);②**faucet 切到 Testnet**(`faucet.flop.network/chain` 的 network 目前仍是 devnet;`faucet.testnet.flop.network` 目前无 DNS);③**计分激活区块公布**(docs network-testnet / testnet-and-timeline / agent-onboarding 内容变化 — 用正文哈希比对)。附:RPC `wss://testnet.flop.network`(已出块,入口高峰会 429)、FLOPScan `https://testnet.flopscan.io`、gateway / mailbox / explorer.testnet 目前无 DNS。
 5. **S2 docs.flop.network**(原 C24)— `llms.txt` 页数 + **全量页面 `Last updated` 扫描**(页数不变内容也会改)。重点:**testnet 规则页、setup 页、agent-onboarding、testnet-and-timeline**。附 ask.flop.finance MCP(manifest 可当更新索引)。
 6. **S3 工具链版本**(原 C28)— `flop.network/releases.json`(cli / miner-worker / miner-vllm-toploc + notices 段)+ npm `@flop-labs/*`(cli、sdk、client)latest diff。CLI 出新版 → T2 升级;npm 跳版 = 修复在路上的信号。
 7. **S4 黄皮书决议号**(原 C30)— 抓 `flop.finance/intro/yellowpaper/` 正文最大 `D-0xxx` diff(页脚日期不可信)。**基线 2026-11-24:D-0547**(D-0547 Era-T 赛季长度可配置、修订空投快照窗口;D-0541 容量质押锚定 400,000 G_n/s per H100 — 这两条直接影响计分/质押,细读)。
@@ -54,8 +55,9 @@
 | miner 意向表(`flop.finance/apply/miner`) | **✅ 已提交**(2026-10-08) |
 | FLOP 收款地址 | **✅ 已完成(2026-10-19)**:`5ED4bNNKCq6miyYyyeURuNWpirECfuDxt465aAtEY1VwQoZY`(SS58 prefix 42,Polkadot.js;加密 keystore 在 `E:lop`,已 gitignore;种子/密码用户自持)。用途:sonnet-2 claim、测试网 faucet、空投 destination |
 | Devnet 矿工 | **✅ 2026-11-08 上线**:账户 `5FU6JExTpvUqraVgNni33RRF664PA6h67M3V8zsLWX38EQdS`,G_n cap 130;**官方 11-23:devnet 成果不继承测试网** |
-| **测试网矿工重新加入** | **今日(11-24)07:00 UTC 开闸后执行**:testnet pack(sha256 校验)→ 账户 → sponsor → 排队校准 → 端点广告 → 网关准入。矿工线不需要用户输密码 |
-| **测试网 Agent 线首日** | **今日开闸后执行**:凭 DID 领水 → 推理消费 → 回执入库;此后每日(T1)。**passphrase 命令用户亲手跑** |
+| **测试网矿工重新加入** | **等官方发布签名 Testnet 矿工包**(11-24 开放时:无公开包、无升级命令)。发布后:专用 Testnet 账户 + 独立数据目录 → 注册 → sponsor → 校准 → 端点广告 → 网关准入。devnet 矿工继续单独跑,不继承 |
+| **测试网 Agent 线首日** | **等 faucet 切到 Testnet**(11-24:通用 faucet 仍报 Devnet,无 Testnet 领水通道)。开放后:凭 DID 领水 → 推理消费 → 回执入库;此后每日(T1)。**passphrase 命令用户亲手跑** |
+| **测试网计分激活区块** | **等官方公布**。此前一切活动记零、不补 — 不必抢跑;公布后按日执行 T1/T2 |
 | **测试网期机器常开** | **待用户决策**:只算 inference served,关机 = 零。Claude 建议尽量常开;不自启则重启后说"新的一天"由 Claude 拉起 |
 | sonnet-2 领奖(7 FLOP) | 主网 claim,见 M1 |
 | KOL 排行榜入驻 | 主网才开启,见 M2 |
@@ -90,6 +92,13 @@
 ```
 
 ## 四、变更日志
+
+### 2026-11-24(续)— 测试网实为分阶段开放:当前 live, unscored
+- 官方 07:00 UTC 未准点(06:46、08:20 两次承认延期);12:18 UTC 链起块;约 14:17 UTC docs 状态页改为《Testnet opening FAQ》。
+- **只有 validator / RPC 团队能接入**;无 Testnet faucet、无 Testnet 矿工包;**计分未开始**(等公示激活区块,此前记零不补)。
+- 我方"开闸日执行序"B/C 暂停,改为盯三个信号(S1 重写);一次性动作表两行改为"等发布",新增"计分激活区块"。
+- 哨兵教训(三次误报/漏报):判定不能匹配 NXDOMAIN 响应里的 SOA `data`;空读数必须跳过;`grep -c` 空输入会输出 0;状态页措辞会整体更换,"Status: planned" 字符串消失不算瞬时失败 — 已改为**正文哈希比对**的脚本 `$TEMP/flop_watch.sh`。
+- npm `@flop-labs/sdk@0.9.0`(allowlist 到 1014034,开网 runtime 1014035)。
 
 ### 2026-11-24 — 阶段换挡:清单重构为"测试网实战"模式(27 → 19 项)
 - **触发**:官方 @flop_labs 确认测试网 11-24 07:00 UTC 开闸;规则变为"只算 agent 行为与 inference served"。

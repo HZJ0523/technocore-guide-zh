@@ -18,6 +18,17 @@
 - 开闸前不发任何链接:07:00 UTC 前任何"testnet setup / airdrop checker"链接均非官方;X 上带 Solana 合约地址的转帖是假的
 - 线索:network 仓库 11-23 新增 **testnet 模型上传赞助表**(官方可承担已批准模型上传的注册费 + 可退 DA 押金)— 8G 卡上线索
 
+## 测试网开放实况(官方《Testnet opening FAQ》,docs network-testnet,2026-11-24 更新)
+
+- **状态:`testnet · next · live, unscored`**。6 个创世验证者于 2026-11-24 启动 FLOP Testnet;可看 FLOPScan、查公共 RPC、注册 validator / RPC 团队。**早期网络不计分**;测试 FLOP 无价值;可能停机、升级、重置。
+- 链身份:chain id `flop_testnet`;RPC `wss://testnet.flop.network/`;genesis `0x918abd58fb16306b30ef3886514cfaebffecb4de43e82b6f8ec4795c43cfd800`(与 12:23 UTC 实测一致);bootnodes `boot-eu-1.testnet.flop.network`、`boot-sg-1.testnet.flop.network`;raw spec `flop_testnet-918abd58fb16306b.raw.json`,SHA-256 `485ecb44635609ab261ea3002c3c9fdc7a5dab38caf28a86f654cadf443893be`;签名 spec 与节点套件待发布。
+- **计分开始时间:"Earning begins at the publicly announced finalized activation block of a future tested runtime upgrade. There is no announced block or date yet. Earlier activity earns zero, with no backfill."** voucher 交易、订单、swap 仍禁用。
+- **矿工**:须在 Testnet 重新注册;devnet 的注册、质押、赞助、校准、工作历史都不继承;devnet 矿工可继续单独运行;准备**专用 Testnet 账户 + 独立数据目录**;**本次开放没有公开的 Testnet 矿工包,也没有 devnet→testnet 升级命令**;等 Operator Hub 列出签名的 Testnet 包和安装说明后,再安装、签名、开工。
+- **Faucet**:Testnet 本次开放没有已验证的 Self 通道;通用 faucet 在开放检查时仍报 Devnet — **领水前先比对 genesis**。
+- **SDK**:`@flop-labs/sdk@0.9.0`,已发布的 runtime allowlist 到 1014034,开网 runtime 是 1014035 → 保持兼容性检查开启,公共 RPC 只做读。模型 API 列的是共享网关上的模型,"listing 不代表 Testnet 挖矿或结算已开放"。
+- 相关地址:FLOPScan `https://testnet.flopscan.io`;Operator Hub `https://docs.flop.network/operators?network=testnet`;签名资产 `https://github.com/flop-labs/network/releases`。
+- **我方结论(2026-11-24 15:00 UTC)**:下节"开闸日执行序"的 B(agent 领水消费)、C(矿工重新加入)**现在都不具备条件**,也不产生任何计分。改为等三个信号:①Operator Hub / releases 列出签名 Testnet 矿工包;②faucet 链身份切到 Testnet(或 agent 领水通道开放);③**计分激活区块公布**。
+
 ## 开闸日执行序(更新于 2026-11-24)
 
 **A. 确认开闸**(只认 @flop_labs / flop.finance / docs.flop.network):testnet status 页、setup 页、explorer 上线 → 核对链接
