@@ -4,6 +4,32 @@
 > 前提:DID `did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty`(identity.pem 在 E:\flop\technocore-did-starter\,passphrase 用户持有)。
 > 路线:agent(领水消费推理,池 12 亿,3:1 消费解锁)。不做矿工/验证者。
 
+## 开闸公告要点(官方 @flop_labs,2026-11-23 08:07 UTC;开闸 2026-11-24 07:00 UTC = 北京 15:00)
+
+- **Agent**:无审批、无等待名单。agent **每天**从 faucet 领测试网 $FLOP("in Technocore chat or with one API call" — 即凭 Technocore DID 或 API 调用),花在推理上。**空投按 agent 在测试网上的行为计量,攒着不花的 faucet 币=零**
+- **矿工/验证者**:质押由网络赞助,无需持有 $FLOP。矿工名额不设上限,但首日**排队、按序校准**(为稳定性限流)
+- **Devnet 成果不继承,必须重新加入**(全新 genesis:重新 sponsor、重新校准)
+- 验证者 14 天宽限期,主网排名两周后才开始
+- **"Uptime on its own is not counted toward rewards. Inference served is what counts."**(11-22 官方回复)— 只算实际服务的推理
+- KOL 计划在**主网**才开启
+- 网关准入(run-miner 原文):无需申请 — 校准被接受 + 端点能应答网关探测 → 自动从签名端点广告列出(devnet 阶段该步未开放 = 我们零单的原因)
+- 开闸前不发任何链接:07:00 UTC 前任何"testnet setup / airdrop checker"链接均非官方;X 上带 Solana 合约地址的转帖是假的
+- 线索:network 仓库 11-23 新增 **testnet 模型上传赞助表**(官方可承担已批准模型上传的注册费 + 可退 DA 押金)— 8G 卡上线索
+
+## 开闸日执行序(更新于 2026-11-24)
+
+**A. 确认开闸**(只认 @flop_labs / flop.finance / docs.flop.network):testnet status 页、setup 页、explorer 上线 → 核对链接
+**B. Agent 线(最优先 — 不受矿工排队影响,且直接计分)**
+1. 读 setup 页:faucet 领水的确切形态(Technocore 聊天室房间名/消息格式,或 API)
+2. 用现有 DID(`z6MksWUe7FV2x68…`,自 08-25 有完整记录)领水 — 需 passphrase,**用户亲手跑**
+3. 按官方指引做推理消费;保存每笔回执(receipt / tx / channel)
+4. 以后每天领 + 花;记录到 technocore-evidence.json
+**C. 矿工线(重新加入)**
+1. 下载 testnet pack(sha256 校验)→ 建/沿用矿工账户 → `sponsor.sh` → 排队校准
+2. 隧道端点 401 → announce 在发 → 等网关准入(校准通过后自动)
+3. 用 `explorer /api/compute-channels?miner=<地址>` 与网关 price_sources 验证是否被列入
+**D. 证据 + 反馈**:每日异常整理成 issue(Hayes:测试网期 X/GitHub 有用反馈换主网 FLOP)
+
 ## 规则锚点(2026-10-21 官方 docs 更新)
 
 - **测试网无门槛**:无白名单、无人数上限、**无需申请**;miner/validator 表单只是联系名单,不审批不拒绝。11-03 直接参与。

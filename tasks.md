@@ -163,6 +163,11 @@
 - docs 38 页不变(run-miner 11-02 仍是最新)。
 - 计数:26 项不变。
 
+### 2026-11-24 — 开闸日:官方确认 07:00 UTC 上线
+- 官方 @flop_labs(11-23):testnet **11-24 07:00 UTC** 上线。Agent 无审批、凭 DID 每日领水、花在推理上才算分;矿工赞助质押、首日排队校准;**devnet 不继承须重新加入**;只算 inference served(不算 uptime);KOL 计划改在主网开启(C25 触发条件更新);07:00 UTC 前任何 setup 链接均非官方。
+- 网关准入机制查清:校准通过 + 端点应答探测即自动列入(devnet 阶段未开放 = 零单根因)。
+- 执行序写入 runbook「开闸日执行序」。
+
 ### 2026-11-14 — 测试网目标日公布:2026-11-24
 - **官方口径(新页 agent-onboarding,11-14)**:public testnet targeted **2026-11-24**,subject to readiness;devnet 活动不赚空投;**空投只认测试网合格已结算推理消费**。
 - faucet linked 层:500 基础 / 单笔至多 2000 / 滚动 7 天 2000 / 24h 冷却;Self/BrightID 同层无乘数。
