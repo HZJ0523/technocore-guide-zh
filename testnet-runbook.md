@@ -13,6 +13,8 @@
 - **"Uptime on its own is not counted toward rewards. Inference served is what counts."**(11-22 官方回复)— 只算实际服务的推理
 - KOL 计划在**主网**才开启
 - 网关准入(run-miner 原文):无需申请 — 校准被接受 + 端点能应答网关探测 → 自动从签名端点广告列出(devnet 阶段该步未开放 = 我们零单的原因)
+- **测试网链身份(2026-11-24 12:23 UTC 公共 RPC 实测)**:`FLOP Testnet`;genesis `0x918abd58fb16306b30ef3886514cfaebffecb4de43e82b6f8ec4795c43cfd800`;runtime `flop-testnet` spec **1014035**(impl `zkv-node`,node `1.1.0-00000000000`);RPC `wss://testnet.flop.network`(WebSocket 握手 101;HTTPS POST 也可)。链约 12:18 UTC 起块(12:23 时块高 273),peers 8。`system_account` 未对公共 RPC 开放。
+- **开闸顺序(实测)**:先起链(RPC)→ 再上 faucet / gateway / explorer / mailbox → 再发 setup 页。12:23 UTC 时后两步尚未发生。
 - 开闸前不发任何链接:07:00 UTC 前任何"testnet setup / airdrop checker"链接均非官方;X 上带 Solana 合约地址的转帖是假的
 - 线索:network 仓库 11-23 新增 **testnet 模型上传赞助表**(官方可承担已批准模型上传的注册费 + 可退 DA 押金)— 8G 卡上线索
 
