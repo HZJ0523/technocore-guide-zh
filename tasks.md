@@ -1,137 +1,73 @@
 # FLOP / Technocore 每日任务清单与维护协议
 
-> 版本:2026-11-08(在跑 27 项 + 归档 4 项)。本文件由 Claude 在"新的一天"会话中自动维护。
-> 维护规则见文末;变更记入"变更日志"。
+> 版本:2026-11-24(**测试网实战期**;在跑 19 项 = T3 + S8 + W4 + M4)。本文件由 Claude 在"新的一天"会话中自动维护。
+> 维护规则见文末;变更记入"变更日志"。旧编号 → 新编号对照见 2026-11-24 变更日志。
 
-## 一、每日检查(21 项)
+## 一、检查项(按阶段:测试网 2026-11-24 07:00 UTC 开闸,约 90 天)
 
-### A. 官方(6)
+### T. 测试网实战(每日 — 空投只认这里)
 
-1. **Teaser 版本行** — `flop.finance/teaser/` 提取 `Version X (draft) Updated YYYY-MM-DD`。
-2. **首页链接 diff** — `flop.finance/` 全部 href 对比上次(新页面/新表单)。
-3. **Technocore 版本 + faucet 探测** — `technocore.chat/.well-known/agent.json` 版本号;`/faucet` 状态码(**404=未上线**;出现非 404 立即上报)。
-4. **Intro 页日期** — `/intro/` 与 `/intro/yellowpaper/` 的 `Updated` 日期。
-5. **org 事件流** — `api.github.com/orgs/flop-labs/events`(一次覆盖全部仓库 push/PR/issue/release)。
-6. **/config 参数** — `technocore.chat/config`(房间上限、dupe 过滤等运维参数)。
+1. **T1 Agent 线:领水 + 推理消费 + 证据(最优先)** — 每天凭 Technocore DID(`z6MksWUe7FV2x68…`,08-25 起有记录)**领测试网 FLOP**(形态以官方 setup 页为准:Technocore 聊天室签名或一次 API 调用)→ **花在推理上** → 回执(tx/channel/receipt)写入 `technocore-evidence.json`。
+    - 规则:无审批无等待名单;**空投按 agent 在测试网的行为计量,攒着不花 = 零**。
+    - passphrase / keystore 密码相关的命令**由用户亲手跑**;我只给命令、收地址与回执。
+    - 待官方发布后补入:最低活跃门槛("随测试网规则发布")。
+2. **T2 矿工线:栈运维(每日;每次"新的一天"先拉栈)** — Docker Desktop 引擎 → `compose up -d` → 重起 cloudflared 取新域名 → 更新 `miner.env` 的 `SESSION_PUBLIC_HOST` → `up -d worker` → 端点应 401。然后查:
+    - 容器状态(restarts=0);**announce 存活**:近 1 小时 `Endpoint ad … published` >0,**为 0 → restart worker**(#358:RPC 停滞后 announce 循环静默死亡,矿工健康但隐形)
+    - **实际服务量**:`explorer…/api/compute-channels?miner=<地址>` 与网关 price_sources(测试网等价端点)是否含我方。**"Uptime on its own is not counted. Inference served is what counts."**
+    - `releases.json` 版本 diff → **有新版即自动升级**(11-12 用户授权):备份身份文件 → `compose pull` → `up -d` → 验证 "Session host listening" + 端点 401 + 校准仍在
+    - 网关准入无需申请:校准通过 + 端点应答探测即自动列入(devnet 阶段此步未开放 = 当时零单根因)
+3. **T3 反馈/赏金线(每日)** — 当日遇到的矿工/agent/faucet/网关/CLI 异常,先搜 `flop-labs/network` 同类,无则整理成可提交的 issue(公开信息、不带密钥)。依据:Hayes 11-20 — 测试网期 X/GitHub 有用反馈换主网 FLOP。
 
-### B. 深挖(5)
+### S. 信号(每日)
 
-7. **sitemap diff** — `flop.finance/sitemap.xml` 与 `technocore.chat/sitemap.xml`(新页面最先现形)。
-8. **technocore-chat open issues** — 运维限制、新示例、schema 讨论。
-9. **yellowpaper issues** — 团队技术评审面(D-0440 空投池变更即此发现)。
-10. **托管页 vs GitHub 镜像** — `flop.finance/intro/yellowpaper/` 比 `flop-labs/yellowpaper` 新;以托管页为准。
-11. **分配数字一致性(2026-11-02 起周频)** — teaser 与托管黄皮书的分配表交叉核对(历史漂移:35 亿 vs 44 亿)。两页自 10-05 未动,降频。
+4. **S1 测试网端点存活**(原 D15/C27)— CLI 内置档案:`wss://testnet.flop.network`、`https://gateway.testnet.flop.network`、`https://faucet.testnet.flop.network`(`/chain`、`/limits`)+ explorer + CT `*.testnet.flop.network`。开闸前 = 开闸信号;开闸后 = 基础设施健康。
+5. **S2 docs.flop.network**(原 C24)— `llms.txt` 页数 + **全量页面 `Last updated` 扫描**(页数不变内容也会改)。重点:**testnet 规则页、setup 页、agent-onboarding、testnet-and-timeline**。附 ask.flop.finance MCP(manifest 可当更新索引)。
+6. **S3 工具链版本**(原 C28)— `flop.network/releases.json`(cli / miner-worker / miner-vllm-toploc + notices 段)+ npm `@flop-labs/*`(cli、sdk、client)latest diff。CLI 出新版 → T2 升级;npm 跳版 = 修复在路上的信号。
+7. **S4 黄皮书决议号**(原 C30)— 抓 `flop.finance/intro/yellowpaper/` 正文最大 `D-0xxx` diff(页脚日期不可信)。**基线 2026-11-24:D-0547**(D-0547 Era-T 赛季长度可配置、修订空投快照窗口;D-0541 容量质押锚定 400,000 G_n/s per H100 — 这两条直接影响计分/质押,细读)。
+8. **S5 flop-labs/network**(原 C31)— 新 issue 与官方回复 diff;对照我方异常;开闸首日必查。
+9. **S6 X + 新闻**(原 D16/D17)— @flop_labs / @CryptoHayes;`flopnetworknews.com` 头条;**诈骗动向**(官方:开闸前不发链接;带 Solana 合约的转帖是假的)。
+10. **S7 Technocore 领水通道**(原 A3)— `technocore.chat/faucet` 状态码、官方房间是否出现官方 issuer(`/r/faucet` 现为第三方 drip,**非官方不领**)、agent.json 版本。
+11. **S8 sitemap diff**(原 B7)— `flop.finance/sitemap.xml` 与 `technocore.chat/sitemap.xml`(新 setup 页最先现形)。
 
-### C. 比赛(3,至 2026-09-18T12:00Z — **今日到期,下个会话归档**)
+### W. 周频
 
-12. **回执追踪** — 轮询 `mb-sonnet-2-registration` export 查我们 DID(`z6MksWUe7FV2x68…`)的回执,验证签名者为裁判 DID `z6MkowHQwsx9xr84…`。
-    - **注意环形窗口**:注册室吞吐 3–13 条/秒,窗口仅存约 2.4 万条;我方注册消息(seq 242518)已滚出。若首次注册逾 24 小时无回执,按官方口径(同 request_id 重试返回原回执)重发**同一 request_id** `reg-voter-z6mk-20260914`,勿换新 ID。
-    - **2026-09-16 修订**:回执缺失是**系统性**问题,非我方个案。官方仓库 issue #39 实测:70 分钟窗口内 18,689 条注册仅 4 条回执(且裁判一旦响应仅需 8–11 秒,非延迟)。issue #40/#42/#43/#46/#47 均为同类报告。**结论:不再重发;改以"投出 ballot 触发资格审查"作为决定性测试**(issue #23 先例:ballot 可迫使裁判裁决)。
-    - 资格权威判据改为 `d-sonnet-2-results` 房间的 `sonnet.identities.v1` 增量记录(含 `evidence_sha256` 与 `first_seen`)。
-    - **2026-09-18 修订**:issue #72 实测 **98% 回执为批量信封**(`sonnet.receipts.v1`,status 在信封层)— "按 request_id 查无回执"多为查询形态假象。我方注册可能已被接受;已向 #64 提交跟进评论求明确处置。
-    - 社区工具:`dharmanan/sonnet-registration-status`(第三方注册状态监控,可参考其累积方法)。
-13. **四房间巡查** — `mb-sonnet-2-campaign` / `submissions` / `votes` / `d-sonnet-2-rules`(裁判每 4 小时状态播报)。
-14. **投出 ballot** — 已投两张(seq 314746、444277,entry `maragung-flop`);截止前不再新投(已向 #64 声明"以现有两张为准")。
+12. **W1 官方站巡检**(合并原 A1/A2/A4/A5/A6/B8/B11)— teaser / intro 日期、首页 href、technocore `/config`、org 事件流、tc-chat open issues、分配数字一致性(35 亿 vs 44 亿历史漂移)。
+13. **W2 黄皮书 issues + 托管 vs 镜像**(原 B9/B10)— `flop-labs/yellowpaper` 新 issue;托管页比镜像新,以托管页为准。
+14. **W3 生态扫描**(原 C18)— GitHub 新仓库、`ecosystem-pulse.technocore.chat`(周报)、`gpus.flop.finance`(可租 GPU 行情)、机构入场动向(operator 配额申请)。
+15. **W4 KV 笔记刷新**(原 C19)— 写 `did-a4/6f172335ff9660`;**7 天不写即被回收**(11-24 实测已过期,已用 `?if_absent=1` 重新认领)。建议每周固定刷。
 
-### C3. close-1 交易赛(已终,2026-10-04 — 归档)
+### M. 月频 / 触发式
 
-23. **close-1 参赛跟踪** — **赛终归档**:结算价 234.69;我方三单全 void(mint 未发放,裁判 bug 集群 #26/#31-35);得分 0。证据全存 technocore-evidence.json。#26 申诉留档。
+16. **M1 sonnet-2 领奖**(原 C22)— 主网开 claim:在 `mb-sonnet-2-registration` 签 `sonnet.claim.v1`(contest_id / request_id=`ballot-z6mk-20260917-2` / destination=`5ED4bNNK…QoZY`);我方 7 FLOP 在 `payouts.json` 在册。
+17. **M2 KOL 排行榜**(原 C25)— **主网才开启**(官方 11-23);无需申请;出现即入驻(绑钱包 + X @HzzzJ87419)。
+18. **M3 kibble**(原 C26)— 官方 0 提及、连续 5 周无产出,降为月频:只看官方是否提及或与 "certified work" 挂钩;不参与。
+19. **M4 模型上传赞助(线索)** — `flop-labs/network` 的 `model-upload-sponsorship.yml`(testnet):官方可承担已批准模型的注册费 + 可退 DA 押金。触发条件:测试网注册表没有适配 8G 卡的模型、或我方矿工长期无流量 → 评估自己注册一个小模型。
 
-### C2. 赛后(至领奖窗口关闭)
-
-22. **结果与领奖跟踪** — **结果已于 2026-09-23 发布(2026-10-16 发现)**:胜者 `maragung-flop`(我方两 ballot 所投);我方 DID 在 `payouts.json` 中,应得 **7 FLOP**(voter 池 floor(50,000/6,852),计票依据为 `ballot-z6mk-20260917-2`,intake_seq 1448731)。payouts.json sha256 `ebc0de59…` 与签名收据(seq 45498)一致。
-    - **claim 待主网**:开闸后在 `mb-sonnet-2-registration` 签 `sonnet.claim.v1`(`contest_id`/`request_id`/`destination`);claim 只定收款地址,不改金额。
-    - **硬依赖:FLOP 收款地址**(格式待公布)— 见一次性动作。此后本项转"待主网"档,仅需月度复查 claim 窗口是否开启。
-
-### D. 外部(3)
-
-15. **子域名探测** — `faucet.technocore.chat`、`testnet.technocore.chat`、`claim.technocore.chat`(模式已证:`tclk.technocore.chat`、`mcp.technocore.chat` 存在)。
-16. **X 搜索** — 域限 `x.com` 搜 @flop_labs / @CryptoHayes 近期发帖。
-17. **新闻搜索** — `Flop Labs FLOP testnet announcement`,近一日。
-
-### E. 生态(1,周频)
-
-18. **生态扫描** — GitHub 搜 `technocore OR flop` 新仓库:同行贡献(竞争)与新监控工具。附 `gpus.flop.finance`(官方可租 GPU 市场监控:H100 容量、价格地板、API 毛利、盈亏平衡租价)— 矿工租/买决策时看,平时扫一眼。
-
-### F. 维护(1,≤每周)
-
-19. **KV 笔记刷新** — 写 `did-a4/6f172335ff9660`(7 天不写过期)。
-
-### G. 告警(已清空)
-
-20. ~~裁判行为突变监控~~ — **2026-11-02 删除**:sonnet-2 裁判 09-18 停摆,`d-sonnet-2-results` 房已滚空(0 条),监控对象不存在。
-
-21. ~~sonnet-challenge issue 跟踪器~~ — **2026-11-02 并入 C22(月频)**:结果 09-23 已发布、申诉全部结案、仓库最后 push 09-23。
-
-24. **docs.flop.network 检查(2026-10-15 新增;10-30 修订)** — ①`llms.txt` 页数 diff;②`/docs/network-testnet` 状态页;③**全部页面(37)的 `Last updated` 日期 diff**(2026-10-30 修订:原 12 页清单不全,漏了 agent-integration / protocol-parameters / run-validator 的 10-26 改版;做法改为全量日期扫描)。理由:页数不变时内容仍会改;status 页是开闸最直接信号源。附 `ask.flop.finance` MCP(manifest 可当更新索引)。
-
-28. **官方数据面/网络状态(2026-10-19 新增,每日)** — 四端点合计 <10 秒:
-    - `api.flop.network/openapi.json`(版本;当前 2.0.0,17 路径,含 `/enroll/wallet`、`/chat/completions`、`/keys/me/receipts`;`/v1/models` 公开目录,现仅 `qwen/qwen2.5-0.5b-instruct`,4+ 矿工报价)
-    - `explorer.devnet.flop.network/api/stats` + `/api/health`(块高/TPS/validators/agents/operators/finality state)
-    - `rpc.devnet.flop.network`(JSON-RPC `chain_getBlockHash`)
-    - `faucet.flop.network/health`
-    - `flop.network/releases.json`(**版本表 2026-10-29 新增**:cli/miner-worker/miner-vllm-toploc,v0.1.220 起,minimum 0.1.172 — 矿工栈就绪信号;矿工线装包必用最新 pin)
-    - `faucet.flop.network/limits`(**2026-11-07 新增**:一端点读全队列状态 — miner sponsor `automatic_full`/open、未校准占用 n/40、每日新赞助 used/100、validator sponsor 状态、faucet 余额与日限。**sponsor 从 full 转 open = #73 可执行信号**)
-    - npm/PyPI 版本(2026-10-29 深扫新增):`registry.npmjs.org/@flop-labs/cli` 等五包 latest 与 dist-tags diff;PyPI `flop-sdk`。**10-29 全部首发**(sdk/cli 0.4.0,client 0.2.1,contracts 0.1.1,pi 0.3.1;maintainer svidyuk=CTO)→ 新版本发布=测试网临近信号。
-    - 理由:**agent 线真正的花钱入口**;yellowpaper #172 指出网关路由消费可能记在共享网关账户(实测同账户占 122 通道中 46 个),R8.4 计分主体未定(官方 0 回复)→ 澄清前,计分消费优先自行开通道,不走网关。
-    - 附:devnet 实况(2026-10-19)块高 1,584,112、10 validators、**0 active agents / 0 operators** — agent 侧仍是空白,先进入者有先发优势。
-    - 周频附查:`explorer.devnet.flop.network/api/miners`(活跃矿工、selfStake、G_n、calibration)与 `/api/models`(模型注册/价格)— 判断矿工生态成熟度。
-
-25. **KOL 排行榜跟踪(2026-10-16 新增,每日)** — 2026-10-15 Arthur Hayes 预告 **KOL Leaderboard**(Flop Labs 转发):devnet explorer 的 *Participate* 菜单下,每周 FLOP 奖池按 **certified work** 比例分给公开 KOL;三步入驻 = 邮箱魔法链接 → 绑定收款钱包(签名证明所有权)→ 验证社媒(可选)。**尚未上线,池大小 TBA**。
-    - 检查面:@flop_labs / @CryptoHayes 新帖;`flop.finance/apply/kol` 页变化;devnet explorer 的 Participate 区(需 devnet 访问,待开闸)。
-    - 上线后动作:入驻(邮箱=已有 KOL 表单邮箱;钱包=主网钱包装好后绑定;社媒=X @HzzzJ87419)。排行榜列含 "Funded wallets"(引流钱包数),与推荐链接、定期钱包抽奖挂钩 — 与测试网矿工/agent 线协同。
-
-26. **kibble 生态跟踪(2026-10-18 深扫新增,周频)** — `kibble.world`(社区,自述 "A public job board for useful work, until $FLOP can pay"):索引 technocore `/r/kibble` 房间(kibble-v1 协议:JOB/CLAIM/RESULT/ATTEST),按 kibble-score-v2 出 passports 排名,自称 "reputation is an IOU for a future airdrop"。规模:22.4 万 JOB、5,754 agents(实测 10-18)。
-    - 每周查:`/api/status`(score_schema 变化 / reset 标志)+ 官方是否首次提及 kibble 或定义 "certified work"(docs.flop.network 与 flop.finance 当前 **0 次提及**;KOL 排行榜的 certified work 度量未定义,kibble 是头号候选解读)。
-    - **暂不参与**:官方零背书;房间 bot 环境重(89 万条解析中 58.6 万被 ignore);与官方空投规则(测试网验证算力)无已证关联。若官方定义挂钩 kibble 或提及 → 提请用户决策是否以现有 DID 做真实贡献(勿 keygen 新 DID — 身份连续性是资产)。
-    - 官方关联信号仅一条:tc-chat issue #955(kibble 索引游标问题)有维护者跟帖(至 10-16)— 关注但不等于背书。
-
-27. **faucet 监测(每日)** — **官方 faucet 已上线:`https://faucet.flop.network`(devnet)**(2026-10-19 深扫发现,CT 证书枚举)。实测:`/chain` 返回 devnet 链参数(genesis `0x99c172c0…`,ss58Format **42**,decimals **18**,symbol FLOP,RPC `wss://rpc.devnet.flop.network`);`/health` signer `5DZsAQ…M8ux`;页面:quick 25 FLOP,人类验证 500–2000 FLOP(BrightID / Self,按 Human Passport 或 Guild score)。
-    - 每日:faucet `/health` + `/chain` 是否新增 **testnet** network;technocore `/r/faucet` 房尾(仍为第三方 dFLOP drip + kibble 广告,**非官方,不领**)。
-    - devnet 领水无空投权重;但可演练全流程(钱包→领水→消费),等 testnet 同日执行。
-
-29. **验证者席位路径(2026-10-20 新增,周频;10-21 修订)** — 官方 `run-validator` + `validator-faq` + `skills/setup-validator`。
-    - **测试网验证者开放报名:无白名单、无上限、无需购买;测试网 stake 由网络赞助**(docs testnet-and-timeline 10-20 更新)。**须切换到实网(devnet 仍是管理员控制)**。
-    - 选中者(cutover 时 top-1,000)每人**免费获得 1,200,000 FLOP 的 bond**;评分维度:uptime、出块、准确度、延迟、地理分布(三个月全程,权重未公布)。
-    - 硬件规划 8 核/32GB/4TB NVMe/1Gbps;本机磁盘与网络不达标 → **不参选**,仅跟踪规则变化。
-    - 每周查:run-validator / testnet-and-timeline 更新。
-
-30. **托管黄皮书决议 ID 监控(2026-10-24 新增,每日)** — `flop.finance/intro/yellowpaper/` 正文里的 `D-04xx/D-05xx` 决议编号。**页脚日期不可信**(10-05 之后正文已加 D-0528/0529/0530/0531)。做法:抓页面,提取最大 `D-0xxx`,与上次比对;新增即读该段并判断是否影响 agent/矿工/空投规则。
-    - 基线(2026-10-31):最大 **D-0537**(D-0534..0537 为 FCU 算力期货规范,测试网不含)。
-    - 附:`docs.flop.network/reference`(skills 的 SHA-256 与 CLI/env 名)每周扫一眼。
-
-31. **flop-labs/network 仓库跟踪(2026-11-01 新增,每日)** — 官方反馈仓库(2026-10-30 创建,Hayes 亲自分享):节点 bug、验证争议、网关问题、文档问题的官方 triage 面。
-    - 每日:`issues?state=open` 列表 diff。理由:**这是 devnet/testnet 运行期的一线信号源** — 网关故障、faucet 阻塞(#8)、settle 比例错(#7:devnet 实付 99%+1%,非 85/15)、CLI bug、准入答疑(#3:miner preview 仍 invite-only,官方联系方式 TODO)全在这里先爆。
-    - 我方动作:遇与 agent 线相关的故障(faucet/网关/CLI)可提 issue 或引用;**开闸首日必查**。
-
-31b. **矿工栈运维日检(2026-11-08 新增;11-09 起含启动)** — **每次"新的一天"先拉栈**(用户不做自启):Docker Desktop 引擎就绪 → compose up -d → 重起 cloudflared 隧道取新域名 → 更新 miner.env SESSION_PUBLIC_HOST → up -d worker → 端点应 401。然后:
-    - `docker ps`:worker + backend 状态(restarts 应为 0)
-    - 隧道端点探活:`curl -o /dev/null -w %{http_code} https://<当前域名>/session/info` 应 401
-    - **announce 存活检查(2026-11-19 新增,#358 缓解)**:近 1 小时 `Endpoint ad ... published` 行数应 >0(正常 ~5 分钟一条;RPC 停滞后 announce 循环会**静默死掉**,矿工健康但隐形 — network #358,0.1.388 仍未修)。**为 0 → restart worker**(重启即复活并重发广告)。已在日检执行一次。
-    - **网关可选性检查(2026-11-13 新增)**:`api.flop.network/v1/models` 的 `x-flop.price_sources` 是否含我方地址 — **不在列表 = 买家看不到我们,零订单**。这是最灵敏的"能不能接单"指标。
-    - **releases.json 版本 diff → 有新版即自动升级**(2026-11-12 用户授权):备份身份文件 → `compose pull` → `up -d`(保留 miner.env/signer/session-keys/模型)→ 验证 worker "Session host listening" + 端点 401 + 校准仍在。升级后如校准/注册异常 → 按 network 仓库同类 issue 处理并记录
-    - explorer `/api/miners` 查我方地址入册与校准状态(索引滞后属正常)
-    - paid sessions 开放信号:官方公告 + `/api/sessions` 出现记录
+**已归档(不再检查)**:验证者席位路径(原 C29 — 本机磁盘/网络不达标,不参选;换硬件才重启)、close-1 参赛(原 C23)、sonnet-2 赛事项(原 C12–14,9 月到期)、裁判监控(原 C20/C21)。
 
 ## 二、一次性动作(非每日)
 
 | 动作 | 状态 |
 |---|---|
-| 提交 awesome-technocore PR | **❌ 作废(2026-10-18 发现)**:`flop-labs/awesome-technocore` 仓库已删除/转移(404,org 下 7 仓无此名),PR #12 随之消失。无动作;指南仓库仍在 |
-| 填 validator 意向表(`flop.finance/apply/validator`) | **✅ 已提交**(2026-09-15,含硬件现状与升级意向) |
-| 填 miner 意向表(`flop.finance/apply/miner`) | **✅ 已提交**(2026-10-08,8GB 单卡 SOFT 层,申请名单通道) |
-| 测试网开闸首日跑 `testnet-runbook.md` | 条件触发 |
-| **准备 FLOP 收款地址** | **✅ 已完成(2026-10-19)**:`5ED4bNNKCq6miyYyyeURuNWpirECfuDxt465aAtEY1VwQoZY`(SS58 prefix 42,Polkadot.js,种子用户自持)。devnet faucet 已到账 25 FLOP(仅演练,无空投权重)。用途:sonnet-2 的 7 FLOP claim、测试网 faucet、空投 destination |
-| **close-2 启动预案** | issue #36 显示续赛设计中;启动时改 close1_trade.py 的 SEASON 字符串 + 重跑注册/交易流程 |
-| **KOL 排行榜入驻** | **官方口径(11-03 邮件):无需申请/注册**;专属推荐链接 + 周度排行榜细节"soon"发布,出现即入驻(绑钱包+社媒) |
-| **Devnet 矿工邀请** | **✅ 邮件已发(2026-11-03)**至 info@flop.finance(官方 Reply-To);等批准/access bundle,48h 无回音转 X 公开渠道;公共端点已开(wss://rpc.devnet、mailbox.devnet、faucet /sponsor/miner),限额 10 新矿工/24h,paid sessions 未开放 |
+| 提交 awesome-technocore PR | **❌ 作废(10-18)**:`flop-labs/awesome-technocore` 仓库已删除,PR #12 随之消失 |
+| validator 意向表(`flop.finance/apply/validator`) | **✅ 已提交**(2026-09-15) |
+| miner 意向表(`flop.finance/apply/miner`) | **✅ 已提交**(2026-10-08) |
+| FLOP 收款地址 | **✅ 已完成(2026-10-19)**:`5ED4bNNKCq6miyYyyeURuNWpirECfuDxt465aAtEY1VwQoZY`(SS58 prefix 42,Polkadot.js;加密 keystore 在 `E:lop`,已 gitignore;种子/密码用户自持)。用途:sonnet-2 claim、测试网 faucet、空投 destination |
+| Devnet 矿工 | **✅ 2026-11-08 上线**:账户 `5FU6JExTpvUqraVgNni33RRF664PA6h67M3V8zsLWX38EQdS`,G_n cap 130;**官方 11-23:devnet 成果不继承测试网** |
+| **测试网矿工重新加入** | **今日(11-24)07:00 UTC 开闸后执行**:testnet pack(sha256 校验)→ 账户 → sponsor → 排队校准 → 端点广告 → 网关准入。矿工线不需要用户输密码 |
+| **测试网 Agent 线首日** | **今日开闸后执行**:凭 DID 领水 → 推理消费 → 回执入库;此后每日(T1)。**passphrase 命令用户亲手跑** |
+| **测试网期机器常开** | **待用户决策**:只算 inference served,关机 = 零。Claude 建议尽量常开;不自启则重启后说"新的一天"由 Claude 拉起 |
+| sonnet-2 领奖(7 FLOP) | 主网 claim,见 M1 |
+| KOL 排行榜入驻 | 主网才开启,见 M2 |
+| close-2 启动预案 | 启动时改 `close1_trade.py` 的 `SEASON` 字符串 + 重跑注册/交易流程 |
+| 模型上传赞助 | 线索,见 M4 |
 
 ## 三、维护协议(每次"新的一天"执行)
 
 每次会话按顺序执行:**跑检查 → 维护清单 → 报告**。
 
 ### 1. 跑检查
-批量执行 1–19,只记录**差异**与异常;无差异则一句话确认。
+每日执行 T1–T3、S1–S8,只记录**差异**与异常;无差异则一句话确认。W 组每周、M 组每月或触发时执行。
 
 ### 2. 维护清单(核心要求)
 
@@ -154,6 +90,18 @@
 ```
 
 ## 四、变更日志
+
+### 2026-11-24 — 阶段换挡:清单重构为"测试网实战"模式(27 → 19 项)
+- **触发**:官方 @flop_labs 确认测试网 11-24 07:00 UTC 开闸;规则变为"只算 agent 行为与 inference served"。
+- **新增 T1(agent 线:每日领水 + 推理消费 + 证据)** — 这是空投的主要计分线,此前清单里没有对应日检项。
+- **新增 T3(反馈/赏金线)** — Hayes:测试网期 X/GitHub 有用反馈换主网 FLOP。
+- **合并降频**:A1/A2/A4/A5/A6 + B8/B11 → W1 周频(官网页面自 10-05 未动;org 事件被 network 仓库覆盖且烧 GitHub 限额);B9/B10 → W2;C26 kibble → M3 月频(官方 0 提及、连续 5 周无产出)。
+- **触发式**:C22 → M1(主网);C25 KOL → M2(**官方 11-23:主网才开启**)。
+- **删除/归档**:C12–14(9 月即到期,一直没清)、C23 close-1、C29 验证者路径(本机硬件不达标,不参选)。
+- **改写**:D15/C27 → S1(改用 CLI 内置的真实测试网主机名:`testnet.flop.network`、`gateway.testnet.flop.network`、`faucet.testnet.flop.network` — 之前探测的 `rpc.testnet.*` 是错的主机名);C28 拆为 S3(版本)+ T2(运维);C31b → T2(加入"实际服务量"与网关准入机制);C30 → S4(**基线刷新:D-0539 → D-0547**,此前漏了 D-0540–0547)。
+- **一次性动作表重写**:清掉过时的"Devnet 矿工邀请"行(早已完成);新增测试网矿工重新加入、Agent 线首日、机器常开决策、模型上传赞助线索。
+- **同日修正**:KV 笔记已过期被回收 → 已用 `?if_absent=1` 重新认领并刷新。
+- 计数:在跑 27 → **19 项**(T3 + S8 + W4 + M4)。
 
 ### 2026-11-03 — 深扫(邮件后):sponsor 端点已部署 + MCP 15 工具 + FRCR 页
 - **faucet `POST /sponsor/miner` 已上线**(实测 400 "Missing 'address'" = 服务存在待参数)— 矿工质押请求通道就绪,等官方批准即可调用。
