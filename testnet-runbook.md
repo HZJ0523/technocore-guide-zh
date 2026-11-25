@@ -41,7 +41,7 @@
 - **我方命令(用户亲手跑,需 passphrase;PowerShell)**:
 
   ```powershell
-  cd E:lop	echnocore-did-starter
+  cd E:\flop\technocore-did-starter
   $n = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds()
   .\.venv\Scripts\python.exe technocore_agent.py say flop-testnet-faucet "!faucet request 5ED4bNNKCq6miyYyyeURuNWpirECfuDxt465aAtEY1VwQoZY $n" --nonce $n
   ```
