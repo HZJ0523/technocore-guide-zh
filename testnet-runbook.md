@@ -63,6 +63,19 @@
   .\.venv\Scripts\python.exe technocore_agent.py say flop-testnet-faucet "!faucet request 5ED4bNNKCq6miyYyyeURuNWpirECfuDxt465aAtEY1VwQoZY $n" --nonce $n
   ```
 
+- **完整流程是两步**(bot 回复实测,seq 4164):
+  1. 房间发签名消息 `!faucet request <SS58> <nonce>`(上面的命令)。bot 回复一条挑战串 `flop-faucet-agent/v1|<genesis>|<SS58>|<nonce>`。
+  2. 用**钱包账户密钥**对挑战串的 UTF-8 字节做 sr25519 签名,私下 `POST {"address","nonce","signature":"<0x-hex>"}` 到 `https://faucet.flop.network/v1/testnet/agent-claims`。签名不要发到房间里。
+
+  第 2 步的本地工具(官方 CLI/SDK 无现成命令):`E:\flop\flop_faucet_claim.mjs` + 包装脚本 `flop_faucet_claim.ps1`(PowerShell 掩码输入口令,经 UTF-8 管道传给 Node;依赖 `@polkadot/keyring` 14.0.3,`pair.sign` 即 64 字节原始 sr25519 签名)。
+
+  ```powershell
+  # 先只验口令(不发送):预期输出 signed challenge (150 bytes); not sent
+  powershell -NoProfile -ExecutionPolicy Bypass -File E:\flop\flop_faucet_claim.ps1 -Nonce <nonce> -NoPost
+  # 去掉 -NoPost 即发送;预期 HTTP 200
+  ```
+
+- **口令输错排查(11-25)**:脚本报 `wrong keystore password` = 输入的 bytes 与 keystore 不匹配。已核实 Polkadot 库各版本对口令都无规范化差异,解码路径标准;可能原因是口令记错(应使用 10-29 在 Polkadot.js 扩展导出账户时设的密码,不是 DID 口令、也不是矿工 keystore 密码)或终端 raw 模式读输入被弄乱(因此改用包装脚本)。仍不对 → 在 Polkadot.js 重新导出到 `E:\flop\agent-keystore.json`(新密码,只用字母数字),加 `-Keystore E:\flop\agent-keystore.json`。
 - **兑付实况(04:10 UTC)**:房间自 11-24 12:24 起 1136 条,其中 1082 条请求、826 个不同 DID;bot 在房间内零回复;faucet 签名账户 nonce 1、txCount 1、余额 999,989.997 — **只兑付过 1 笔(10 FLOP)**。`/v1/testnet/agent-claims` 在 `api.flop.network` 与 faucet 主机均 404(测试网网关未部署)。
 - **结论**:通道已公布但未规模化兑付,计分也未开始 — **暂不领取**。等两项:bot 稳定兑付(看签名账户 txCount 增长)、激活区块公布。
 

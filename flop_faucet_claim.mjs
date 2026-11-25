@@ -16,7 +16,6 @@
 
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import readline from 'node:readline';
 import { Keyring } from '@polkadot/keyring';
 import { cryptoWaitReady } from '@polkadot/util-crypto';
 
@@ -25,12 +24,22 @@ const GENESIS = '0x918abd58fb16306b30ef3886514cfaebffecb4de43e82b6f8ec4795c43cfd
 const CLAIM_URL = 'https://faucet.flop.network/v1/testnet/agent-claims';
 const DEFAULT_KEYSTORE = fileURLToPath(new URL('./5ED4bNNKCq6miyYyyeURuNWpirECfuDxt465aAtEY1VwQoZY.json', import.meta.url));
 
+function readAllStdin() {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    process.stdin.setEncoding('utf8');
+    process.stdin.on('data', (c) => chunks.push(c));
+    process.stdin.on('end', () => resolve(chunks.join('').replace(/[\r\n]+$/, '')));
+    process.stdin.on('error', reject);
+  });
+}
+
 function promptMasked(label) {
   return new Promise((resolve, reject) => {
     const stdin = process.stdin;
     if (!stdin.isTTY) {
-      const rl = readline.createInterface({ input: stdin, terminal: false });
-      rl.question('', (answer) => { rl.close(); resolve(answer); });
+      // Piped input: one line, the password. Used by flop_faucet_claim.ps1.
+      readAllStdin().then(resolve, reject);
       return;
     }
     stdin.setRawMode(true);
