@@ -8,6 +8,10 @@
 // official faucet. The keystore password is prompted for locally, kept in
 // process memory only, and never printed. The signature is never printed.
 //
+// The faucet answers the same 401 "claim_signature_invalid" to every bad or
+// unknown claim, so this script tries the two signing variants in turn and
+// stops at the first answer that is not a 401.
+//
 // Usage: node flop_faucet_claim.mjs <nonce> [--keystore <path>] [--no-post]
 //   nonce      the nonce used in the step-1 message (milliseconds timestamp)
 //   --no-post  sign only, do not send the claim
@@ -103,21 +107,32 @@ async function main() {
   }
 
   const challenge = `flop-faucet-agent/v1|${GENESIS}|${ADDRESS}|${nonce}`;
-  // pair.sign returns the raw 64-byte sr25519 signature over the exact UTF-8 bytes.
-  const signature = '0x' + Buffer.from(pair.sign(new TextEncoder().encode(challenge))).toString('hex');
-  pair.lock();
+  // The faucet does not publish the exact claim bytes. Community-verified orders
+  // (flop-labs/network#1252, #1255): the polkadot-js <Bytes> wrapping first, then the raw challenge.
+  const enc = new TextEncoder();
+  const variants = [
+    ['wrapped', enc.encode('<Bytes>' + challenge + '</Bytes>')],
+    ['raw', enc.encode(challenge)],
+  ];
 
   if (noPost) {
-    console.log('signed challenge (' + Buffer.byteLength(challenge) + ' bytes); not sent');
+    for (const [name, message] of variants) pair.sign(message);
+    pair.lock();
+    console.log('signed challenge (' + Buffer.byteLength(challenge) + ' bytes, wrapped and raw); not sent');
     return;
   }
-  const res = await fetch(CLAIM_URL, {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ address: ADDRESS, nonce: Number(nonce), signature }),
-  });
-  const text = await res.text();
-  console.log('HTTP ' + res.status + ' ' + text.slice(0, 800));
+  for (const [name, message] of variants) {
+    const signature = '0x' + Buffer.from(pair.sign(message)).toString('hex');
+    const res = await fetch(CLAIM_URL, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ address: ADDRESS, nonce: Number(nonce), signature }),
+    });
+    const text = await res.text();
+    console.log('[' + name + '] HTTP ' + res.status + ' ' + text.slice(0, 800));
+    if (res.status !== 401) break;
+  }
+  pair.lock();
 }
 
 main().catch((err) => {
