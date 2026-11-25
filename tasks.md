@@ -1,6 +1,6 @@
 # FLOP / Technocore 每日任务清单与维护协议
 
-> 版本:2026-11-24(**测试网实战期**;在跑 19 项 = T3 + S8 + W4 + M4)。本文件由 Claude 在"新的一天"会话中自动维护。
+> 版本:2026-11-25(**测试网实战期**;在跑 18 项 = T3 + S7 + W4 + M4)。本文件由 Claude 在"新的一天"会话中自动维护。
 > 维护规则见文末;变更记入"变更日志"。旧编号 → 新编号对照见 2026-11-24 变更日志。
 
 ## 一、检查项(按阶段:测试网 2026-11-24 起分阶段开放;当前 `live, unscored` — 见 runbook「测试网开放实况」)
@@ -13,7 +13,8 @@
     - **计分尚未开始**:官方 — earning 自"未来一次 runtime 升级的公示 finalized activation block"起算,目前未公布区块或日期;此前活动记零、不补。
     - 待官方发布后补入:最低活跃门槛("随测试网规则发布")。
     - **领水通道已公布(11-25)**:Technocore 房间 `flop-testnet-faucet`,签名消息 `!faucet request <SS58> <nonce>`(命令见 runbook「测试网开放进展」);agent 每笔 10 FLOP、24 小时上限 10、需先花掉上一笔才能再领。
-    - **暂不领取**:计分未开始,且 11-25 04:10 UTC 实测 bot 只兑付过 1 笔(1082 条请求)。开领条件:激活区块公布,或 bot 兑付转正常(faucet 签名账户 `5CcDr5Bc…gXtw` 的 txCount 开始增长)。
+    - **硬规则(官方 `flop.finance/testnet/` 四条公平规则)**:同控钱包按一个参与者计;**花到自己矿工的支出不计** — agent 消费必须选独立矿工,绝不买我方矿工;刷量没收;每个角色有最低活跃门槛(数值未公布)。
+    - **暂不领取**:计分未开始,官方称 TechnoCore claims "await an announced, finalized grant",且 11-25 04:10 UTC 实测 bot 只兑付过 1 笔(1082 条请求)。开领条件:激活区块公布,或 bot 兑付转正常(faucet 签名账户 `5CcDr5Bc…gXtw` 的 txCount 开始增长)。
 2. **T2 矿工线:栈运维(每日;每次"新的一天"先拉栈)** — Docker Desktop 引擎 → `compose up -d` → 重起 cloudflared 取新域名 → 更新 `miner.env` 的 `SESSION_PUBLIC_HOST` → `up -d worker` → 端点应 401。然后查:
     - 容器状态(restarts=0);**announce 存活**:近 1 小时 `Endpoint ad … published` >0,**为 0 → restart worker**(#358:RPC 停滞后 announce 循环静默死亡,矿工健康但隐形)
     - **实际服务量**:`explorer…/api/compute-channels?miner=<地址>` 与网关 price_sources(测试网等价端点)是否含我方。**"Uptime on its own is not counted. Inference served is what counts."**
@@ -23,18 +24,17 @@
 
 ### S. 信号(每日)
 
-4. **S1 测试网开放进度**(原 D15/C27)— 四个信号任一出现即上报:①**签名 Testnet 矿工包**(`flop.network/releases.json` 哈希、`docs.flop.network/docs/run-miner?network=testnet` 正文哈希);②**bot 兑付转正常**(`testnet.flopscan.io/api/accounts/5CcDr5BcVWGqdyk7EK3S43PPd4E1yTFHPMGjtjqvRLttgXtw` 的 txCount > 1);③**计分激活区块公布**(`llms.txt?network=testnet`、`docs/network-testnet`、`docs/testnet-and-timeline?network=testnet` 正文哈希);④测试网公共服务上线(`gateway` / `mailbox` / `explorer` / `faucet` 的 `.testnet.flop.network` DNS,目前均无)。哨兵脚本:`$TEMP/flop_watch.sh`(正文哈希比对,空读数跳过)。
+4. **S1 测试网开放进度**(原 D15/C27)— 四个信号任一出现即上报:①**签名 Testnet 矿工包**(`flop.network/releases.json` 哈希、`docs.flop.network/docs/run-miner?network=testnet` 正文哈希);②**bot 兑付转正常**(`testnet.flopscan.io/api/accounts/5CcDr5BcVWGqdyk7EK3S43PPd4E1yTFHPMGjtjqvRLttgXtw` 的 txCount > 1);③**计分激活区块公布**(`llms.txt?network=testnet`、`docs/network-testnet`、`docs/testnet-and-timeline?network=testnet` 正文哈希);④测试网公共服务上线(`gateway` / `mailbox` / `explorer` / `faucet` 的 `.testnet.flop.network` DNS,目前均无;官方:gateway 与快照源 `snapshots.flop.network` await publication)。哨兵脚本:`$TEMP/flop_watch.sh`(正文哈希比对,空读数跳过;原 S7 的 Technocore 领水通道已并入此项:bot DID 与房间见 runbook)。
 5. **S2 docs.flop.network**(原 C24)— `llms.txt` 页数 + **全量页面 `Last updated` 扫描**(页数不变内容也会改)。重点:**testnet 规则页、setup 页、agent-onboarding、testnet-and-timeline**。附 ask.flop.finance MCP(manifest 可当更新索引)。
-6. **S3 工具链版本**(原 C28)— `flop.network/releases.json`(cli / miner-worker / miner-vllm-toploc + notices 段)+ npm `@flop-labs/*`(cli、sdk、client)latest diff。CLI 出新版 → T2 升级;npm 跳版 = 修复在路上的信号。
+6. **S3 工具链版本**(原 C28)— `flop.network/releases.json`(cli / miner-worker / miner-vllm-toploc + notices 段)+ npm `@flop-labs/*`(cli、sdk、client)latest diff。**附查:CLI 镜像的 testnet 档案是否已 pin**(`flop network status --network testnet` 的 `profile_status` 是否从 `planned` 变 `live`、`matches_expected` 是否为 true;11-25 仍未 pin)。SDK 需 ≥ 0.10.0 才接受 runtime 1014035。CLI 出新版 → T2 升级;npm 跳版 = 修复在路上的信号。
 7. **S4 黄皮书决议号**(原 C30)— 抓 `flop.finance/intro/yellowpaper/` 正文最大 `D-0xxx` diff(页脚日期不可信)。**基线 2026-11-24:D-0547**(D-0547 Era-T 赛季长度可配置、修订空投快照窗口;D-0541 容量质押锚定 400,000 G_n/s per H100 — 这两条直接影响计分/质押,细读)。
 8. **S5 flop-labs/network**(原 C31)— 新 issue 与官方回复 diff;对照我方异常;开闸首日必查。
 9. **S6 X + 新闻**(原 D16/D17)— @flop_labs / @CryptoHayes;`flopnetworknews.com` 头条;**诈骗动向**(官方:开闸前不发链接;带 Solana 合约的转帖是假的)。
-10. **S7 Technocore 领水通道**(原 A3)— `technocore.chat/faucet` 状态码、官方房间是否出现官方 issuer(`/r/faucet` 现为第三方 drip,**非官方不领**)、agent.json 版本。
-11. **S8 sitemap diff**(原 B7)— `flop.finance/sitemap.xml` 与 `technocore.chat/sitemap.xml`(新 setup 页最先现形)。
+11. **S8 官网规则页正文哈希**(原 B7 改)— `flop.finance/testnet/`、`flop.finance/airdrop/`、`docs.flop.network/docs/official-links`。**页脚 `Updated` 日期不可信**(testnet 页已整页改写仍显示 2026-10-05)— 只认正文哈希。sitemap diff 降为周频并入 W1。
 
 ### W. 周频
 
-12. **W1 官方站巡检**(合并原 A1/A2/A4/A5/A6/B8/B11)— teaser / intro 日期、首页 href、technocore `/config`、org 事件流、tc-chat open issues、分配数字一致性(35 亿 vs 44 亿历史漂移)。
+12. **W1 官方站巡检**(合并原 A1/A2/A4/A5/A6/B8/B11)— teaser / intro 日期、首页 href、technocore `/config`、org 事件流、tc-chat open issues、分配数字一致性(35 亿 vs 44 亿历史漂移)、sitemap diff(B7 并入)。注意:页脚日期不可信,以正文为准。
 13. **W2 黄皮书 issues + 托管 vs 镜像**(原 B9/B10)— `flop-labs/yellowpaper` 新 issue;托管页比镜像新,以托管页为准。
 14. **W3 生态扫描**(原 C18)— GitHub 新仓库、`ecosystem-pulse.technocore.chat`(周报)、`gpus.flop.finance`(可租 GPU 行情)、机构入场动向(operator 配额申请)。
 15. **W4 KV 笔记刷新**(原 C19)— 写 `did-a4/6f172335ff9660`;**7 天不写即被回收**(11-24 实测已过期,已用 `?if_absent=1` 重新认领)。建议每周固定刷。
@@ -57,7 +57,7 @@
 | miner 意向表(`flop.finance/apply/miner`) | **✅ 已提交**(2026-10-08) |
 | FLOP 收款地址 | **✅ 已完成(2026-10-19)**:`5ED4bNNKCq6miyYyyeURuNWpirECfuDxt465aAtEY1VwQoZY`(SS58 prefix 42,Polkadot.js;加密 keystore 在 `E:lop`,已 gitignore;种子/密码用户自持)。用途:sonnet-2 claim、测试网 faucet、空投 destination |
 | Devnet 矿工 | **✅ 2026-11-08 上线**:账户 `5FU6JExTpvUqraVgNni33RRF664PA6h67M3V8zsLWX38EQdS`,G_n cap 130;**官方 11-23:devnet 成果不继承测试网** |
-| **测试网矿工重新加入** | **等官方发布签名 Testnet 矿工包**(11-25:sponsor 已 open、0/64,包仍 pending)。发布后:专用 Testnet 账户 + 独立数据目录 → 注册 → sponsor → 校准 → 端点广告 → 网关准入。devnet 矿工继续单独跑,不继承 |
+| **测试网矿工重新加入** | **等官方发布签名 Testnet 矿工包**(11-25:sponsor 已 open、0/64,包仍 pending)。赞助席位条件:硬件 attested 或从申请名单准入(我方意向表 10-08 已交);推荐 16 GB+/卡,我方 8 GB 低于推荐 — 准入结果待观察 |发布后:专用 Testnet 账户 + 独立数据目录 → 注册 → sponsor → 校准 → 端点广告 → 网关准入。devnet 矿工继续单独跑,不继承 |
 | **测试网 Agent 线首日** | **faucet 已切 Testnet(11-25),通道已公布但暂不领**:计分未开始、bot 16 小时只兑付 1 笔。开领后:凭 DID 在 `flop-testnet-faucet` 签名领水 → 推理消费 → 回执入库;此后每日(T1)。**passphrase 命令用户亲手跑** |
 | **测试网计分激活区块** | **等官方公布**。此前一切活动记零、不补 — 不必抢跑;公布后按日执行 T1/T2 |
 | **测试网期机器常开** | **待用户决策**:只算 inference served,关机 = 零。Claude 建议尽量常开;不自启则重启后说"新的一天"由 Claude 拉起 |
@@ -94,6 +94,12 @@
 ```
 
 ## 四、变更日志
+
+### 2026-11-25(续)— 深扫:官网测试网规则页改写;清单 19 → 18
+- **新面**:`flop.finance/testnet/` 已整页改写为正式规则(阶段、角色、硬件、onboarding、计分口径、最低活跃门槛、四条公平规则),页脚日期未变(仍 2026-10-05)— 官网页脚日期不可信,改用正文哈希。`official-links`(11-24)新增 Public Testnet access 段。
+- **对 agent 线的硬约束**:花到自己矿工的支出不计;同控钱包合并计分;每角色有最低活跃门槛(未公布)→ 写入 T1。
+- FAQ(04:15 UTC 更新):SDK 0.10.0 才接受 runtime 1014035。CLI 镜像的 testnet 档案仍未 pin genesis → S3 加附查。
+- **清单调整**:删 S7(Technocore 领水通道 — 已查清,并入 S1);S8 由 sitemap 改为官网规则页正文哈希;sitemap 并入 W1。计数 19 → 18。
 
 ### 2026-11-25 — 测试网 faucet 切到 Testnet;bot 兑付未跟上;矿工包仍待发
 - `faucet.flop.network/chain` 报 `testnet`,公布 `technocoreBot`(房间 `flop-testnet-faucet`);限额与领水格式写入 runbook。

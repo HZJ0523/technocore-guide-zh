@@ -29,6 +29,23 @@
 - 相关地址:FLOPScan `https://testnet.flopscan.io`;Operator Hub `https://docs.flop.network/operators?network=testnet`;签名资产 `https://github.com/flop-labs/network/releases`。
 - **我方结论(2026-11-24 15:00 UTC)**:下节"开闸日执行序"的 B(agent 领水消费)、C(矿工重新加入)**现在都不具备条件**,也不产生任何计分。改为等三个信号:①Operator Hub / releases 列出签名 Testnet 矿工包;②faucet 链身份切到 Testnet(或 agent 领水通道开放);③**计分激活区块公布**。
 
+## 测试网正式规则(`flop.finance/testnet/`,2026-11-25 读;页脚仍写 Updated 2026-10-05,不可信)
+
+- **阶段**:Unscored opening(11-24,6 个创世验证者)→ **Scored phase(planned,最长约 90 天;治理可提前结束,奖池规模不变)** → Snapshot(在公示的 finalized 块高冻结,之后不计,无滚动快照)→ Review(公示完整分配表与哈希,可申诉)→ Genesis(Q1 2027;只带分配,不迁移链状态)。
+- **"We'll be activating features over the coming hours."**;预期停机、runtime 升级、**历史与余额可能重置**。
+- **计分**:Miners — 通过验证的算力;Validators — 测试网排名;**Agents — 已结算会话中购买的算力**。持有代币不计。**每个角色有最低活跃门槛,低于门槛无分配**(门槛数值未公布)。
+- **四条公平规则(直接影响我方 agent 线)**:
+  1. One participant, one score — 同控钱包按一个参与者计,拆账户不加分配。
+  2. **Independent demand only — 花到同控矿工的支出、同控钱包间循环,不计为需求。→ 我们的 agent 绝不能买我们自己矿工的推理,必须选独立矿工。**
+  3. Fraud forfeits — 被判定刷量即没收(可在 review 窗口申诉)。
+  4. 安全披露 — 私下报给 security@flop.finance 可获奖励;利用漏洞则取消资格。
+- **赞助矿工席位条件:硬件被 attested,或运营者从申请名单准入**(我方 miner 意向表 10-08 已交)。推荐规格 **每卡 16 GB+ VRAM**(我方 8 GB,低于推荐;"recommended specifications and subject to refinement")。
+- Agent 也可"与 technocore.chat 上的其他 agent 交易",但空投只认已结算会话购买的算力。
+- 验证者前 50 席注册已开;推荐 8+ 核 / 64 GB / 4 TB NVMe / 1 Gbps。
+- SDK:**`@flop-labs/sdk@0.10.0` 是第一个 allowlist 接受开网 runtime 1014035 的版本;0.9.0 及更早拒绝**。
+- 官方链接页(11-24):测试网网关 `https://gateway.testnet.flop.network` 与快照源 `https://snapshots.flop.network/testnet/archive/latest.json` **await publication**;"Testnet Self and TechnoCore claims await an announced, finalized grant on the Testnet…" — Technocore 领水尚未正式开放(与实测 bot 仅兑付 1 笔一致)。
+- Docker CLI 镜像(cli:stable 0.1.455):testnet 档案仍 `profile_status: planned`、`genesis_policy: pin-before-live`、`matches_expected: null` — CLI 镜像待更新。
+
 ## 测试网开放进展(2026-11-25 04:10 UTC 实测)
 
 状态仍 `live, unscored`。**计分未开始**:官方 — earning 自未来一次升级的公示 finalized activation block 起算,未公布区块或日期;此前活动记零、不补。
