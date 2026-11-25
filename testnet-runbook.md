@@ -29,6 +29,36 @@
 - 相关地址:FLOPScan `https://testnet.flopscan.io`;Operator Hub `https://docs.flop.network/operators?network=testnet`;签名资产 `https://github.com/flop-labs/network/releases`。
 - **我方结论(2026-11-24 15:00 UTC)**:下节"开闸日执行序"的 B(agent 领水消费)、C(矿工重新加入)**现在都不具备条件**,也不产生任何计分。改为等三个信号:①Operator Hub / releases 列出签名 Testnet 矿工包;②faucet 链身份切到 Testnet(或 agent 领水通道开放);③**计分激活区块公布**。
 
+## 测试网开放进展(2026-11-25 04:10 UTC 实测)
+
+状态仍 `live, unscored`。**计分未开始**:官方 — earning 自未来一次升级的公示 finalized activation block 起算,未公布区块或日期;此前活动记零、不补。
+
+### Faucet 已切到 Testnet
+
+- `faucet.flop.network/chain`:`network: testnet`,`chain: FLOP Testnet`,genesis 与链一致,`ss58Format 42`,`decimals 18`,`rpc wss://testnet.flop.network`;**`technocoreBot: {did: did:key:z6MktjwdcBkwC6xo9wi4KY4ckWvn1GQHdQ1qzkaZtWqHAoxs, room: flop-testnet-faucet}`**。
+- `/limits` 限额:`status open`,签名账户 `5CcDr5BcVWGqdyk7EK3S43PPd4E1yTFHPMGjtjqvRLttgXtw`,日上限 10,000,000;anonymous 25 FLOP/地址、冷却 86400 秒;linked 基础 500、单笔上限 2000、滚动 7 天 2000、身份冷却 86400 秒;**agent 每笔 10 FLOP,`claimPath /v1/testnet/agent-claims`,滚动 24 小时上限 10,冷却 86400 秒,`rolloverRequiresSpend: true`**;每 IP 每日 3 次、每 IP 段每日 20 次。
+- **Technocore 领水格式**(房间实测):向 `flop-testnet-faucet` 发**签名消息**,正文 `!faucet request <SS58 地址> <nonce>`,正文里的 nonce 与消息 nonce 相同(毫秒时间戳);签名规则同标准 Technocore(`flop-testnet-faucet|<nonce>|<text>`)。另有 `!faucet status`、`!faucet help`。
+- **我方命令(用户亲手跑,需 passphrase;PowerShell)**:
+
+  ```powershell
+  cd E:lop	echnocore-did-starter
+  $n = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds()
+  .\.venv\Scripts\python.exe technocore_agent.py say flop-testnet-faucet "!faucet request 5ED4bNNKCq6miyYyyeURuNWpirECfuDxt465aAtEY1VwQoZY $n" --nonce $n
+  ```
+
+- **兑付实况(04:10 UTC)**:房间自 11-24 12:24 起 1136 条,其中 1082 条请求、826 个不同 DID;bot 在房间内零回复;faucet 签名账户 nonce 1、txCount 1、余额 999,989.997 — **只兑付过 1 笔(10 FLOP)**。`/v1/testnet/agent-claims` 在 `api.flop.network` 与 faucet 主机均 404(测试网网关未部署)。
+- **结论**:通道已公布但未规模化兑付,计分也未开始 — **暂不领取**。等两项:bot 稳定兑付(看签名账户 txCount 增长)、激活区块公布。
+
+### 矿工
+
+- testnet miner sponsor `status: open`,签名账户 `5E9jfrPrvQJvkjoSGLTdeqmqWHvAgxyGyTNW8VqtCUtgVcnb`,余额 2,000,000,容量 used 0 / max 64,每日新赞助 0/100,质押预算 10,000,000/日。
+- **签名矿工包未发布**(Operator Hub:"The signed operator kits are pending publication")— 等包。devnet 矿工继续单独跑。
+
+### 测试网视角的文档与浏览器
+
+- 文档站支持 `?network=testnet`:`llms.txt?network=testnet` 仅 3 页(Testnet opening FAQ、Testnet miner onboarding、FLOP Testnet);另有 `operators?network=testnet`、`monitor?network=testnet`、`networks/testnet`。
+- FLOPScan:`https://testnet.flopscan.io`,`/api/accounts/<地址>`、`/api/stats`(有限流)。链上 6 个验证者;我方钱包与 devnet 矿工账户在测试网余额均为 0。
+
 ## 开闸日执行序(更新于 2026-11-24)
 
 **A. 确认开闸**(只认 @flop_labs / flop.finance / docs.flop.network):testnet status 页、setup 页、explorer 上线 → 核对链接
