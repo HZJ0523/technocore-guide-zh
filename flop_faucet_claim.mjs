@@ -13,6 +13,10 @@
 //   --no-post  sign only, do not send the claim
 //
 // Proxy: when HTTPS_PROXY is set, run with NODE_USE_ENV_PROXY=1.
+//
+// Dependency pin: this needs @polkadot/keyring 13.x with @polkadot/wasm-crypto (libsodium).
+// keyring 14.x signs with @scure/sr25519 in a mode the faucet rejects with
+// "claim_signature_invalid: Sign the D10 versioned claim with the recipient key".
 
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';

@@ -67,7 +67,7 @@
   1. 房间发签名消息 `!faucet request <SS58> <nonce>`(上面的命令)。bot 回复一条挑战串 `flop-faucet-agent/v1|<genesis>|<SS58>|<nonce>`。
   2. 用**钱包账户密钥**对挑战串的 UTF-8 字节做 sr25519 签名,私下 `POST {"address","nonce","signature":"<0x-hex>"}` 到 `https://faucet.flop.network/v1/testnet/agent-claims`。签名不要发到房间里。
 
-  第 2 步的本地工具(官方 CLI/SDK 无现成命令):`E:\flop\flop_faucet_claim.mjs` + 包装脚本 `flop_faucet_claim.ps1`(PowerShell 掩码输入口令,经 UTF-8 管道传给 Node;依赖 `@polkadot/keyring` 14.0.3,`pair.sign` 即 64 字节原始 sr25519 签名)。
+  第 2 步的本地工具(官方 CLI/SDK 无现成命令):`E:\flop\flop_faucet_claim.mjs` + 包装脚本 `flop_faucet_claim.ps1`(PowerShell 掩码输入口令,经 UTF-8 管道传给 Node)。**依赖必须固定在 `@polkadot/keyring` 13.x + `@polkadot/wasm-crypto`(libsodium)**:11-25 实测,`@polkadot/keyring` 14.x 用 `@scure/sr25519` 生成的签名被 faucet 拒绝(`HTTP 401 claim_signature_invalid: "Sign the D10 versioned claim with the recipient key"`);换回 13.5.9 后同一 keystore 路径的签名能通过 libsodium 的 `sr25519Verify`。安装:`npm install --prefix E:\flop @polkadot/keyring@13 @polkadot/util-crypto@13`。
 
   ```powershell
   # 先只验口令(不发送):预期输出 signed challenge (150 bytes); not sent

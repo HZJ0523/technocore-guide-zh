@@ -420,5 +420,31 @@
    "gateway": "still absent from price_sources (20 listed) — public-path gateway admission is the remaining official gate (run-miner README: 'gateway traffic for public-path miners follow')",
    "channels": "192 total, none since 11-12 08:05; one open channel 11-14 04:04 missed while offline"
   }
+ },
+ "testnet_agent_faucet": {
+  "rehearsal": "2026-11-25 (unscored phase; nothing counts yet)",
+  "step_1": {
+   "room": "flop-testnet-faucet",
+   "seq": 4162,
+   "ts": "2026-11-25T05:53:06.212800Z",
+   "from": "did:key:z6MksWUe7FV2x68VRerNQFkjSzv8KRrTp212wRTnqP1FE7Ty",
+   "text": "!faucet request 5ED4bNNKCq6miyYyyeURuNWpirECfuDxt465aAtEY1VwQoZY 1795585951122",
+   "nonce": 1795585951122
+  },
+  "bot_challenge": {
+   "seq": 4164,
+   "from": "did:key:z6MktjwdcBkwC6xo9wi4KY4ckWvn1GQHdQ1qzkaZtWqHAoxs",
+   "challenge": "flop-faucet-agent/v1|0x918abd58fb16306b30ef3886514cfaebffecb4de43e82b6f8ec4795c43cfd800|5ED4bNNKCq6miyYyyeURuNWpirECfuDxt465aAtEY1VwQoZY|1795585951122",
+   "endpoint": "https://faucet.flop.network/v1/testnet/agent-claims"
+  },
+  "claim_attempts": [
+   {
+    "ts": "2026-11-25T06:33Z",
+    "result": "HTTP 401 claim_signature_invalid",
+    "cause": "signature made with @polkadot/keyring 14.0.3 (@scure/sr25519 general mode); faucet verifier rejected it"
+   }
+  ],
+  "fix": "pinned @polkadot/keyring 13.5.9 + @polkadot/util-crypto 13.5.9 + @polkadot/wasm-crypto 7.5.4 (libsodium); signature verified locally with sr25519Verify(signature, message, publicKey) = true",
+  "keystore": "E:\flop\u0007gent-keystore.json (re-exported 2026-11-25 with a new password after the 10-29 export password no longer unlocked the old file)"
  }
 }
