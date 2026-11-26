@@ -475,5 +475,28 @@
    "retry_after": "2026-11-27 06:05 UTC"
   },
   "script_fix_20261126": "flop_faucet_claim.ps1: added -Wait/-WaitMinutes (password once, poll status, submit on open); relaxed ErrorActionPreference around the CLI call (PS 5.1 turns native stderr JSON into a terminating NativeCommandError under Stop)."
+ },
+ "testnet_gateway_live_20261126": {
+  "when": "2026-11-26T07:07:42Z (watcher confirmed on change from error|connected=False)",
+  "health": "status ok, connected true, version 2.0.0, image 0.1.497, deps all ok",
+  "models_public": [
+   "qwen/qwen3-14b",
+   "Qwen/Qwen2.5-7B-Instruct",
+   "Qwen/Qwen3-14B",
+   "Qwen/Qwen3-8B",
+   "Qwen/Qwen3-4B",
+   "Qwen/Qwen3-1.7B"
+  ],
+  "gateway_price_source_miner": "5EeXdV1qv8dUCBRN9K1dby7Aj5tBW5JaRKxrLks5eS2r5gFo",
+  "registry_provider": "5FPErjdR8izqfeiszU8YuuiDuVhb6t4qAgSLeZpUHKdNWK6t",
+  "runtime_spec": "1014039 (CLI 0.9.0 rejects; 0.9.1 required)"
+ },
+ "testnet_inference_attempt_20261126": {
+  "wallet": "5ED4bNNKCq6miyYyyeURuNWpirECfuDxt465aAtEY1VwQoZY (10 FLOP from faucet rehearsal)",
+  "chat": "ERROR HTLC chat requires --tee-requirements from a registered EconomicCritical profile",
+  "session_run": "ERROR inference fee credits are not ready for new offers (no channel)",
+  "chain_state": "api.query.validators.inferenceFeeStatus = Uninitialized",
+  "sdk_gate": "@flop-labs/sdk compute-channel/offers.js newSessionOfferFeeProfile throws unless status === Ready",
+  "status": "blocked on network side; first real spend when inferenceFeeStatus becomes Ready"
  }
 }

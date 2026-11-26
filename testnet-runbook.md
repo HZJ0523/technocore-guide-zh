@@ -63,6 +63,14 @@
 - **同一份指南的其它要点**:Testnet 目前 "no Testnet gateway and no registered Testnet model or miner, so Testnet inference does not work yet";`api.flop.network` 与 `mcp.flop.network` 服务的是 Devnet(Devnet 活动不计分)。Devnet 网关注册流程:钱包至少 1 FLOP → `GET /v1/enroll/wallet/challenge?address=` → 用 sr25519 签 `message` → `POST /v1/enroll/wallet {address, message, signature}` 得 `{key, model, remaining_quota, expires_at}`。矿工安装 skill 需运营方发的包:`https://flop.network/skills/flop-miner-devnet/SKILL.md`。
 - **部署观察**:`gateway.testnet.flop.network` 已上线(FLOP REST Gateway 2.0.0,image 0.1.480),`/health` 为 `error`、`connected: false`,`/v1/models` 为空 — 已部署未开放。`mailbox.testnet.flop.network` 返回 404。FLOPScan:6 个验证者、2,131 账户、1,520 个 active agents。**11-26 06:0x UTC 复查**:image 0.1.497,gateway 刚重启(uptime ~34 min),仍 `error`/`connected:false`,依赖 `catalog: no_live_offers`,models 0 条。
 
+## 测试网推理网关上线与首笔消费尝试(2026-11-26 07:07 UTC 起)
+
+- **网关转 live**:`gateway.testnet.flop.network/health` → `status ok`、`connected: true`、`syncing:false`,依赖四路全 ok(image 0.1.497,version 2.0.0)。`/v1/models` 从 0 变 5:`Qwen/Qwen2.5-7B-Instruct`、`Qwen/Qwen3-14B`、`Qwen/Qwen3-8B`、`Qwen/Qwen3-4B`、`Qwen/Qwen3-1.7B`(provider `5FPErjdR8izqfeiszU8YuuiDuVhb6t4qAgSLeZpUHKdNWK6t`);网关报价源矿工 `5EeXdV1qv8dUCBRN9K1dby7Aj5tBW5JaRKxrLks5eS2r5gFo`(flop_per_gn 2e-8,`testnet-no-usd-value`,capacity_tpm 308)。两者都不是我方矿工 → 符合 independent demand。
+- **CLI 必须 0.9.1**:测试网运行时升到 **spec 1014039**,CLI 0.9.0 直接 `Unsupported runtime spec version 1014039`;npm 已发 cli 0.9.1 / sdk 0.12.1。`E:\flop\cli` 已升级,`model list` 可读(5 个模型,hash 例:Qwen3-14B `0x4f8fcb14…2634ce`)。
+- **`flop chat` 走不通**:报 `HTLC chat requires --tee-requirements from a registered EconomicCritical profile` → 测试网聊天路径需 TEE 承诺,暂不用。
+- **`flop session run` 被链上状态挡住**:`--miner 5EeXdV1q… --model qwen/qwen3-14b --max-flop 1` → `inference fee credits are not ready for new offers`;链上 `api.query.validators.inferenceFeeStatus = Uninitialized`(SDK 源码 `compute-channel/offers.js` 的 `newSessionOfferFeeProfile` 要求 `Ready`)。**结论:等 `inferenceFeeStatus` 变 `Ready` 再做首笔真实消费**。
+- **我方钱包**:测试网余额 10 FLOP(faucet 演练);无会话(`session list` 0 条);faucet IP 冷却到 11-27 06:05 UTC。
+
 ## 测试网开放进展(2026-11-25 04:10 UTC 实测)
 
 状态仍 `live, unscored`。**计分未开始**:官方 — earning 自未来一次升级的公示 finalized activation block 起算,未公布区块或日期;此前活动记零、不补。
