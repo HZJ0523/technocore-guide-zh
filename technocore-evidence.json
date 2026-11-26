@@ -442,9 +442,23 @@
     "ts": "2026-11-25T06:33Z",
     "result": "HTTP 401 claim_signature_invalid",
     "cause": "signature made with @polkadot/keyring 14.0.3 (@scure/sr25519 general mode); faucet verifier rejected it"
+   },
+   {
+    "ts": "2026-11-25T06:51Z",
+    "nonce": 1795589464510,
+    "result": "HTTP 401 claim_signature_invalid (raw sr25519 via keyring 13, nonce sent as number)"
+   },
+   {
+    "ts": "2026-11-25T07:04Z",
+    "nonce": 1795590252885,
+    "room_seq": 11903,
+    "result": "HTTP 401 x2 (wrapped and raw; nonce sent as number)"
    }
   ],
   "fix": "pinned @polkadot/keyring 13.5.9 + @polkadot/util-crypto 13.5.9 + @polkadot/wasm-crypto 7.5.4 (libsodium); signature verified locally with sr25519Verify(signature, message, publicKey) = true",
-  "keystore": "E:\flop\u0007gent-keystore.json (re-exported 2026-11-25 with a new password after the 10-29 export password no longer unlocked the old file)"
+  "keystore": "E:\\flop\\agent-keystore.json (re-exported 2026-11-25 with a new password; the 2026-10-29 export no longer unlocks with the password in use)",
+  "root_cause": "nonce was sent as a JSON number; the official agent guide (https://flop.network/llms.txt, read 2026-11-26) specifies {\"address\": \"<address>\", \"nonce\": \"<nonce>\", \"signature\": \"0x<hex>\"} with nonce as a string, signed text flop-faucet-agent/v1|<genesis>|<address>|<nonce>. No Technocore room step is required (room claims are 'not open yet').",
+  "fix_20261126": "nonce sent as string; verified with a throwaway wallet: string nonce -> HTTP 429 daily_cap (signature accepted), number nonce -> 401. Primary tool is now the official CLI (@flop-labs/cli 0.9.0 `flop faucet request`, installed under E:\\flop\\cli); flop_faucet_claim.mjs kept as fallback.",
+  "status_20261126": "faucet.status daily_cap_reached at 02:37 UTC; wallet 5ED4bNNK...QoZY balance 0 on testnet; not claimed yet (a grant earns no airdrop credit)"
  }
 }

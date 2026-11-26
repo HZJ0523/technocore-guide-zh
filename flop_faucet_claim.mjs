@@ -1,26 +1,28 @@
 #!/usr/bin/env node
-// FLOP Testnet agent-faucet claim, step 2.
+// FLOP Testnet agent-faucet claim, per the official agent guide
+// (https://flop.network/llms.txt, "Get Testnet FLOP").
 //
-// Step 1 is a signed Technocore message in room flop-testnet-faucet:
-//     !faucet request <SS58 address> <nonce>
-// The official faucet bot replies with a challenge string. This script signs
-// that challenge with the wallet keystore (sr25519) and POSTs the claim to the
-// official faucet. The keystore password is prompted for locally, kept in
-// process memory only, and never printed. The signature is never printed.
+// Signs the UTF-8 text `flop-faucet-agent/v1|<genesis hash>|<address>|<nonce>` with the
+// recipient wallet's own sr25519 key and POSTs
+//   {"address": "<address>", "nonce": "<nonce>", "signature": "0x<hex signature>"}
+// to https://faucet.flop.network/v1/testnet/agent-claims. No Technocore room message is
+// needed: the guide says claims in room flop-testnet-faucet are not open yet.
 //
-// The faucet answers the same 401 "claim_signature_invalid" to every bad or
-// unknown claim, so this script tries the two signing variants in turn and
-// stops at the first answer that is not a 401.
+// `nonce` is sent as a JSON string. Sent as a number, the faucet answers the same
+// 401 claim_signature_invalid it gives every invalid claim.
+//
+// The keystore password is prompted for locally, kept in process memory only, and never
+// printed. The signature is never printed.
 //
 // Usage: node flop_faucet_claim.mjs <nonce> [--keystore <path>] [--no-post]
-//   nonce      the nonce used in the step-1 message (milliseconds timestamp)
-//   --no-post  sign only, do not send the claim
+//   nonce      canonical decimal, up to 19 digits (a millisecond clock works); use a
+//              new one only after the previous request reached a final result
+//   --no-post  only check the password and sign; do not send the claim
 //
 // Proxy: when HTTPS_PROXY is set, run with NODE_USE_ENV_PROXY=1.
 //
-// Dependency pin: this needs @polkadot/keyring 13.x with @polkadot/wasm-crypto (libsodium).
-// keyring 14.x signs with @scure/sr25519 in a mode the faucet rejects with
-// "claim_signature_invalid: Sign the D10 versioned claim with the recipient key".
+// Dependency pin: @polkadot/keyring 13.x with @polkadot/wasm-crypto (libsodium).
+// keyring 14.x signs with @scure/sr25519 in a form libsodium verifiers reject.
 
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -30,7 +32,7 @@ import { cryptoWaitReady } from '@polkadot/util-crypto';
 const ADDRESS = process.env.FLOP_CLAIM_ADDRESS || '5ED4bNNKCq6miyYyyeURuNWpirECfuDxt465aAtEY1VwQoZY';
 const GENESIS = '0x918abd58fb16306b30ef3886514cfaebffecb4de43e82b6f8ec4795c43cfd800';
 const CLAIM_URL = 'https://faucet.flop.network/v1/testnet/agent-claims';
-const DEFAULT_KEYSTORE = fileURLToPath(new URL('./5ED4bNNKCq6miyYyyeURuNWpirECfuDxt465aAtEY1VwQoZY.json', import.meta.url));
+const DEFAULT_KEYSTORE = fileURLToPath(new URL('./agent-keystore.json', import.meta.url));
 
 function readAllStdin() {
   return new Promise((resolve, reject) => {
@@ -107,32 +109,20 @@ async function main() {
   }
 
   const challenge = `flop-faucet-agent/v1|${GENESIS}|${ADDRESS}|${nonce}`;
-  // The faucet does not publish the exact claim bytes. Community-verified orders
-  // (flop-labs/network#1252, #1255): the polkadot-js <Bytes> wrapping first, then the raw challenge.
-  const enc = new TextEncoder();
-  const variants = [
-    ['wrapped', enc.encode('<Bytes>' + challenge + '</Bytes>')],
-    ['raw', enc.encode(challenge)],
-  ];
+  const signature = '0x' + Buffer.from(pair.sign(new TextEncoder().encode(challenge))).toString('hex');
+  pair.lock();
 
   if (noPost) {
-    for (const [name, message] of variants) pair.sign(message);
-    pair.lock();
-    console.log('signed challenge (' + Buffer.byteLength(challenge) + ' bytes, wrapped and raw); not sent');
+    console.log('signed claim (' + Buffer.byteLength(challenge) + ' bytes); not sent');
     return;
   }
-  for (const [name, message] of variants) {
-    const signature = '0x' + Buffer.from(pair.sign(message)).toString('hex');
-    const res = await fetch(CLAIM_URL, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ address: ADDRESS, nonce: Number(nonce), signature }),
-    });
-    const text = await res.text();
-    console.log('[' + name + '] HTTP ' + res.status + ' ' + text.slice(0, 800));
-    if (res.status !== 401) break;
-  }
-  pair.lock();
+  const res = await fetch(CLAIM_URL, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ address: ADDRESS, nonce: String(nonce), signature }),
+  });
+  const text = await res.text();
+  console.log('HTTP ' + res.status + ' ' + text.slice(0, 800));
 }
 
 main().catch((err) => {
