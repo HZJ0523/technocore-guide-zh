@@ -459,6 +459,21 @@
   "keystore": "E:\\flop\\agent-keystore.json (re-exported 2026-11-25 with a new password; the 2026-10-29 export no longer unlocks with the password in use)",
   "root_cause": "nonce was sent as a JSON number; the official agent guide (https://flop.network/llms.txt, read 2026-11-26) specifies {\"address\": \"<address>\", \"nonce\": \"<nonce>\", \"signature\": \"0x<hex>\"} with nonce as a string, signed text flop-faucet-agent/v1|<genesis>|<address>|<nonce>. No Technocore room step is required (room claims are 'not open yet').",
   "fix_20261126": "nonce sent as string; verified with a throwaway wallet: string nonce -> HTTP 429 daily_cap (signature accepted), number nonce -> 401. Primary tool is now the official CLI (@flop-labs/cli 0.9.0 `flop faucet request`, installed under E:\\flop\\cli); flop_faucet_claim.mjs kept as fallback.",
-  "status_20261126": "faucet.status daily_cap_reached at 02:37 UTC; wallet 5ED4bNNK...QoZY balance 0 on testnet; not claimed yet (a grant earns no airdrop credit)"
+  "status_20261126": "claimed 10 FLOP (rehearsal) at ~06:03 UTC; wallet balance 10 FLOP; next claim blocked by ip_cooldown until 11-27 06:05 UTC; testnet inference still closed (gateway connected:false, 0 models) so nothing to spend on yet",
+  "grant_20261126": {
+   "status": "SUCCESS (rehearsal only — official: a faucet grant earns no airdrop credit)",
+   "when": "2026-11-26 ~06:03 UTC (open window; first -Wait run whose JSON was swallowed by a PowerShell 5.1 NativeCommandError)",
+   "address": "5ED4bNNKCq6miyYyyeURuNWpirECfuDxt465aAtEY1VwQoZY",
+   "amount_flop": 10,
+   "evidence": "testnet-reader /api/accounts/<addr>: balance 10000000000000000000 (10 FLOP, 18 decimals), txCount 0 (incoming grant), liveBalance true",
+   "faucet_signer": "5CcDr5BcVWGqdyk7EK3S43PPd4E1yTFHPMGjtjqvRLttgXtw nonce 6134 txCount 6245 (was txCount 1 on 11-25 — the faucet went into mass payout today)",
+   "tool": "E:\flop\flop_faucet_claim.ps1 -Wait (official CLI 0.9.0 `flop faucet request`; polls faucet.status every 3 s and submits the moment it is open)"
+  },
+  "ip_cooldown_20261126": {
+   "observed": "HTTP 429 ip_cooldown, retry_after_seconds 86271 on the next attempt — this IP funded recently (the 06:03 grant itself)",
+   "per_client_limits": "ipGrantsPerDay 3, ipRangeGrantsPerDay 20, ipCooldownSeconds 86400",
+   "retry_after": "2026-11-27 06:05 UTC"
+  },
+  "script_fix_20261126": "flop_faucet_claim.ps1: added -Wait/-WaitMinutes (password once, poll status, submit on open); relaxed ErrorActionPreference around the CLI call (PS 5.1 turns native stderr JSON into a terminating NativeCommandError under Stop)."
  }
 }

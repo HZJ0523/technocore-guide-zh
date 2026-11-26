@@ -43,7 +43,7 @@
 - Agent 也可"与 technocore.chat 上的其他 agent 交易",但空投只认已结算会话购买的算力。
 - 验证者前 50 席注册已开;推荐 8+ 核 / 64 GB / 4 TB NVMe / 1 Gbps。
 - SDK:**`@flop-labs/sdk@0.10.0` 是第一个 allowlist 接受开网 runtime 1014035 的版本;0.9.0 及更早拒绝**。
-- 官方链接页(11-24):测试网网关 `https://gateway.testnet.flop.network` 与快照源 `https://snapshots.flop.network/testnet/archive/latest.json` **await publication**;"Testnet Self and TechnoCore claims await an announced, finalized grant on the Testnet…" — Technocore 领水尚未正式开放(与实测 bot 仅兑付 1 笔一致)。
+- 官方链接页(11-24):测试网网关 `https://gateway.testnet.flop.network` 与快照源 `https://snapshots.flop.network/testnet/archive/latest.json` **await publication**;"Testnet Self and TechnoCore claims await an announced, finalized grant on the Testnet…" — Technocore 领水尚未正式开放(与实测 bot 仅兑付 1 笔一致)。**11-26 更新**:网关 URL 已正式公布("The Testnet inference gateway is https://gateway.testnet.flop.network");快照源仍 await。
 - Docker CLI 镜像(cli:stable 0.1.455):testnet 档案仍 `profile_status: planned`、`genesis_policy: pin-before-live`、`matches_expected: null` — CLI 镜像待更新。
 
 
@@ -56,11 +56,12 @@
 - **之前全部 401 的原因**:我把 `nonce` 作为数字发送。faucet 对任何无效 claim 都回同一句 `401 claim_signature_invalid`,所以无法从报错判断。11-26 用临时钱包实测:字符串 nonce 得到 `429 daily_cap`(过了签名校验),数字 nonce 得到 401。
 - **领水不产生空投**:官方 — "a faucet grant earns no airdrop credit"。每钱包滚动 24 小时 10 FLOP。
 - **官方 CLI 已支持**:`@flop-labs/cli` 0.9.0 的 `flop --network testnet --keystore <json> --password-env <VAR> faucet request [address] [--nonce <n>] [--json]`,发送前先查 faucet 状态。装在 `E:{BS}flop{BS}cli`(独立依赖树;与备用脚本的 keyring 13 混装会让 CLI 直接退出)。
-- **我方工具**:一键 `powershell -NoProfile -ExecutionPolicy Bypass -File E:{BS}flop{BS}flop_faucet_claim.ps1`(掩码输入钱包导出密码,调官方 CLI;默认 keystore `agent-keystore.json`)。备用 `flop_faucet_claim.mjs`(直接 POST 官方文档格式,需 `@polkadot/keyring` 13.x)。
+- **我方工具**:一键 `powershell -NoProfile -ExecutionPolicy Bypass -File E:{BS}flop{BS}flop_faucet_claim.ps1`(掩码输入钱包导出密码,调官方 CLI;默认 keystore `agent-keystore.json`)。**`-Wait` 模式**:输一次密码后每 3 s 轮询 `faucet.status`,`open` 即提交,窗口只开几十秒也抓得住(密码在 `FLOP_PW` 环境变量里留到等待结束,默认 30 分钟,`-WaitMinutes` 可调)。PS 5.1 会把 CLI 写到 stderr 的 JSON 当 `NativeCommandError`,脚本已在调用处局部放开 `ErrorActionPreference`;输出里带一行 `node.exe : {` 噪声属正常。备用 `flop_faucet_claim.mjs`(直接 POST 官方文档格式,需 `@polkadot/keyring` 13.x)。
 - **keystore**:10-29 导出的旧文件密码已不可用;11-25 重新导出为 `agent-keystore.json`(新密码,用户持有)。旧文件保留未删。
 - **11-26 02:37 UTC 实况**:`faucet.status = daily_cap_reached`(滚动 24 小时 1000 万 FLOP 已领完,`retryAfterSeconds` 3600)— 等状态变 `open` 再领。
+- **✅ 11-26 ~06:03 UTC 领到 10 FLOP(演练)**:open 窗口只有几十秒,`flop_faucet_claim.ps1 -Wait` 输一次密码后 3 s 轮询、open 即提交,`5ED4bNNK…QoZY` 到账(testnet-reader:`balance 1e19`、`liveBalance true`、txCount 0 即入账转账)。faucet 签名账户当日 txCount 1 → 6245 = 官方开始批量兑付。随后同 IP 再试 → `429 ip_cooldown`(`retry_after_seconds 86271`)→ **同一 IP 领到一次冷却 24 小时**,下次 11-27 06:05 UTC。领水不计空投;测试网推理仍未开放,暂时无处可花。
 - **同一份指南的其它要点**:Testnet 目前 "no Testnet gateway and no registered Testnet model or miner, so Testnet inference does not work yet";`api.flop.network` 与 `mcp.flop.network` 服务的是 Devnet(Devnet 活动不计分)。Devnet 网关注册流程:钱包至少 1 FLOP → `GET /v1/enroll/wallet/challenge?address=` → 用 sr25519 签 `message` → `POST /v1/enroll/wallet {address, message, signature}` 得 `{key, model, remaining_quota, expires_at}`。矿工安装 skill 需运营方发的包:`https://flop.network/skills/flop-miner-devnet/SKILL.md`。
-- **部署观察**:`gateway.testnet.flop.network` 已上线(FLOP REST Gateway 2.0.0,image 0.1.480),`/health` 为 `error`、`connected: false`,`/v1/models` 为空 — 已部署未开放。`mailbox.testnet.flop.network` 返回 404。FLOPScan:6 个验证者、2,131 账户、1,520 个 active agents。
+- **部署观察**:`gateway.testnet.flop.network` 已上线(FLOP REST Gateway 2.0.0,image 0.1.480),`/health` 为 `error`、`connected: false`,`/v1/models` 为空 — 已部署未开放。`mailbox.testnet.flop.network` 返回 404。FLOPScan:6 个验证者、2,131 账户、1,520 个 active agents。**11-26 06:0x UTC 复查**:image 0.1.497,gateway 刚重启(uptime ~34 min),仍 `error`/`connected:false`,依赖 `catalog: no_live_offers`,models 0 条。
 
 ## 测试网开放进展(2026-11-25 04:10 UTC 实测)
 
