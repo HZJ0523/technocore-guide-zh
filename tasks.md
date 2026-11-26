@@ -1,6 +1,6 @@
 # FLOP / Technocore 每日任务清单与维护协议
 
-> 版本:2026-11-26(**测试网实战期**;在跑 18 项 = T3 + S7 + W4 + M4)。本文件由 Claude 在"新的一天"会话中自动维护。
+> 版本:2026-11-26(**测试网实战期**;在跑 17 项 = T3 + S7 + W4 + M3)。本文件由 Claude 在"新的一天"会话中自动维护。
 > 维护规则见文末;变更记入"变更日志"。旧编号 → 新编号对照见 2026-11-24 变更日志。
 
 ## 一、检查项(按阶段:测试网 2026-11-24 起分阶段开放;当前 `live, unscored` — 见 runbook「测试网开放实况」)
@@ -15,6 +15,7 @@
     - **领水格式(官方 Agent Guide `flop.network/llms.txt`,11-26)**:用钱包密钥签 `flop-faucet-agent/v1|<genesis>|<address>|<nonce>`,`POST /v1/testnet/agent-claims`,**`nonce` 必须是字符串**;不需要 Technocore 房间那一步(官方:房间领水未开放)。一键命令:`powershell -NoProfile -ExecutionPolicy Bypass -File E:\flop\flop_faucet_claim.ps1`(官方 CLI 0.9.0,只输钱包导出密码)。详见 runbook「官方 Agent Guide 与领水定论」。
     - **硬规则(官方 `flop.finance/testnet/` 四条公平规则)**:同控钱包按一个参与者计;**花到自己矿工的支出不计** — agent 消费必须选独立矿工,绝不买我方矿工;刷量没收;每个角色有最低活跃门槛(数值未公布)。
     - **领水时机**:领水不产生空投("a faucet grant earns no airdrop credit"),测试网推理也未开放,所以现在领只是演练。先看 `GET https://faucet.flop.network/limits` 的 `faucet.status`:11-26 02:37 UTC 为 `daily_cap_reached`;变 `open` 后可领一次做演练(每钱包滚动 24 小时 10 FLOP)。
+    - **归属警告(11-26 实测)**:官方 CLI 的 `flop agent credential`(Devnet 网关注册)默认**不用传入的 `--keystore` 钱包**,而是自建一个新的 agent 钱包(明文助记词写入 `~/.flop/devnet-enroll-wallet.json`),经 Devnet faucet 自动领 25 FLOP 后为它注册网关密钥。测试网按"参与者自己的钱包在已结算会话中购买的算力"计分 → 测试网推理开放时,**先确认消费记在哪个账户**,不要直接用默认注册。
 2. **T2 矿工线:栈运维(每日;每次"新的一天"先拉栈)** — Docker Desktop 引擎 → `compose up -d` → 重起 cloudflared 取新域名 → 更新 `miner.env` 的 `SESSION_PUBLIC_HOST` → `up -d worker` → 端点应 401。然后查:
     - 容器状态(restarts=0);**announce 存活**:近 1 小时 `Endpoint ad … published` >0,**为 0 → restart worker**(#358:RPC 停滞后 announce 循环静默死亡,矿工健康但隐形)
     - **实际服务量**:`explorer…/api/compute-channels?miner=<地址>` 与网关 price_sources(测试网等价端点)是否含我方。**"Uptime on its own is not counted. Inference served is what counts."**
@@ -24,9 +25,10 @@
 
 ### S. 信号(每日)
 
-4. **S1 测试网开放进度**(原 D15/C27)— 另加第⓪个信号:**测试网推理开放**(官方 Agent Guide 现为 "no Testnet gateway and no registered Testnet model or miner";盯 `gateway.testnet.flop.network/health` 的 `status`/`connected`、`/v1/models` 条数、`mailbox.testnet.flop.network` 的状态码)。— 四个信号任一出现即上报:①**签名 Testnet 矿工包**(`flop.network/releases.json` 哈希、`docs.flop.network/docs/run-miner?network=testnet` 正文哈希);②**bot 兑付转正常**(`testnet.flopscan.io/api/accounts/5CcDr5BcVWGqdyk7EK3S43PPd4E1yTFHPMGjtjqvRLttgXtw` 的 txCount > 1);③**计分激活区块公布**(`llms.txt?network=testnet`、`docs/network-testnet`、`docs/testnet-and-timeline?network=testnet` 正文哈希);④测试网公共服务上线(`gateway` / `mailbox` / `explorer` / `faucet` 的 `.testnet.flop.network` DNS,目前均无;官方:gateway 与快照源 `snapshots.flop.network` await publication)。哨兵脚本:`$TEMP/flop_watch7.sh`(正文哈希 + faucet 状态 + 网关健康,空读数跳过;来源含官方 Agent Guide `flop.network/llms.txt`;原 S7 的 Technocore 领水通道已并入此项:bot DID 与房间见 runbook)。
+4. **S1 测试网开放进度**(原 D15/C27)— 另加第⓪个信号:**测试网推理开放**(官方 Agent Guide 现为 "no Testnet gateway and no registered Testnet model or miner";盯 `gateway.testnet.flop.network/health` 的 `status`/`connected`、`/v1/models` 条数、`mailbox.testnet.flop.network` 的状态码)。已知测试网主机:`testnet.flop.network`(RPC)、`gateway.testnet`、`mailbox.testnet`、`testnet-reader.flop.network`(FLOPScan 读后端)、`snapshots.flop.network`(快照源,根路径 404);Devnet 侧 `faucet.devnet.flop.network`(agent 每笔 2 FLOP,冷却 24 小时)。— 四个信号任一出现即上报:①**签名 Testnet 矿工包**(`flop.network/releases.json` 哈希、`docs.flop.network/docs/run-miner?network=testnet` 正文哈希);②**bot 兑付转正常**(`testnet.flopscan.io/api/accounts/5CcDr5BcVWGqdyk7EK3S43PPd4E1yTFHPMGjtjqvRLttgXtw` 的 txCount > 1);③**计分激活区块公布**(`llms.txt?network=testnet`、`docs/network-testnet`、`docs/testnet-and-timeline?network=testnet` 正文哈希);④测试网公共服务上线(`gateway` / `mailbox` / `explorer` / `faucet` 的 `.testnet.flop.network` DNS,目前均无;官方:gateway 与快照源 `snapshots.flop.network` await publication)。哨兵脚本:`$TEMP/flop_watch7.sh`(正文哈希 + faucet 状态 + 网关健康,空读数跳过;来源含官方 Agent Guide `flop.network/llms.txt`;原 S7 的 Technocore 领水通道已并入此项:bot DID 与房间见 runbook)。
 5. **S2 docs.flop.network**(原 C24)— `llms.txt` 页数 + **全量页面 `Last updated` 扫描**(页数不变内容也会改)。重点:**testnet 规则页、setup 页、agent-onboarding、testnet-and-timeline**。附 ask.flop.finance MCP(manifest 可当更新索引)。
-6. **S3 工具链版本**(原 C28)— `flop.network/releases.json`(cli / miner-worker / miner-vllm-toploc + notices 段)+ npm `@flop-labs/*`(cli、sdk、client)latest diff。**附查:CLI 镜像的 testnet 档案是否已 pin**(`flop network status --network testnet` 的 `profile_status` 是否从 `planned` 变 `live`、`matches_expected` 是否为 true;11-25 仍未 pin)。SDK 需 ≥ 0.11.0(固定测试网 genesis),CLI 需 ≥ 0.8.3(官方 Agent Guide);11-26:npm cli 0.9.0(含测试网领水命令)、sdk 0.12.0。CLI 出新版 → T2 升级;npm 跳版 = 修复在路上的信号。
+6. **S3 工具链版本**(原 C28)— `flop.network/releases.json`(cli / miner-worker / miner-vllm-toploc + notices 段)+ npm `@flop-labs/*`(cli、sdk、client)latest diff。**附查:CLI 镜像的 testnet 档案是否已 pin**(`flop network status --network testnet` 的 `profile_status` 是否从 `planned` 变 `live`、`matches_expected` 是否为 true;11-25 仍未 pin)。SDK 需 ≥ 0.11.0(固定测试网 genesis),CLI 需 ≥ 0.8.3(官方 Agent Guide);11-26:npm cli 0.9.0(含测试网领水命令)、sdk 0.12.0。
+    - **网关模型目录 diff(周频)**:`api.flop.network/v1/models`(Devnet)与 `gateway.testnet.flop.network/v1/models`。11-26:Devnet 新增 `qwen/qwen3-14b`(8 个矿工报价;14B 需 16 GB+ 显存,8G 卡跑不了),`qwen/qwen2.5-0.5b-instruct` 41 个矿工报价。CLI 出新版 → T2 升级;npm 跳版 = 修复在路上的信号。
 7. **S4 黄皮书决议号**(原 C30)— 抓 `flop.finance/intro/yellowpaper/` 正文最大 `D-0xxx` diff(页脚日期不可信)。**基线 2026-11-26:D-0554**(D-0547 Era-T 赛季长度可配置、修订空投快照窗口;D-0541 容量质押锚定 400,000 G_n/s per H100 — 这两条直接影响计分/质押,细读;新增 D-0548–D-0554,其中 D-0553 "10M SOFT ceiling behind the direct PoI clamp")。
 8. **S5 flop-labs/network**(原 C31)— 新 issue 与官方回复 diff;对照我方异常;开闸首日必查。
 9. **S6 X + 新闻**(原 D16/D17)— @flop_labs / @CryptoHayes;`flopnetworknews.com` 头条;**诈骗动向**(官方:开闸前不发链接;带 Solana 合约的转帖是假的)。
@@ -43,10 +45,9 @@
 
 16. **M1 sonnet-2 领奖**(原 C22)— 主网开 claim:在 `mb-sonnet-2-registration` 签 `sonnet.claim.v1`(contest_id / request_id=`ballot-z6mk-20260917-2` / destination=`5ED4bNNK…QoZY`);我方 7 FLOP 在 `payouts.json` 在册。
 17. **M2 KOL 排行榜**(原 C25)— **主网才开启**(官方 11-23);无需申请;出现即入驻(绑钱包 + X @HzzzJ87419)。
-18. **M3 kibble**(原 C26)— 官方 0 提及、连续 5 周无产出,降为月频:只看官方是否提及或与 "certified work" 挂钩;不参与。
 19. **M4 模型上传赞助(线索)** — `flop-labs/network` 的 `model-upload-sponsorship.yml`(testnet):官方可承担已批准模型的注册费 + 可退 DA 押金。触发条件:测试网注册表没有适配 8G 卡的模型、或我方矿工长期无流量 → 评估自己注册一个小模型。
 
-**已归档(不再检查)**:验证者席位路径(原 C29 — 本机磁盘/网络不达标,不参选;换硬件才重启)、close-1 参赛(原 C23)、sonnet-2 赛事项(原 C12–14,9 月到期)、裁判监控(原 C20/C21)。
+**已归档(不再检查)**:kibble(原 C26/M3 — 官方自始至终 0 提及,10-18 至 11-26 无任何产出,11-26 删除)、验证者席位路径(原 C29 — 本机磁盘/网络不达标,不参选;换硬件才重启)、close-1 参赛(原 C23)、sonnet-2 赛事项(原 C12–14,9 月到期)、裁判监控(原 C20/C21)。
 
 ## 二、一次性动作(非每日)
 
@@ -94,6 +95,13 @@
 ```
 
 ## 四、变更日志
+
+### 2026-11-26(续)— 深扫:Devnet 可演练但 CLI 默认注册有归属陷阱;清单 18 → 17
+- **CT 新主机**:`faucet.devnet.flop.network`(200;Devnet faucet,bot 房间 `flop-devnet-faucet`)、`testnet-reader.flop.network`(FLOPScan 读后端)、`snapshots.flop.network`(404)。
+- **Devnet 网关注册开放**:用未充值的临时钱包实测,官方 CLI `flop agent credential` 直接成功(配额 100,模型 qwen2.5-0.5b)——但它**自建了一个 agent 钱包**(明文助记词落盘 `~/.flop/devnet-enroll-wallet.json`),经 Devnet faucet 自动领 25 FLOP,为该自建钱包注册,与传入的 keystore 钱包无关。测试文件已删;测试消耗 Devnet 匿名额度 1 次(每 IP 每日 300,可忽略)。→ 写入 T1 的归属警告。
+- **Devnet 模型目录新增 `qwen/qwen3-14b`**;S3 加周频模型目录 diff。
+- **删 M3 kibble**:官方 0 提及、九周无产出,彻底归档。计数 18 → 17 项(T3 + S7 + W4 + M3)。
+- 撤回了未提交的 Devnet 演练包装脚本(它会让消费落在自建钱包上,达不到"我方钱包签名"的目的)。
 
 ### 2026-11-26 — 领水格式由官方 Agent Guide 定论;官方 CLI 支持领水;工具链就绪
 - **新面**:`https://flop.network/llms.txt`(《FLOP Network Agent Guide》,FAQ 所指 "agent guide")— 入口、Devnet/Testnet 领水、网关注册、MCP、客户端状态的权威汇总。并入 S1 的哈希来源。
