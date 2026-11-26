@@ -9,9 +9,12 @@
 # Revoke: delete the file (Remove-Item $env:USERPROFILE\.flop\keystore-pass.bin).
 #
 # Usage:
-#   powershell -NoProfile -ExecutionPolicy Bypass -File E:\flop\set_keystore_password.ps1
+#   powershell -NoProfile -ExecutionPolicy Bypass -File E:\flop\set_keystore_password.ps1 [-Label <text>] [-OutFile <path>]
+#   powershell ... -Label 'DID passphrase' -OutFile %USERPROFILE%\.flop\did-passphrase.bin
+#     stores the Technocore DID passphrase for technocore.ps1 (unattended say/did/kv)
 param(
-    [string]$OutFile = ''
+    [string]$OutFile = '',
+    [string]$Label = 'keystore password'
 )
 
 $ErrorActionPreference = 'Stop'
@@ -19,7 +22,7 @@ Add-Type -AssemblyName System.Security
 
 if (-not $OutFile) { $OutFile = Join-Path $env:USERPROFILE '.flop\keystore-pass.bin' }
 
-$secure = Read-Host -Prompt 'keystore password (will be stored DPAPI-encrypted for your Windows account)' -AsSecureString
+$secure = Read-Host -Prompt "$Label (will be stored DPAPI-encrypted for your Windows account)" -AsSecureString
 $bstr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secure)
 $plain = [Runtime.InteropServices.Marshal]::PtrToStringAuto($bstr)
 [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($bstr)
