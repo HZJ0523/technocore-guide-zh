@@ -21,7 +21,8 @@ param(
     [string]$Nonce = '',
     [string]$Keystore = '',
     [switch]$Wait,
-    [int]$WaitMinutes = 30
+    [int]$WaitMinutes = 30,
+    [string]$PasswordFile = ''
 )
 
 $ErrorActionPreference = 'Stop'
@@ -39,9 +40,24 @@ if (-not (Test-Path -LiteralPath $cli)) {
     exit 2
 }
 
-$secure = Read-Host -Prompt 'keystore password' -AsSecureString
-$env:FLOP_PW = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($secure))
-$secure = $null
+# Password source: -PasswordFile > %USERPROFILE%\.flop\keystore-pass.bin (written by
+# set_keystore_password.ps1, DPAPI-encrypted for this Windows account) > masked prompt.
+if (-not $PasswordFile) {
+    $defaultPw = Join-Path $env:USERPROFILE '.flop\keystore-pass.bin'
+    if (Test-Path -LiteralPath $defaultPw) { $PasswordFile = $defaultPw }
+}
+if ($PasswordFile) {
+    Add-Type -AssemblyName System.Security
+    $blob = [IO.File]::ReadAllBytes($PasswordFile)
+    $bytes = [Security.Cryptography.ProtectedData]::Unprotect($blob, $null, [Security.Cryptography.DataProtectionScope]::CurrentUser)
+    try { $env:FLOP_PW = [Text.Encoding]::UTF8.GetString($bytes) }
+    finally { [Array]::Clear($bytes, 0, $bytes.Length) }
+}
+else {
+    $secure = Read-Host -Prompt 'keystore password' -AsSecureString
+    $env:FLOP_PW = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($secure))
+    $secure = $null
+}
 
 $env:NODE_USE_ENV_PROXY = '1'
 $nodeArgs = @($cli, '--network', 'testnet', '--keystore', $Keystore, '--password-env', 'FLOP_PW',
