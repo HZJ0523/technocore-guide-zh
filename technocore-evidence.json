@@ -489,7 +489,8 @@
   ],
   "gateway_price_source_miner": "5EeXdV1qv8dUCBRN9K1dby7Aj5tBW5JaRKxrLks5eS2r5gFo",
   "registry_provider": "5FPErjdR8izqfeiszU8YuuiDuVhb6t4qAgSLeZpUHKdNWK6t",
-  "runtime_spec": "1014039 (CLI 0.9.0 rejects; 0.9.1 required)"
+  "runtime_spec": "1014039 (CLI 0.9.0 rejects; 0.9.1 required)",
+  "follow_up_0742z": "gateway flipped back to error/connected:false at 07:42:20Z with deps catalog no_live_offers and /v1/models empty; uptime 8296 s (no restart) -> the live period tracked a miner offer whose expires_at was 07:09:23Z (offers renew ~every 2 min). Gateway liveness follows miner offer publication."
  },
  "testnet_inference_attempt_20261126": {
   "wallet": "5ED4bNNKCq6miyYyyeURuNWpirECfuDxt465aAtEY1VwQoZY (10 FLOP from faucet rehearsal)",
