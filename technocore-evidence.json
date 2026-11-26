@@ -498,6 +498,18 @@
   "session_run": "ERROR inference fee credits are not ready for new offers (no channel)",
   "chain_state": "api.query.validators.inferenceFeeStatus = Uninitialized",
   "sdk_gate": "@flop-labs/sdk compute-channel/offers.js newSessionOfferFeeProfile throws unless status === Ready",
-  "status": "blocked on network side; first real spend when inferenceFeeStatus becomes Ready"
+  "status": "blocked on network side; first real spend when inferenceFeeStatus becomes Ready",
+  "fee_status_ready": {
+   "when": "2026-11-26 ~09:06 UTC, block 155698",
+   "status": "validators.inferenceFeeStatus = Ready (was Uninitialized at block 150145)"
+  },
+  "session_run_2": {
+   "cmd": "flop --network testnet --keystore agent-keystore.json session run --miner 5EeXdV1qv8dUCBRN9K1dby7Aj5tBW5JaRKxrLks5eS2r5gFo --model qwen/qwen3-14b --max-flop 1 --max-tokens 16",
+   "channel": "0x61290740375196fb1af5ee69e5cca4183811524b888ba251db9e4b1edb20f95b",
+   "result": "miner /session/info -> 401; recovery TIMED_OUT_REFUNDED (outcome confirmed)",
+   "cost": "0.017884188 FLOP in tx fees (balance 10 -> 9.982115817775 FLOP; nonce 2, txCount 2); escrow refunded",
+   "root_cause": "the miner session endpoint requires the gateway-held bearer token (SESSION_AUTH_TOKEN); testnet agent enrollment is not open: gateway /enroll/wallet/challenge is devnet-only (GATEWAY_WALLET_ENROLL=1) and flop agent credential is devnet-only",
+   "status": "blocked until the official opens testnet agent key issuance; watch /enroll/wallet/challenge status code and flop agent credential --network testnet"
+  }
  }
 }

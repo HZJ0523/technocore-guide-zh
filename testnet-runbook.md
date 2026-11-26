@@ -68,7 +68,9 @@
 - **网关转 live**:`gateway.testnet.flop.network/health` → `status ok`、`connected: true`、`syncing:false`,依赖四路全 ok(image 0.1.497,version 2.0.0)。`/v1/models` 从 0 变 5:`Qwen/Qwen2.5-7B-Instruct`、`Qwen/Qwen3-14B`、`Qwen/Qwen3-8B`、`Qwen/Qwen3-4B`、`Qwen/Qwen3-1.7B`(provider `5FPErjdR8izqfeiszU8YuuiDuVhb6t4qAgSLeZpUHKdNWK6t`);网关报价源矿工 `5EeXdV1qv8dUCBRN9K1dby7Aj5tBW5JaRKxrLks5eS2r5gFo`(flop_per_gn 2e-8,`testnet-no-usd-value`,capacity_tpm 308)。两者都不是我方矿工 → 符合 independent demand。
 - **CLI 必须 0.9.1**:测试网运行时升到 **spec 1014039**,CLI 0.9.0 直接 `Unsupported runtime spec version 1014039`;npm 已发 cli 0.9.1 / sdk 0.12.1。`E:\flop\cli` 已升级,`model list` 可读(5 个模型,hash 例:Qwen3-14B `0x4f8fcb14…2634ce`)。
 - **`flop chat` 走不通**:报 `HTLC chat requires --tee-requirements from a registered EconomicCritical profile` → 测试网聊天路径需 TEE 承诺,暂不用。
-- **`flop session run` 被链上状态挡住**:`--miner 5EeXdV1q… --model qwen/qwen3-14b --max-flop 1` → `inference fee credits are not ready for new offers`;链上 `api.query.validators.inferenceFeeStatus = Uninitialized`(SDK 源码 `compute-channel/offers.js` 的 `newSessionOfferFeeProfile` 要求 `Ready`)。**结论:等 `inferenceFeeStatus` 变 `Ready` 再做首笔真实消费**。
+- **`flop session run` 第一轮被链上状态挡住**:`inference fee credits are not ready for new offers`;链上 `api.query.validators.inferenceFeeStatus = Uninitialized`(SDK 源码 `compute-channel/offers.js` 的 `newSessionOfferFeeProfile` 要求 `Ready`)。
+- **09:06 UTC `inferenceFeeStatus` 变 `Ready`**(块 155698),再跑 `session run --miner 5EeXdV1q… --model qwen/qwen3-14b --max-flop 1`:**建了通道 `0x61290740…f95b`,但矿工 `/session/info` 回 401,超时后退款**(`TIMED_OUT_REFUNDED`,outcome confirmed)。损失仅手续费 **0.017884188 FLOP**(余额 10 → 9.982115817775;nonce 2)。
+- **根因**:矿工会话端点要网关的 bearer(`SESSION_AUTH_TOKEN`);而测试网 **agent 发钥通道未开** — 网关 `/enroll/wallet/challenge` 是 devnet 专用(只在 `GATEWAY_WALLET_ENROLL=1` 时挂载,测试网 404),CLI `flop agent credential` 也只服务 devnet。**结论:等官方开测试网 agent key 发放再做首笔真实消费。**
 - **我方钱包**:测试网余额 10 FLOP(faucet 演练);无会话(`session list` 0 条);faucet IP 冷却到 11-27 06:05 UTC。
 
 ## 测试网开放进展(2026-11-25 04:10 UTC 实测)
