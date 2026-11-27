@@ -112,6 +112,7 @@
 - **版本**:npm cli **0.10.2** / sdk **0.13.1**(已装);releases worker **0.1.520**(已自动升级,vllm/cli 0.1.505);devnet 栈重启后 worker 曾 exit 127,已 pull+up 恢复(`Session host listening`,广告已发)。
 - **GitHub 活跃**:#1338(docs:测试网 agent 怎么够到矿工 —— 社区给出两个公开端点)、#1706/#1707(agent 网关额度/私有端点申请,#1707 已关闭且他人已结算成功)、#1708/#1709(CLI 测试网 `agent credential` 先建钱包后才发现 404)、#328(矿工allowlist 20GB 卡获批 → 门槛接近 23,774)。
 - **黄皮书**:基线 D-0555(测试网 pin 价变体)。**faucet**:open,余额 9108 万,IP 冷却到 ~11-27 06:03 UTC;已有 settled spend,满足 rollover 条件。
+- **黄皮书新 challenge 群(11-27)**`flop-labs/yellowpaper`:#258(测试网 agent 计分受 faucet 身份额度封顶 + 不同 provider 的身份可叠加)、#257(创世前 voucher 可转让性未定义)、#256(矿工块奖励 voucher 非 1:1)、#268(D-0531 推荐抽奖创建奖励钱包)、#328(D-0507 10% 席位帽只约束创世构成)。**对我方含义**:计分期内 agent 分 ≈ 每日领水 × 每日花完;单钱包每日 10 FLOP,身份冷却 86400s —— 每天一领一花就是上限。
 - 清单仍 17 项;T2 由"等包"改为"硬件阻断";W4 KV 12-01 前刷。
 
 ### 2026-11-26(再续)— 测试网推理网关上线;结算未就绪;CLI 需 0.9.1
