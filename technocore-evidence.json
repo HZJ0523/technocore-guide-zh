@@ -571,6 +571,16 @@
   ],
   "chain_at_failure": "genesis 0x918abd58... matches, spec 1014039, txVer 2, nonce 4, balance 19.9552 FLOP (escrow of an earlier pendingAck channel 0x57872b80... opened at block 242999, ackDeadline 243599, will expire/refund)",
   "notes": "wss://testnet.flop.network kept closing with 1000 Normal Closure and briefly served stale state earlier (head 227.5k vs reader 228.1k; balance without the second grant). Looks network-side; retried 3x. Devnet RPC also down at the same time.",
-  "next": "retry when RPC is stable; verify a settled channel (state Settled) to satisfy faucet rolloverRequiresSpend"
+  "next": "retry when RPC is stable; verify a settled channel (state Settled) to satisfy faucet rolloverRequiresSpend",
+  "root_cause_official": {
+   "issues": [
+    "flop-labs/network#1768 testnet public RPC is 700+ blocks behind and user transactions are never included",
+    "#1802 gateway wallet fundWallet bad signature and RPC 700+ behind",
+    "#1775 public RPC finality stalled at block 232199"
+   ],
+   "proof": "a freshly generated unfunded sr25519 account also gets 1010 'Transaction has a bad signature' on a plain balances.transferKeepAlive -> node-wide signature rejection, not our keystore",
+   "our_keystore": "unlocks fine, address 5ED4bNNK..., same keystore signed a successful forceOpen at 00:57 UTC today",
+   "action": "wait for the official RPC fix; retry force spend then"
+  }
  }
 }
