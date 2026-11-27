@@ -7,3 +7,5 @@ package.json
 package-lock.json
 *-keystore.json
 cli/
+.playwright-mcp/
+*.png

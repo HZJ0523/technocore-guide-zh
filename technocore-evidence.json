@@ -538,5 +538,17 @@
   "sha256": "2d9a2046286fe84ad75f33cb1a9586c8c1977efec7c50e3a9a31aa7167e41b8b",
   "requirements": "Ubuntu 22.04/24.04, Docker + NVIDIA container toolkit, one NVIDIA GPU with >=23,774 MiB VRAM (serves Qwen/Qwen3-8B), stable public DNS with inbound TCP 80/443, unsigned (check SHA-256)",
   "our_status": "BLOCKED: RTX 4060 8 GB < 23,774 MiB; quick tunnel gives no stable DNS or inbound 80/443"
+ },
+ "kol_survey_20261127": {
+  "when": "2026-11-27 ~01:14 UTC",
+  "result": "submitted ('Thank you for filling out our form, we will respond shortly via email')",
+  "answers": "email 840897354@qq.com; Name HZJ0523; X https://x.com/HzzzJ87419; language Chinese; audience/location East Asia; groups Crypto Community + AI Community; channels X/Twitter; prior programs No; heard via X; additional note includes settled channel 0x72c08b63..."
+ },
+ "github_feedback_20261127": {
+  "issue": "flop-labs/network#1338",
+  "url": "https://github.com/flop-labs/network/issues/1338#issuecomment-7207301490",
+  "posted_by": "HZJ0523",
+  "when": "2026-11-27T01:27:21Z",
+  "content": "first direct force-open settled channel data point; --via auto 401; enroll 404; asked about a public session-offer index"
  }
 }
