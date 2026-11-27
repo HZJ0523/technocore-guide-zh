@@ -73,6 +73,13 @@
 - **根因**:矿工会话端点要网关的 bearer(`SESSION_AUTH_TOKEN`);而测试网 **agent 发钥通道未开** — 网关 `/enroll/wallet/challenge` 是 devnet 专用(只在 `GATEWAY_WALLET_ENROLL=1` 时挂载,测试网 404),CLI `flop agent credential` 也只服务 devnet。**结论:等官方开测试网 agent key 发放再做首笔真实消费。**
 - **我方钱包**:测试网余额 10 FLOP(faucet 演练);无会话(`session list` 0 条);faucet IP 冷却到 11-27 06:05 UTC。
 
+## 首笔已结算消费与测试网矿工包(2026-11-27)
+
+- **可用 agent 路径(实测)**:`flop session run --via force --miner <矿工> --endpoint <矿工公网> --model qwen/qwen3-8b --max-flop 0.005 --max-duration 1200 --max-tokens 32`。11-27 ~00:57 UTC 用 CLI 0.10.2 / SDK 0.13.1 跑通:channel `0x72c08b63…301c`、`settle_tx 0xe312b02a…6f0d`、`verified_turns 1`、合作结算,矿工 `5Cm99adrc…`(`https://m14.floptest.xyz`,来自 #1338/#1404 的公开发布),成本约 0.0134 FLOP。**payer = 我方 keystore 钱包 → 消费记我方。**
+- **不行的路径**:网关 `/enroll/wallet*` 测试网 404;`flop agent credential` / `launch claude|codex` 仍 devnet 专用(#1708:它先建钱包才发现 404);`flop chat` 需要已注册 TEE appraisal(`attest.profiles` 空);`--via auto` 对网关广告的矿工 `/session/info` 401(只认网关 bearer)。
+- **其它公开端点**:AMCONSEIL `5E7UL5m78…` @ `https://antju2.5-am.fr`(qwen/qwen3-14b,worker 0.1.513)。
+- **Testnet 矿工包**:`https://flop.network/releases/cli/miner-pack-testnet-20261126/`,sha256 `2d9a2046286fe84ad75f33cb1a9586c8c1977efec7c50e3a9a31aa7167e41b8b`,需 Ubuntu 22.04/24.04 + Docker/NVIDIA toolkit + **≥23,774 MiB 单卡** + 稳定公网 DNS 与入站 80/443,未签名。**我方 8 GB 4060 + quick tunnel 不满足 → 矿工线硬件阻断。**
+
 ## 测试网开放进展(2026-11-25 04:10 UTC 实测)
 
 状态仍 `live, unscored`。**计分未开始**:官方 — earning 自未来一次升级的公示 finalized activation block 起算,未公布区块或日期;此前活动记零、不补。

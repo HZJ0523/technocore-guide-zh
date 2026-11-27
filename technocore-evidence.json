@@ -511,5 +511,32 @@
    "root_cause": "the miner session endpoint requires the gateway-held bearer token (SESSION_AUTH_TOKEN); testnet agent enrollment is not open: gateway /enroll/wallet/challenge is devnet-only (GATEWAY_WALLET_ENROLL=1) and flop agent credential is devnet-only",
    "status": "blocked until the official opens testnet agent key issuance; watch /enroll/wallet/challenge status code and flop agent credential --network testnet"
   }
+ },
+ "testnet_first_spend_20261127": {
+  "when": "2026-11-27 ~00:57 UTC (unscored phase; earns no airdrop credit — rehearsal of the scored-phase path)",
+  "cmd": "flop --network testnet --keystore agent-keystore.json --password-env FLOP_PW session run --via force --miner 5Cm99adrc7guxVoT6YnC7LxUmmVgPamRsw9nVifRA9NUwDmd --endpoint https://m14.floptest.xyz --model qwen/qwen3-8b --max-duration 1200 --max-flop 0.005 --max-tokens 32 --prompt ...",
+  "miner": "5Cm99adrc7guxVoT6YnC7LxUmmVgPamRsw9nVifRA9NUwDmd (independent operator; endpoint from their access request #1404 as posted in #1338)",
+  "channel": "0x72c08b63cd146ede43771533ab610819846f6e347c3931c5d8c3a1837fb2501c",
+  "settle_tx": "0xe312b02a8b0467d2df637babd78cdea598a4bd073ff4e2ee9047bb986d846f0d",
+  "cooperative": true,
+  "verified_turns": 1,
+  "completion_tokens": "32",
+  "finish_reason": "length",
+  "cost": "balance 9.982115817775 -> 9.96867967625 FLOP (escrow 0.005 refunded partly? net ~0.01344 incl. fees); nonce 3 txCount 3",
+  "note": "--via auto with the gateway-advertised miner fails (miner /session/info 401, gateway bearer); --via force with the operator's public endpoint is the working agent route in the unscored phase."
+ },
+ "testnet_agent_route_20261127": {
+  "working": "--via force + --endpoint <public miner endpoint>; payer = own keystore wallet -> spend is the agent's own settled channel",
+  "blocked_paths": "gateway /enroll/wallet 404 (testnet); flop agent credential / launch -> devnet only; flop chat needs TEE appraisal (attest.profiles empty)",
+  "public_endpoints_seen": [
+   "https://m14.floptest.xyz (5Cm99adrc..., qwen/qwen3-8b)",
+   "https://antju2.5-am.fr (5E7UL5m78..., qwen/qwen3-14b)"
+  ]
+ },
+ "testnet_miner_pack_20261126": {
+  "url": "https://flop.network/releases/cli/miner-pack-testnet-20261126/",
+  "sha256": "2d9a2046286fe84ad75f33cb1a9586c8c1977efec7c50e3a9a31aa7167e41b8b",
+  "requirements": "Ubuntu 22.04/24.04, Docker + NVIDIA container toolkit, one NVIDIA GPU with >=23,774 MiB VRAM (serves Qwen/Qwen3-8B), stable public DNS with inbound TCP 80/443, unsigned (check SHA-256)",
+  "our_status": "BLOCKED: RTX 4060 8 GB < 23,774 MiB; quick tunnel gives no stable DNS or inbound 80/443"
  }
 }
