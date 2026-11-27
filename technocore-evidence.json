@@ -560,5 +560,17 @@
   "posted_by": "HZJ0523",
   "when": "2026-11-27T01:27:21Z",
   "content": "first direct force-open settled channel data point; --via auto 401; enroll 404; asked about a public session-offer index"
+ },
+ "testnet_bad_signature_20261127": {
+  "when": "2026-11-27 12:54-13:00 UTC (after the PC restart); same command that worked at 00:57 UTC",
+  "symptom": "1010 Invalid Transaction: Transaction has a bad signature on submitAndWatchExtrinsic; CLI returns 'open submission outcome unknown' with a derived channel id",
+  "attempts": [
+   "12:54 channel 0x512232cf...",
+   "12:58 channel 0x71ddb089...",
+   "12:59 channel 0x6d9e704d..."
+  ],
+  "chain_at_failure": "genesis 0x918abd58... matches, spec 1014039, txVer 2, nonce 4, balance 19.9552 FLOP (escrow of an earlier pendingAck channel 0x57872b80... opened at block 242999, ackDeadline 243599, will expire/refund)",
+  "notes": "wss://testnet.flop.network kept closing with 1000 Normal Closure and briefly served stale state earlier (head 227.5k vs reader 228.1k; balance without the second grant). Looks network-side; retried 3x. Devnet RPC also down at the same time.",
+  "next": "retry when RPC is stable; verify a settled channel (state Settled) to satisfy faucet rolloverRequiresSpend"
  }
 }
