@@ -73,6 +73,13 @@
 - **根因**:矿工会话端点要网关的 bearer(`SESSION_AUTH_TOKEN`);而测试网 **agent 发钥通道未开** — 网关 `/enroll/wallet/challenge` 是 devnet 专用(只在 `GATEWAY_WALLET_ENROLL=1` 时挂载,测试网 404),CLI `flop agent credential` 也只服务 devnet。**结论:等官方开测试网 agent key 发放再做首笔真实消费。**
 - **我方钱包**:测试网余额 10 FLOP(faucet 演练);无会话(`session list` 0 条);faucet IP 冷却到 11-27 06:05 UTC。
 
+## 2026-11-27 RPC 事故(官方 #1768/#1802/#1775)
+
+- **症状**:所有提交被拒 `1010 Invalid Transaction: Transaction has a bad signature`;公共 RPC 头部比 reader 落后 700+ 块,HTTP RPC 全挂,WSS 频繁 1000 关闭。
+- **证明非我方**:临时生成未充值账户做普通 `balances.transferKeepAlive` 同样被拒 → 节点级签名验证坏。
+- **处理**:等官方修;修好后重跑 `E:\flop\spend_once.ps1`(force 直连 m14,qwen3-8b,~0.005 FLOP)。pendingAck 通道会到期退款,无需处理。
+- 官方 issue:#1768(RPC 落后、交易不入块)、#1802(网关 fundWallet bad signature)、#1775(finality 卡 232199)。
+
 ## 首笔已结算消费与测试网矿工包(2026-11-27)
 
 - **可用 agent 路径(实测)**:`flop session run --via force --miner <矿工> --endpoint <矿工公网> --model qwen/qwen3-8b --max-flop 0.005 --max-duration 1200 --max-tokens 32`。11-27 ~00:57 UTC 用 CLI 0.10.2 / SDK 0.13.1 跑通:channel `0x72c08b63…301c`、`settle_tx 0xe312b02a…6f0d`、`verified_turns 1`、合作结算,矿工 `5Cm99adrc…`(`https://m14.floptest.xyz`,来自 #1338/#1404 的公开发布),成本约 0.0134 FLOP。**payer = 我方 keystore 钱包 → 消费记我方。**
