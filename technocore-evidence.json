@@ -474,7 +474,17 @@
    "per_client_limits": "ipGrantsPerDay 3, ipRangeGrantsPerDay 20, ipCooldownSeconds 86400",
    "retry_after": "2026-11-27 06:05 UTC"
   },
-  "script_fix_20261126": "flop_faucet_claim.ps1: added -Wait/-WaitMinutes (password once, poll status, submit on open); relaxed ErrorActionPreference around the CLI call (PS 5.1 turns native stderr JSON into a terminating NativeCommandError under Stop)."
+  "script_fix_20261126": "flop_faucet_claim.ps1: added -Wait/-WaitMinutes (password once, poll status, submit on open); relaxed ErrorActionPreference around the CLI call (PS 5.1 turns native stderr JSON into a terminating NativeCommandError under Stop).",
+  "grant_2_20261127": {
+   "when": "2026-11-27 ~06:35 UTC (cooldown ended ~06:03; first attempt timed out, reconciled by nonce)",
+   "nonce": "1795761046236..? see note",
+   "nonce_exact": "1795761046238",
+   "tx_hash": "0x70a553cdd13b79c2190a8b1c3a3afba06e4e0c0c6f3b888db5bb47a565dc4580",
+   "amount_flop": 10,
+   "transfer": "finalized",
+   "balance_after": "19968679676250000000 (19.9687 FLOP)",
+   "lesson": "timeout -> FAUCET_OUTCOME_UNKNOWN then 503 grant_pending; reconcile with the SAME nonce (never sign a new one) until the grant finalizes"
+  }
  },
  "testnet_gateway_live_20261126": {
   "when": "2026-11-26T07:07:42Z (watcher confirmed on change from error|connected=False)",
